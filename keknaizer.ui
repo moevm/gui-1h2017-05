@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
+    <width>900</width>
     <height>730</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>keknaizer</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -22,14 +22,14 @@
      <height>534</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0,0,0,0,0,0,0">
     <property name="leftMargin">
      <number>0</number>
     </property>
     <property name="bottomMargin">
      <number>3</number>
     </property>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="label_3">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -70,7 +70,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>76</width>
+          <width>145</width>
           <height>20</height>
          </size>
         </property>
@@ -96,7 +96,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>79</width>
+          <width>145</width>
           <height>20</height>
          </size>
         </property>
@@ -129,19 +129,6 @@
        </spacer>
       </item>
      </layout>
-    </item>
-    <item>
-     <spacer name="verticalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>17</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -644,7 +631,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>76</width>
+          <width>145</width>
           <height>20</height>
          </size>
         </property>
@@ -670,7 +657,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>79</width>
+          <width>145</width>
           <height>20</height>
          </size>
         </property>
@@ -703,19 +690,6 @@
        </spacer>
       </item>
      </layout>
-    </item>
-    <item>
-     <spacer name="verticalSpacer_4">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>17</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -1218,10 +1192,10 @@
       </property>
      </spacer>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="pushButton">
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -1250,7 +1224,7 @@
       </property>
      </spacer>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QLabel" name="label_8">
       <property name="text">
        <string>Ваше свободное время:</string>
@@ -1258,55 +1232,10 @@
      </widget>
     </item>
     <item>
-     <spacer name="verticalSpacer_7">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>17</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
      <widget class="QPlainTextEdit" name="plainTextEdit"/>
     </item>
    </layout>
   </widget>
-  <zorder>comboBox</zorder>
-  <zorder>comboBox_2</zorder>
-  <zorder>label_3</zorder>
-  <zorder>label_4</zorder>
-  <zorder>label_5</zorder>
-  <zorder>label_6</zorder>
-  <zorder>label_7</zorder>
-  <zorder>label_8</zorder>
-  <zorder>pushButton</zorder>
-  <zorder>comboBox_5</zorder>
-  <zorder>comboBox_3</zorder>
-  <zorder>plainTextEdit</zorder>
-  <zorder>comboBox_5</zorder>
-  <zorder>comboBox_2</zorder>
-  <zorder>comboBox</zorder>
-  <zorder>label_6</zorder>
-  <zorder>comboBox_2</zorder>
-  <zorder>comboBox</zorder>
-  <zorder>label_6</zorder>
-  <zorder>horizontalSpacer_3</zorder>
-  <zorder>horizontalSpacer_4</zorder>
-  <zorder>horizontalSpacer_5</zorder>
-  <zorder>horizontalSpacer_6</zorder>
-  <zorder>horizontalSpacer_7</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>verticalSpacer</zorder>
-  <zorder>verticalSpacer_2</zorder>
-  <zorder>verticalSpacer_3</zorder>
-  <zorder>verticalSpacer_4</zorder>
-  <zorder>verticalSpacer_5</zorder>
-  <zorder>verticalSpacer_6</zorder>
-  <zorder>verticalSpacer_7</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
@@ -1344,22 +1273,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>keknaizer</receiver>
-   <slot>free_time()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>252</x>
-     <y>249</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>78</x>
-     <y>305</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>comboBox_2</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>keknaizer</receiver>
@@ -1388,6 +1301,22 @@
     <hint type="destinationlabel">
      <x>142</x>
      <y>76</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>free_time()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>249</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>78</x>
+     <y>305</y>
     </hint>
    </hints>
   </connection>

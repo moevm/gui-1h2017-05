@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-03-29T23:53:36
+# Project created by QtCreator 2017-04-12T15:50:01
 #
 #-------------------------------------------------
 
@@ -24,8 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        keknaizer.cpp
+        keknaizer.cpp \
+    time.cpp
 
-HEADERS  += keknaizer.h
+HEADERS  += keknaizer.h \
+    time.h
 
 FORMS    += keknaizer.ui
