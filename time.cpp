@@ -1,7 +1,7 @@
 #include "time.h"
 #include <QDebug>
 
-Time::Time()
+Time::Time():left_border(false),right_border(false)
 {
     // Инициализация массива
     for (int  i = 0; i < 10; i++){
@@ -139,6 +139,7 @@ bool Time::free_time()
     busy_time[number_of_intvls][2] = end_h;
     busy_time[number_of_intvls][3] = end_m;
     number_of_intvls++;
+    number_of_free_intvls++;
 
     for (int j = 0; j < 4; j++){
        my_sort(busy_time,j);
@@ -152,24 +153,27 @@ bool Time::free_time()
     //qDebug() << "-----------";
     //qDebug() << "Свободно: ";
 
-//    int free_index = 0;
+   // int free_index = 0;
 
-//    if ((busy_time[0][0] != 0)&& (busy_time[0][1]!=0)){
-//        qDebug() << "Зашел";
-//        free_vec[0][0] = 0;
-//        free_vec[0][1] = 0;
-//        free_vec[0][2] = busy_time[0+1][0] ;
-//        free_vec[0][3] = busy_time[0+1][1]-1;
-//        if(free_vec[0][3] < 0){
-//           // free[i][3] +=60;
-//            free_vec[0][3] +=60;
-//           // free[i][2]--;
-//            free_vec[0][2]--;
-//        }
-//        free_index++;
-//    }
+    if ((busy_time[0][0] != 0)&& (busy_time[0][1]!=0)&& !left_border){
+        qDebug() << "Зашел";
+        free_vec[0][0] = 0;
+        free_vec[0][1] = 0;
+        free_vec[0][2] = busy_time[0][0] ;
+        free_vec[0][3] = busy_time[0][1]-1;
+        if(free_vec[0][3] < 0){
+           // free[i][3] +=60;
+            free_vec[0][3] +=60;
+           // free[i][2]--;
+            free_vec[0][2]--;
+        }
+        left_border = true;
+        number_of_free_intvls++;
 
-    for(int i = 0; i < number_of_intvls-1; i++){
+        //free_index++;
+    }
+
+    for(int i = 0; i < number_of_free_intvls-1; i++){
 //        if (i ==0){
 
 //        }
@@ -197,18 +201,27 @@ bool Time::free_time()
         //free_index++;
     }
 
-//    if((busy_time[number_of_intvls][2] != 23)&& (busy_time[number_of_intvls][3]!=59)){
-//        free_vec[free_index][0] = busy_time[number_of_intvls][2];
-//        free_vec[free_index][1] = busy_time[number_of_intvls][3] +1;
-//        if (free_vec[free_index][1]%60 == 0){ // если было 59
-//           // free[i][1] = 0;
-//             free_vec[free_index][1] = 0;
-//            //free[i][0]++;
-//             free_vec[free_index][0]++;
+
+    //проверка на границы ОЗЕЗКА
+
+
+
+
+//        if((busy_time[number_of_intvls][2] != 23)&& (busy_time[number_of_intvls][3]!=59) && !right_border){
+//            free_vec[number_of_free_intvls][0] = busy_time[number_of_intvls][2];
+//            free_vec[number_of_free_intvls][1] = busy_time[number_of_intvls][3] +1;
+
+//            if (free_vec[number_of_free_intvls][1]%60 == 0){ // если было 59
+//               // free[i][1] = 0;
+//                 free_vec[number_of_free_intvls][1] = 0;
+//                //free[i][0]++;
+//                 free_vec[number_of_free_intvls][0]++;
+//            }
+//            free_vec[0][2] = 23 ;
+//            free_vec[0][3] = 59;
+//            right_border = true;
+//            number_of_free_intvls++;
 //        }
-//        free_vec[0][2] = 23 ;
-//        free_vec[0][3] = 59;
-//    }
 
     return flag;
 }

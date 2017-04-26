@@ -14,7 +14,7 @@ public:
     bool free_time();
     void setTimeBorders(int index, int a);
     //int* getFreeTime() {return free[4];}
-    int getNumbInterv() {return number_of_intvls;}
+    int getNumbInterv() {return number_of_free_intvls;} //исправил на free
     vector<vector<int>> getmyVec(){return free_vec;}
 
 private:
@@ -29,7 +29,10 @@ private:
 //    int end_m =0;
     int busy_time[10][4];
     int number_of_intvls =0;
+    int number_of_free_intvls =0;
     int work_var[4];
+    bool left_border;
+    bool right_border;
 
 
 

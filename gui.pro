@@ -25,9 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         keknaizer.cpp \
-    time.cpp
+    time.cpp \
+    task.cpp \
+    problems.cpp
 
 HEADERS  += keknaizer.h \
-    time.h
+    time.h \
+    task.h \
+    problems.h
 
 FORMS    += keknaizer.ui

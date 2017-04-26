@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QTime>
 #include "time.h"
+#include "problems.h"
+#include "task.h"
 
 using namespace std;
 
@@ -35,10 +37,13 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_problems_add();
+
 private:
     Ui::keknaizer *ui;
     Time time;
-
+    vector<task> to_do_list;
+    problems *pr;
 };
 
 #endif // KEKNAIZER_H
