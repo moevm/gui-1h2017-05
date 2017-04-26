@@ -6,27 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>703</width>
-    <height>582</height>
+    <width>746</width>
+    <height>604</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>keknaizer</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">rgb (252, 175, 62)</string>
+   <string notr="true">QWidget#keknaizer {
+background-color:#12202f;
+}</string>
   </property>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>0</y>
-     <width>591</width>
-     <height>551</height>
+     <x>180</x>
+     <y>40</y>
+     <width>561</width>
+     <height>561</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QStackedWidget {
+background-color:#222c3c;
+border-radius:8px;
+}</string>
+   </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QLabel" name="label_12">
@@ -50,6 +58,12 @@
        <height>0</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
      <property name="text">
       <string>Помыть соседа</string>
      </property>
@@ -62,6 +76,25 @@
        <width>151</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_6{
+   padding: 1px 2px; 
+    font: normal 13px;
+    border: none;
+    color: #fff; 
+    background-color: #0e9dc7;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:4px;
+    border-top-left-radius:4px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_6:hover {
+    color: #fff; 
+    background-color: rgb(15, 179, 227);
+    }</string>
      </property>
      <property name="text">
       <string>Добавить новую задачу</string>
@@ -101,6 +134,12 @@
        <height>0</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
      <property name="text">
       <string>Мои    задачи</string>
      </property>
@@ -116,6 +155,12 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
      <property name="text">
       <string>Выберите срок окончания</string>
      </property>
@@ -128,6 +173,12 @@
        <width>171</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
      </property>
      <property name="text">
       <string>Название задачи:</string>
@@ -142,6 +193,12 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
      <property name="text">
       <string>Сложность выполнения:</string>
      </property>
@@ -154,6 +211,12 @@
        <width>151</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox#comboBox_9 {
+
+}
+</string>
      </property>
      <item>
       <property name="text">
@@ -201,9 +264,15 @@
       <rect>
        <x>30</x>
        <y>190</y>
-       <width>181</width>
+       <width>191</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
      </property>
      <property name="text">
       <string>Подробное описание задачи:</string>
@@ -212,11 +281,17 @@
     <widget class="QCalendarWidget" name="calendarWidget">
      <property name="geometry">
       <rect>
-       <x>330</x>
-       <y>70</y>
-       <width>176</width>
-       <height>171</height>
+       <x>290</x>
+       <y>60</y>
+       <width>261</width>
+       <height>251</height>
       </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_8">
@@ -228,6 +303,25 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_8{
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #0e9dc7;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:4px;
+    border-top-left-radius:4px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_8:hover {
+    color: #fff; 
+    background-color: rgb(15, 179, 227);
+    }</string>
+     </property>
      <property name="text">
       <string>Добавить задачу</string>
      </property>
@@ -235,11 +329,30 @@
     <widget class="QPushButton" name="pushButton_9">
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>410</x>
        <y>350</y>
        <width>101</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_9{
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #0e9dc7;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:4px;
+    border-top-left-radius:4px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_9:hover {
+    color: #fff; 
+    background-color: rgb(15, 179, 227);
+    }</string>
      </property>
      <property name="text">
       <string>На главную</string>
@@ -253,6 +366,13 @@
        <width>251</width>
        <height>111</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPlainTextEdit {
+ border-radius:8px;
+
+
+}</string>
      </property>
     </widget>
     <widget class="QPlainTextEdit" name="plainTextEdit_4">
@@ -297,6 +417,12 @@
           <height>0</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+color: #dfdfdf;
+font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+        </property>
         <property name="text">
          <string>Укажите вашу занятость:</string>
         </property>
@@ -338,6 +464,12 @@
             <height>0</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+          </property>
           <property name="text">
            <string>Часы</string>
           </property>
@@ -363,6 +495,12 @@
             <width>40</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
           </property>
           <property name="text">
            <string>Минуты</string>
@@ -407,6 +545,12 @@
             <height>0</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+          </property>
           <property name="text">
            <string>С</string>
           </property>
@@ -419,7 +563,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>88</width>
+            <width>10</width>
             <height>20</height>
            </size>
           </property>
@@ -427,9 +571,18 @@
         </item>
         <item>
          <widget class="QComboBox" name="comboBox_4">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
-            <width>101</width>
+            <width>0</width>
             <height>0</height>
            </size>
           </property>
@@ -578,6 +731,11 @@ background-color:rgb(173, 127, 168);
             <width>101</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QComboBox {
+background-color:rgb(173, 127, 168);
+}</string>
           </property>
           <property name="maxCount">
            <number>59</number>
@@ -917,6 +1075,12 @@ background-color:rgb(173, 127, 168);
             <height>0</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+          </property>
           <property name="text">
            <string>Часы</string>
           </property>
@@ -942,6 +1106,12 @@ background-color:rgb(173, 127, 168);
             <width>40</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
           </property>
           <property name="text">
            <string>Минуты</string>
@@ -995,6 +1165,12 @@ background-color:rgb(173, 127, 168);
             <height>0</height>
            </size>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+          </property>
           <property name="text">
            <string>До</string>
           </property>
@@ -1020,6 +1196,11 @@ background-color:rgb(173, 127, 168);
             <width>101</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QComboBox {
+background-color:rgb(173, 127, 168);
+}</string>
           </property>
           <property name="maxCount">
            <number>23</number>
@@ -1491,6 +1672,25 @@ background-color:rgb(173, 127, 168);
           <height>0</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#pushButton_7{
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #0e9dc7;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:4px;
+    border-top-left-radius:4px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_7:hover {
+    color: #fff; 
+    background-color: rgb(15, 179, 227);
+    }</string>
+        </property>
         <property name="text">
          <string>Запомнить</string>
         </property>
@@ -1511,6 +1711,12 @@ background-color:rgb(173, 127, 168);
       </item>
       <item>
        <widget class="QLabel" name="label_20">
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+        </property>
         <property name="text">
          <string>Ваше свободное время:</string>
         </property>
@@ -1541,36 +1747,93 @@ background-color:rgb(173, 127, 168);
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>40</y>
+     <y>100</y>
      <width>141</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton_2 {
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #704ea0;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:8px;
+    border-top-left-radius:8px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_2:hover {
+    color: #fff; 
+    background-color: #967cb9;
+    }</string>
+   </property>
    <property name="text">
-    <string>Мои задачи</string>
+    <string>Мои задачи            </string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>90</y>
+     <y>150</y>
      <width>141</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton_3 {
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #704ea0;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:8px;
+    border-top-left-radius:8px; 
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_3:hover {
+    color: #fff; 
+    background-color: #967cb9;
+    }</string>
+   </property>
    <property name="text">
-    <string>Добавить задачу</string>
+    <string>Добавить задачу    </string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
+     <y>200</y>
      <width>141</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton_4{
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #704ea0;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:8px;
+    border-top-left-radius:8px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_4:hover {
+    color: #fff; 
+    background-color: #967cb9;
+    }</string>
    </property>
    <property name="text">
     <string>Добавить занятость</string>
@@ -1580,13 +1843,32 @@ background-color:rgb(173, 127, 168);
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>190</y>
+     <y>250</y>
      <width>141</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton_5{
+   padding: 1px 2px; 
+    font: normal 13px Roboto; 
+    border: none;
+    color: #fff; 
+    background-color: #704ea0;
+    transition:border .25s linear, color .25s linear,background-color .25s linear;
+    text-align: center;
+    border-bottom-right-radius:8px;
+    border-top-left-radius:8px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_5:hover {
+    color: #fff; 
+    background-color: #967cb9;
+    }</string>
+   </property>
    <property name="text">
-    <string>Изменить задачи</string>
+    <string>Изменить задачи     </string>
    </property>
   </widget>
  </widget>
