@@ -3,18 +3,19 @@
 
 #include <QMessageBox>
 #include <QVector>
+#include <QWidget>
 
 using namespace std;
 
-class Time
+class Time: public QWidget
 {
 public:
-    Time();
+    Time(QWidget *parent = 0);
     void my_sort(int (*a)[4], int index);
     bool free_time();
     void setTimeBorders(int index, int a);
     //int* getFreeTime() {return free[4];}
-    int getNumbInterv() {return number_of_free_intvls;} //исправил на free
+    int getNumbInterv() {return number_of_intvls;}
     vector<vector<int>> getmyVec(){return free_vec;}
 
 private:
@@ -29,10 +30,17 @@ private:
 //    int end_m =0;
     int busy_time[10][4];
     int number_of_intvls =0;
-    int number_of_free_intvls =0;
     int work_var[4];
-    bool left_border;
-    bool right_border;
+
+    // измененное
+        int X1, X2; // координаты отрезка для отрисовки
+        int lMarg, upMarg; // переменные для правильной отрисовки линии в любом размере
+        int lastIndex;  // индекс последнего доступного в массиве интервала
+
+    protected:
+        void paintEvent(QPaintEvent *event) override;
+        void mousePressEvent(QMouseEvent *event);
+        void mouseReleaseEvent(QMouseEvent *event);
 
 
 

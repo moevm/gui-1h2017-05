@@ -23,7 +23,7 @@ background-color:#12202f;
     <rect>
      <x>180</x>
      <y>40</y>
-     <width>931</width>
+     <width>521</width>
      <height>561</height>
     </rect>
    </property>
@@ -1815,16 +1815,6 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
       </item>
      </layout>
     </widget>
-    <widget class="time" name="widget" native="true">
-     <property name="geometry">
-      <rect>
-       <x>490</x>
-       <y>240</y>
-       <width>351</width>
-       <height>121</height>
-      </rect>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="page_4"/>
   </widget>
@@ -1958,14 +1948,6 @@ QPushButton#pushButton_5:hover {
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>time</class>
-   <extends>QWidget</extends>
-   <header>time.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

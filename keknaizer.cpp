@@ -89,18 +89,21 @@ void keknaizer::on_problems_add()
             msg->setText("Дедлайн ващй задачи некорректен");
             msg->show();
         }
-        task cur_task ;
-        cur_task.setDeadline(ui->calendarWidget->selectedDate());
-        cur_task.setDescription(ui->plainTextEdit_3->toPlainText());
-        ui->plainTextEdit_3->clear();
-        cur_task.setName(ui->plainTextEdit_4->toPlainText());
-        ui->plainTextEdit_4->clear();
-        cur_task.setDifficult(ui->comboBox_9->currentIndex());
+        else
+        {
+            task cur_task ;
+            cur_task.setDeadline(ui->calendarWidget->selectedDate());
+            cur_task.setDescription(ui->plainTextEdit_3->toPlainText());
+            ui->plainTextEdit_3->clear();
+            cur_task.setName(ui->plainTextEdit_4->toPlainText());
+            ui->plainTextEdit_4->clear();
+            cur_task.setDifficult(ui->comboBox_9->currentIndex());
 
-        to_do_list.push_back(cur_task) ;
+            to_do_list.push_back(cur_task) ;
 
-       // (to_do_list.at(0)).getName();
-        qDebug() << to_do_list.at(0).getDeadline().toString("dd/MM/yy");
+           // (to_do_list.at(0)).getName();
+            qDebug() << to_do_list.at(0).getDeadline().toString("dd/MM/yy");
+        }
     }
     else {
         QMessageBox *msg = new QMessageBox(NULL);

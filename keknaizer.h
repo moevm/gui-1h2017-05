@@ -31,19 +31,20 @@ private slots:
     void qBox3(int a);
     void qBox4(int a);
 
+    void on_problems_add();
+
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
 
-    void on_problems_add();
-
 private:
     Ui::keknaizer *ui;
     Time time;
     vector<task> to_do_list;
     problems *pr;
+
 };
 
 #endif // KEKNAIZER_H

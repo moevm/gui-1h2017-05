@@ -1,8 +1,19 @@
 #include "time.h"
 #include <QDebug>
+#include <QtWidgets>
 
-Time::Time():left_border(false),right_border(false)
+Time::Time(QWidget *parent) :
+    QWidget(parent)
 {
+    //новое
+    X1 = X2 = 0;
+        lastIndex = -1;
+        setWindowTitle(tr("Input time"));
+        resize(1300, 200);
+        lMarg = width()/26;
+        upMarg = height()/4;
+
+
     // Инициализация массива
     for (int  i = 0; i < 10; i++){
         {
@@ -139,7 +150,6 @@ bool Time::free_time()
     busy_time[number_of_intvls][2] = end_h;
     busy_time[number_of_intvls][3] = end_m;
     number_of_intvls++;
-    number_of_free_intvls++;
 
     for (int j = 0; j < 4; j++){
        my_sort(busy_time,j);
@@ -153,27 +163,24 @@ bool Time::free_time()
     //qDebug() << "-----------";
     //qDebug() << "Свободно: ";
 
-   // int free_index = 0;
+//    int free_index = 0;
 
-    if ((busy_time[0][0] != 0)&& (busy_time[0][1]!=0)&& !left_border){
-        qDebug() << "Зашел";
-        free_vec[0][0] = 0;
-        free_vec[0][1] = 0;
-        free_vec[0][2] = busy_time[0][0] ;
-        free_vec[0][3] = busy_time[0][1]-1;
-        if(free_vec[0][3] < 0){
-           // free[i][3] +=60;
-            free_vec[0][3] +=60;
-           // free[i][2]--;
-            free_vec[0][2]--;
-        }
-        left_border = true;
-        number_of_free_intvls++;
+//    if ((busy_time[0][0] != 0)&& (busy_time[0][1]!=0)){
+//        qDebug() << "Зашел";
+//        free_vec[0][0] = 0;
+//        free_vec[0][1] = 0;
+//        free_vec[0][2] = busy_time[0+1][0] ;
+//        free_vec[0][3] = busy_time[0+1][1]-1;
+//        if(free_vec[0][3] < 0){
+//           // free[i][3] +=60;
+//            free_vec[0][3] +=60;
+//           // free[i][2]--;
+//            free_vec[0][2]--;
+//        }
+//        free_index++;
+//    }
 
-        //free_index++;
-    }
-
-    for(int i = 0; i < number_of_free_intvls-1; i++){
+    for(int i = 0; i < number_of_intvls-1; i++){
 //        if (i ==0){
 
 //        }
@@ -201,27 +208,18 @@ bool Time::free_time()
         //free_index++;
     }
 
-
-    //проверка на границы ОЗЕЗКА
-
-
-
-
-//        if((busy_time[number_of_intvls][2] != 23)&& (busy_time[number_of_intvls][3]!=59) && !right_border){
-//            free_vec[number_of_free_intvls][0] = busy_time[number_of_intvls][2];
-//            free_vec[number_of_free_intvls][1] = busy_time[number_of_intvls][3] +1;
-
-//            if (free_vec[number_of_free_intvls][1]%60 == 0){ // если было 59
-//               // free[i][1] = 0;
-//                 free_vec[number_of_free_intvls][1] = 0;
-//                //free[i][0]++;
-//                 free_vec[number_of_free_intvls][0]++;
-//            }
-//            free_vec[0][2] = 23 ;
-//            free_vec[0][3] = 59;
-//            right_border = true;
-//            number_of_free_intvls++;
+//    if((busy_time[number_of_intvls][2] != 23)&& (busy_time[number_of_intvls][3]!=59)){
+//        free_vec[free_index][0] = busy_time[number_of_intvls][2];
+//        free_vec[free_index][1] = busy_time[number_of_intvls][3] +1;
+//        if (free_vec[free_index][1]%60 == 0){ // если было 59
+//           // free[i][1] = 0;
+//             free_vec[free_index][1] = 0;
+//            //free[i][0]++;
+//             free_vec[free_index][0]++;
 //        }
+//        free_vec[0][2] = 23 ;
+//        free_vec[0][3] = 59;
+//    }
 
     return flag;
 }
@@ -229,4 +227,66 @@ bool Time::free_time()
 void Time::setTimeBorders(int index, int a)
 {
     timeBorders[index] = a;
+}
+// ДОБАВЛЕННОЕ
+void Time::paintEvent(QPaintEvent *event)
+{
+    lMarg = width()/26;
+    upMarg = height()/4;
+
+    QPainter painter(this);
+    painter.setBrush(QColor(255, 255, 255));
+    //painter.drawRect(50, 50, 1200, 100);
+    painter.drawRect(lMarg, upMarg, 24*lMarg, 2*upMarg);
+    int x(lMarg), y(upMarg);
+
+    for (int i=0; i<=lastIndex && i < 10; i++) {
+        painter.setBrush(QColor(175, 218, 252));
+        //painter.setBrush(QColor(159, 226, 191));
+        //painter.setBrush(QColor(80, 200, 120));
+        //painter.setBrush(QColor(255, 0, 51));
+        int fromX = busy_time[i][0]*lMarg+lMarg+busy_time[i][1]*lMarg/60;
+        int toX = busy_time[i][2]*lMarg+lMarg+busy_time[i][3]*lMarg/60;
+        painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+        X1 = X2 = 0;
+    }
+
+    for (int i=0; i<=24; i++) {
+        painter.drawLine(x, y, x, y+upMarg/4+3);
+        painter.drawLine(x, y+2*upMarg, x, y+2*upMarg-upMarg/4-3);
+
+        painter.drawText(x-13, y-20, 30, 20, Qt::AlignCenter, QString::number(i));
+        x+=lMarg;
+    }
+}
+
+void Time::mousePressEvent(QMouseEvent *event)
+{
+    if(event->pos().x() > lMarg && event->pos().x() <= width()-lMarg
+            && event->pos().y() >= upMarg && event->pos().y() <= height()-upMarg)
+    {
+        X1 = event->pos().x();
+    }
+}
+
+void Time::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (X1 != 0 && event->pos().x()>= X1 && event->pos().x() >= lMarg)
+    {
+        if (event->pos().x() > width()-lMarg) X2 = width()-lMarg;
+        else X2 = event->pos().x();
+
+        lastIndex++;
+        busy_time[lastIndex][0] = (X1-lMarg)/lMarg;
+        qDebug() << "Start hour: " << busy_time[lastIndex][0];
+        busy_time[lastIndex][1] = ((X1-lMarg)%lMarg * 60)/lMarg;
+        qDebug() << "Start minute: " << busy_time[lastIndex][1];
+        busy_time[lastIndex][2] = (X2-lMarg)/lMarg;
+        qDebug() << "End hour: " << busy_time[lastIndex][2];
+        busy_time[lastIndex][3] = ((X2-lMarg)%lMarg * 60)/lMarg;
+        qDebug() << "End minute: " << busy_time[lastIndex][3];
+        qDebug() << "**********************";
+
+        update();
+    }
 }
