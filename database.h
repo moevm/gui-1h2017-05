@@ -11,7 +11,7 @@ class DataBase
 public:
     DataBase();
     ~DataBase();
-    bool addTask(QString nameOfTask, QDate deadline, int difficult, QString description, QString currDate);
+    bool addTask(QString nameOfTask, QDateTime deadline, int difficult, QString description, QDateTime currDate);
 private:
     QSqlDatabase db;
 

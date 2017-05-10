@@ -54,9 +54,10 @@ DataBase::DataBase()
        QString difficult = query.value(1).toString();
        QString description = query.value(2).toString();
        qDebug() << name_of_task+","+difficult +","+description+'\n';
+
         }
 // QDate::currentDate().day()+QDate::currentDate().month()+QDate::currentDate().year()
-    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDate::currentDate(), 5, "Намылить, растереть, погладить, смыть", "Еще не скоро)");
+    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDateTime::currentDateTime(), 5, "Намылить, растереть, погладить, смыть", QDateTime::currentDateTime());
 
 //   bool b = db_query.exec(str);
 //   if (!b) {
@@ -66,31 +67,23 @@ DataBase::DataBase()
 
 
        //Осуществляем запрос
-
-
-    qDebug() << QDate::currentDate().day() << "/" << QDate::currentDate().month() <<"/" << QDate::currentDate().year();
 }
 
 DataBase::~DataBase(){
     db.close();
 }
 
-bool DataBase::addTask(QString nameOfTask, QDate deadline, int difficult, QString description, QString currDate)
+bool DataBase::addTask(QString nameOfTask, QDateTime deadline, int difficult, QString description, QDateTime currDate)
 {
     QSqlQuery my_query;
-//    my_query.prepare("INSERT INTO my_tasks (name_of_task, deadline, difficult, description, cur_date)"
-//                                  "VALUES (:name_of_task, :deadline, :difficult, :description, :cur_date);");
     my_query.prepare("INSERT INTO my_tasks (name_of_task, deadline, difficult, description, cur_date)"
-                                  "VALUES (:name_of_task, :deadline, :difficult, :description);");
-
-//    my_query.prepare("INSERT INTO my_tasks (name_of_task, difficult, description)"
-//                                  "VALUES (:name_of_task, :difficult, :description);");
+                                  "VALUES (:name_of_task, :deadline, :difficult, :description, :cur_date);");
 
     my_query.bindValue(":name_of_task", nameOfTask);
     my_query.bindValue(":deadline", deadline);
     my_query.bindValue(":difficult", difficult);
     my_query.bindValue(":description", description);
-    //my_query.bindValue(":cur_date", currDate);
+    my_query.bindValue(":cur_date", currDate);
 
     if( !my_query.exec() ) {
             qDebug() << db.lastError().text();
