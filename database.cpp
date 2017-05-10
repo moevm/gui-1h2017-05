@@ -3,18 +3,18 @@
 DataBase::DataBase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("ДРУГОЕ НАЗВАНИЕ"); //тут путь
+    db.setDatabaseName("/keknaizer.sqlite");  //тут путь
 
     if (!db.open()) {
-            qDebug() << "Что-то пошло не так!";
+            qDebug() << "Что-то пошло не так!" + QDir::homePath ();
         }
     else{
         qDebug() << "Открылась!";
     }
 
-    if (!db.open()) {
-          qDebug() << db.lastError().text();
-    }
+ //   if (!db.open()) {
+ //         qDebug() << db.lastError().text();
+  //  }
 
     //qDebug() << "Я СОЗДАЛСЯ";
     //QSqlQuery db_query;
@@ -28,22 +28,33 @@ DataBase::DataBase()
 //           "cur_date TIMESTAMP, "
 //           ");";
 
-    QSqlQuery query;
+  //  QSqlQuery query;
     //("SELECT * FROM my_tasks");
-    if(!query.exec("SELECT * FROM my_tasks")){
-        qDebug() << "НУ СУКА НУ КУДА БЛЯТЬ ТЫ ЛЕЗЕШЬ НАХУЙ";
-    }
+  //  if(!query.exec("SELECT * FROM my_tasks")){
+  //      qDebug() << "НУ СУКА НУ КУДА БЛЯТЬ ТЫ ЛЕЗЕШЬ НАХУЙ";
+   // }
     //query.exec();
-    int idNum = query.record().indexOf("number");
-    int idName = query.record().indexOf("name_of_task");
+   // int idNum = query.record().indexOf("number");
+    //int idName = query.record().indexOf("name_of_task");
 //    int idName = query.record().indexOf("name_of_task");
 //    int idName = query.record().indexOf("name_of_task");
-    while(query.next())
-    {
-       QString name = query.value(idNum).toString();
-       qDebug() << name;
-       qDebug() << "не охуеть блять";
-    }
+    //while(query.next())
+  // {
+      // QString name = query.value(idNum).toString();
+     //  qDebug() << name;
+      // qDebug() << "не охуеть блять";
+   // }
+       QSqlQuery query;
+       query.exec("SELECT name_of_task, difficult, description FROM my_tasks");
+
+       //Выводим значения из запроса
+       while (query.next())
+        {
+       QString name_of_task = query.value(0).toString();
+       QString difficult = query.value(1).toString();
+       QString description = query.value(2).toString();
+       qDebug() << name_of_task+","+difficult +","+description+'\n';
+        }
 
 
 
@@ -51,6 +62,11 @@ DataBase::DataBase()
 //   if (!b) {
 //       qDebug() << "Вроде не удается создать таблицу, провертье карманы!";
 //   }
+
+
+
+       //Осуществляем запрос
+
 
 }
 

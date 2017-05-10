@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>keknaizer.sqlite</file>
+    </qresource>
+</RCC>
