@@ -1,11 +1,13 @@
 #include "time.h"
 #include <QDebug>
-#include <QtWidgets>
+#include <QPaintEvent>
+#include <QPainter>
 
 Time::Time(QWidget *parent) :
     QWidget(parent)
 {
     //новое
+    setMaximumSize(1000, 300);
     X1 = X2 = 0;
         lastIndex = -1;
         setWindowTitle(tr("Input time"));

@@ -10,6 +10,7 @@ keknaizer::keknaizer(QWidget *parent) :
 {
     ui->setupUi(this);
     //time = new Time();
+    //ui->stackedWidget->addWidget(new Time());
 
 //    QComboBox *my_combo = new QComboBox(QWidget *parent = 0);
 //    QComboBox *combobox_2 = new QComboBox(QWidget *parent = 0);
@@ -111,3 +112,4 @@ void keknaizer::on_problems_add()
         msg->show();
     }
 }
+

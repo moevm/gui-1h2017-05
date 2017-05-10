@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1550</width>
+    <width>850</width>
     <height>604</height>
    </rect>
   </property>
@@ -23,7 +23,7 @@ background-color:#12202f;
     <rect>
      <x>180</x>
      <y>40</y>
-     <width>931</width>
+     <width>631</width>
      <height>561</height>
     </rect>
    </property>
@@ -65,7 +65,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
 }</string>
      </property>
      <property name="text">
-      <string>Помыть соседа</string>
+      <string>Ничего не делать</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_6">
@@ -244,12 +244,7 @@ background-color:  rgb(15, 179, 227);
      </item>
      <item>
       <property name="text">
-       <string>Не очень легко</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Не очень..</string>
+       <string>Нормально</string>
       </property>
      </item>
      <item>
@@ -260,16 +255,6 @@ background-color:  rgb(15, 179, 227);
      <item>
       <property name="text">
        <string>Очень сложно</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>O_O</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>GODMODE</string>
       </property>
      </item>
     </widget>
@@ -362,7 +347,7 @@ QCalendarWidget QAbstractItemView:enabled
  color: rgb(180, 180, 180);  
  background-color: black;  
  selection-background-color: rgb(64, 64, 64); 
- selection-color: rgb(0, 255, 0); 
+ selection-color: rgb(150, 50, 200); 
 }
  
 
@@ -372,7 +357,7 @@ QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>100</x>
        <y>380</y>
        <width>111</width>
        <height>31</height>
@@ -465,8 +450,8 @@ QPushButton#pushButton_9:hover {
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>20</y>
+       <x>130</x>
+       <y>10</y>
        <width>418</width>
        <height>534</height>
       </rect>
@@ -627,7 +612,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
 }</string>
           </property>
           <property name="text">
-           <string>С</string>
+           <string> С         </string>
           </property>
          </widget>
         </item>
@@ -638,7 +623,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>10</width>
+            <width>80</width>
             <height>20</height>
            </size>
           </property>
@@ -657,13 +642,28 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
           </property>
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>101</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-background-color:rgb(173, 127, 168);
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
@@ -808,8 +808,23 @@ background-color:rgb(173, 127, 168);
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-background-color:rgb(173, 127, 168);
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
@@ -1273,8 +1288,23 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-background-color:rgb(173, 127, 168);
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
@@ -1417,6 +1447,26 @@ background-color:rgb(173, 127, 168);
             <width>101</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
+}</string>
           </property>
           <property name="maxCount">
            <number>59</number>
@@ -1733,7 +1783,7 @@ background-color:rgb(173, 127, 168);
         </property>
        </spacer>
       </item>
-      <item>
+      <item alignment="Qt::AlignHCenter">
        <widget class="QPushButton" name="pushButton_7">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1814,16 +1864,6 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
        <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
       </item>
      </layout>
-    </widget>
-    <widget class="time" name="widget" native="true">
-     <property name="geometry">
-      <rect>
-       <x>490</x>
-       <y>240</y>
-       <width>351</width>
-       <height>121</height>
-      </rect>
-     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="page_4"/>
@@ -1958,14 +1998,6 @@ QPushButton#pushButton_5:hover {
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>time</class>
-   <extends>QWidget</extends>
-   <header>time.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -2017,22 +2049,6 @@ QPushButton#pushButton_5:hover {
    </hints>
   </connection>
   <connection>
-   <sender>comboBox_7</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>keknaizer</receiver>
-   <slot>qBox3(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>376</x>
-     <y>273</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>47</x>
-     <y>433</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>comboBox_8</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>keknaizer</receiver>
@@ -2061,6 +2077,22 @@ QPushButton#pushButton_5:hover {
     <hint type="destinationlabel">
      <x>131</x>
      <y>513</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_7</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>qBox3(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>376</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>47</x>
+     <y>433</y>
     </hint>
    </hints>
   </connection>

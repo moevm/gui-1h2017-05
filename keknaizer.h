@@ -6,6 +6,7 @@
 #include "time.h"
 #include "problems.h"
 #include "task.h"
+#include "database.h"
 
 using namespace std;
 
@@ -37,6 +38,8 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+//    void on_pushButton_4_clicked();
+
     void on_pushButton_4_clicked();
 
 private:
@@ -44,6 +47,7 @@ private:
     Time time;
     vector<task> to_do_list;
     problems *pr;
+    DataBase kdb;
 
 };
 
