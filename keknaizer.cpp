@@ -80,6 +80,18 @@ void keknaizer::on_pushButton_4_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+void keknaizer::on_bd_task(QDate qd) //проверить
+{
+    QVector<QVector<QString>> mytask = kdb.cur_tasks((QDateTime)qd);
+    int size =sizeof(mytask)/sizeof(QVector<QVector<QString>>);
+    for(int i =0; i < size; i++){
+        for(int j = 0; j<4; j++){
+             qDebug() << mytask[i][j];
+        }
+
+    }
+}
+
 void keknaizer::on_problems_add()
 {
     if((ui->plainTextEdit_3->toPlainText() != "") && (ui->plainTextEdit_4->toPlainText() != ""))
@@ -104,6 +116,11 @@ void keknaizer::on_problems_add()
 
            // (to_do_list.at(0)).getName();
             qDebug() << to_do_list.at(0).getDeadline().toString("dd/MM/yy");
+
+            //УБРАТЬ ВЫШЕ И ДОБАВИТ БД
+            qDebug() << kdb.addTask(ui->plainTextEdit_4->toPlainText(),(QDateTime)ui->calendarWidget->selectedDate(),
+                        ui->comboBox_9->currentIndex(),(QString)(ui->comboBox_9->currentIndex()),QDateTime::currentDateTime());
+
         }
     }
     else {

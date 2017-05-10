@@ -42,6 +42,9 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    //вывод текущих задач из БД
+    void on_bd_task(QDate qd);
+
 private:
     Ui::keknaizer *ui;
     Time time;
