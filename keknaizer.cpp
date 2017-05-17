@@ -100,8 +100,33 @@ void keknaizer::on_bd_task(QDate qd) //проверить
         }
     }
 
-    QVector<QString> unique_dates = kdb.all_deadlines();
+    //выводим дерево задач с заданным дедлайном
+    ui->treeWidget->show();
+    //ui->treeWidget->setHeaderLabel(new QLabel(this,"ЛОЛ КЕК ЧЕБУРЕК"));
+    ui->treeWidget->setColumnCount(1);
+    //ui->treeWidget->set
 
+    QList<QTreeWidgetItem *> items;
+    for (int i = 0; i < mytask.size(); i++){
+        items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(mytask[i][0])));
+    }
+    for(int i = 0; i <  mytask.size(); i++ ){
+       items.append(new QTreeWidgetItem(items.at(i), QStringList("DEADLINE - " + mytask[i][1])));
+       items.append(new QTreeWidgetItem(items.at(i), QStringList(mytask[i][2])));
+       items.append(new QTreeWidgetItem(items.at(i), QStringList("Подробно:")));
+       items.append(new QTreeWidgetItem(items.at(mytask.size()-1+(i+1)*mytask[i].size()-1), QStringList(mytask[i][3])));
+       items.last()->setSizeHint(0,QSize(30,50)); //ИЗменение ширины строки, надо поиграться
+    }
+
+    ui->treeWidget->insertTopLevelItems(0, items);
+    ui->treeWidget->setColumnWidth(0,40);
+    ui->treeWidget->setWordWrap(true); //Разрешаем переносы
+}
+
+//Закрашивание дат календаря с дедлайнами
+void keknaizer::on_my_tasks_tap()
+{
+    QVector<QString> unique_dates = kdb.all_deadlines();
     //пытаемся закрасить ячейку календарика
      QTextCharFormat format;
      QBrush brush;
@@ -115,35 +140,6 @@ void keknaizer::on_bd_task(QDate qd) //проверить
           QDate date = QDate::fromString(unique_dates.at(i),"yyyy-MM-dd");
           ui->calendarWidget_2->setDateTextFormat(date,format);
      }
-
-    //выводим дерево задач с заданным дедлайном
-    ui->treeWidget->show();
-    //ui->treeWidget->setHeaderLabel(new QLabel(this,"ЛОЛ КЕК ЧЕБУРЕК"));
-    ui->treeWidget->setColumnCount(1);
-    //ui->treeWidget->set
-
-    QList<QTreeWidgetItem *> items;
-    for (int i = 0; i < mytask.size(); i++){
-        items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(mytask[i][0])));
-       // qDebug() << items.at(i) << " А ЗЕ ЗАЗ ЗА З";
-    }
-
-//        for(int j =1; j<mytask[i].size()-1; j++){
-//            items.append(new QTreeWidgetItem(items.at(i*(mytask[i].size()+1)), QStringList(mytask[i][j])));
-//        }
-    for(int i = 0; i <  mytask.size(); i++ ){
-       items.append(new QTreeWidgetItem(items.at(i), QStringList("DEADLINE - " + mytask[i][1])));
-       items.append(new QTreeWidgetItem(items.at(i), QStringList(mytask[i][2])));
-       items.append(new QTreeWidgetItem(items.at(i), QStringList("Подробно:")));
-       items.append(new QTreeWidgetItem(items.at(mytask.size()-1+(i+1)*mytask[i].size()-1), QStringList(mytask[i][3])));
-       //items.last()->setSizeHint(1,QSize(10,10));
-    }
-
-    ui->treeWidget->insertTopLevelItems(0, items);
-
-    //delete items[];
-
-     //items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("item: %1").arg(i))));
 }
 
 void keknaizer::on_problems_add()
@@ -158,18 +154,6 @@ void keknaizer::on_problems_add()
         }
         else
         {
-//            task cur_task ;
-//            cur_task.setDeadline(ui->calendarWidget->selectedDate());
-//            cur_task.setDescription(ui->plainTextEdit_3->toPlainText());
-//            ui->plainTextEdit_3->clear();
-//            cur_task.setName(ui->plainTextEdit_4->toPlainText());
-//            ui->plainTextEdit_4->clear();
-//            cur_task.setDifficult(ui->comboBox_9->currentIndex());
-
-//            to_do_list.push_back(cur_task) ;
-
-//           // (to_do_list.at(0)).getName();
-//            qDebug() << to_do_list.at(0).getDeadline().toString("dd/MM/yy");
 
             //УБРАТЬ ВЫШЕ И ДОБАВИТ БД
             qDebug() << kdb.addTask((QString)(ui->plainTextEdit_4->toPlainText()),(QDate)ui->calendarWidget->selectedDate(),

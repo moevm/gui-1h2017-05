@@ -11,23 +11,6 @@ DataBase::DataBase()
     else{
         qDebug() << "Открылась!";
     }
-
-//       QSqlQuery query;
-//       query.exec("SELECT name_of_task, difficult, description FROM my_tasks");
-
-//       //Выводим значения из запроса
-//       while (query.next())
-//        {
-//       QString name_of_task = query.value(0).toString();
-//       QString difficult = query.value(1).toString();
-//       QString description = query.value(2).toString();
-//       qDebug() << name_of_task+","+difficult +","+description;
-
-//        }
-
-//       QDate aziza = QDate::currentDate();
-//       qDebug() << aziza.toString("yy-MM-dd");
-//    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDate::currentDate(), 3, "Намылить, растереть, погладить, смыть", QDate::currentDate());
 }
 
 DataBase::~DataBase(){
@@ -62,9 +45,6 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
 
     QVector<QVector<QString>> for_output(30);//напишу пока тут 100
     QSqlQuery my_query;
-
-    //QString new_curr_date = currDate.toString("yy-MM-dd");
-
     int i = 0;//для подсчета элементов
 
     my_query.prepare("SELECT name_of_task, deadline, difficult, description FROM my_tasks WHERE deadline = :currdate");

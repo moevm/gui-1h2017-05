@@ -45,6 +45,9 @@ private slots:
     //вывод текущих задач из БД
     void on_bd_task(QDate qd);
 
+    //по нажатию на "мои задачи"
+    void on_my_tasks_tap();
+
 private:
     Ui::keknaizer *ui;
     Time time;

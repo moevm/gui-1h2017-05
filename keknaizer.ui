@@ -34,7 +34,7 @@ border-radius:8px;
 }</string>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QLabel" name="label_12">
@@ -230,6 +230,38 @@ QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
        <height>192</height>
       </rect>
      </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+     </property>
+     <property name="autoExpandDelay">
+      <number>-1</number>
+     </property>
+     <property name="indentation">
+      <number>20</number>
+     </property>
+     <property name="uniformRowHeights">
+      <bool>false</bool>
+     </property>
+     <property name="itemsExpandable">
+      <bool>true</bool>
+     </property>
+     <property name="allColumnsShowFocus">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+     <property name="headerHidden">
+      <bool>true</bool>
+     </property>
+     <property name="expandsOnDoubleClick">
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QWidget" name="page_2">
@@ -2199,6 +2231,22 @@ QPushButton#pushButton_5:hover {
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>on_my_tasks_tap()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>103</x>
+     <y>513</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>qBox1(int)</slot>
@@ -2208,5 +2256,6 @@ QPushButton#pushButton_5:hover {
   <slot>free_time()</slot>
   <slot>on_problems_add()</slot>
   <slot>on_bd_task(QDate)</slot>
+  <slot>on_my_tasks_tap()</slot>
  </slots>
 </ui>
