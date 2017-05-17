@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>746</width>
-    <height>604</height>
+    <width>908</width>
+    <height>645</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@ background-color:#12202f;
     <rect>
      <x>180</x>
      <y>40</y>
-     <width>561</width>
+     <width>631</width>
      <height>561</height>
     </rect>
    </property>
@@ -40,8 +40,8 @@ border-radius:8px;
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>220</x>
-       <y>160</y>
+       <x>180</x>
+       <y>400</y>
        <width>149</width>
        <height>17</height>
       </rect>
@@ -65,14 +65,14 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
 }</string>
      </property>
      <property name="text">
-      <string>Помыть соседа</string>
+      <string>Ничего не делать</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_6">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>260</y>
+       <x>410</x>
+       <y>360</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -104,7 +104,7 @@ QPushButton#pushButton_6:hover {
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>200</y>
+       <y>450</y>
        <width>491</width>
        <height>41</height>
       </rect>
@@ -142,6 +142,93 @@ font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      </property>
      <property name="text">
       <string>Мои    задачи</string>
+     </property>
+    </widget>
+    <widget class="QCalendarWidget" name="calendarWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>50</y>
+       <width>331</width>
+       <height>271</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+ background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+ }
+QCalendarWidget QToolButton {
+ height: 30px;
+ width: 130px;
+ color: white;
+ font-size: 14px;
+ icon-size: 0.5px, 0.5px;
+ background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+ 
+}
+QCalendarWidget QMenu {
+ width: 150px;
+ left: 20px;
+ color: white;
+ font-size: 12px;
+ background-color: rgb(100, 100, 100);
+}
+QCalendarWidget QSpinBox { 
+ width: 150px; 
+ font-size:14px; 
+ color: white; 
+ background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); 
+ selection-background-color: rgb(136, 136, 136);
+ selection-color: rgb(255, 255, 255);
+}
+QCalendarWidget QSpinBox::up-button {
+ subcontrol-origin: border; 
+ subcontrol-position: top right; 
+ width:65px;
+ }
+QCalendarWidget QSpinBox::down-button {
+subcontrol-origin: border;
+ subcontrol-position: bottom right; 
+ width:65px;
+}
+QCalendarWidget QSpinBox::up-arrow {
+  width:10px;
+  height:10px;
+ }
+QCalendarWidget QSpinBox::down-arrow { 
+width:56px;
+ height:56px; 
+}
+ 
+
+QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }
+ 
+
+QCalendarWidget QAbstractItemView:enabled 
+{
+ font-size:12px;  
+ color: rgb(180, 180, 180);  
+ background-color: black;  
+ selection-background-color: rgb(64, 64, 64); 
+ selection-color: rgb(150, 50, 200); 
+}
+ 
+
+QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
+     </property>
+    </widget>
+    <widget class="QTreeWidget" name="treeWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>256</width>
+       <height>192</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -213,10 +300,24 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QComboBox#comboBox_9 {
-
+      <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
 }
-</string>
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
+}</string>
      </property>
      <item>
       <property name="text">
@@ -230,12 +331,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      </item>
      <item>
       <property name="text">
-       <string>Не очень легко</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Не очень..</string>
+       <string>Нормально</string>
       </property>
      </item>
      <item>
@@ -246,16 +342,6 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      <item>
       <property name="text">
        <string>Очень сложно</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>O_O</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>GODMODE</string>
       </property>
      </item>
     </widget>
@@ -283,22 +369,83 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
       <rect>
        <x>290</x>
        <y>60</y>
-       <width>261</width>
-       <height>251</height>
+       <width>331</width>
+       <height>271</height>
       </rect>
      </property>
      <property name="toolTip">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+ background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+ }
+QCalendarWidget QToolButton {
+ height: 30px;
+ width: 130px;
+ color: white;
+ font-size: 14px;
+ icon-size: 0.5px, 0.5px;
+ background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+ 
+}
+QCalendarWidget QMenu {
+ width: 150px;
+ left: 20px;
+ color: white;
+ font-size: 12px;
+ background-color: rgb(100, 100, 100);
+}
+QCalendarWidget QSpinBox { 
+ width: 150px; 
+ font-size:14px; 
+ color: white; 
+ background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); 
+ selection-background-color: rgb(136, 136, 136);
+ selection-color: rgb(255, 255, 255);
+}
+QCalendarWidget QSpinBox::up-button {
+ subcontrol-origin: border; 
+ subcontrol-position: top right; 
+ width:65px;
+ }
+QCalendarWidget QSpinBox::down-button {
+subcontrol-origin: border;
+ subcontrol-position: bottom right; 
+ width:65px;
+}
+QCalendarWidget QSpinBox::up-arrow {
+  width:10px;
+  height:10px;
+ }
+QCalendarWidget QSpinBox::down-arrow { 
+width:56px;
+ height:56px; 
+}
+ 
+
+QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }
+ 
+
+QCalendarWidget QAbstractItemView:enabled 
+{
+ font-size:12px;  
+ color: rgb(180, 180, 180);  
+ background-color: black;  
+ selection-background-color: rgb(64, 64, 64); 
+ selection-color: rgb(150, 50, 200); 
+}
+ 
+
+QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>350</y>
+       <x>100</x>
+       <y>380</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -330,7 +477,7 @@ QPushButton#pushButton_8:hover {
      <property name="geometry">
       <rect>
        <x>410</x>
-       <y>350</y>
+       <y>380</y>
        <width>101</width>
        <height>31</height>
       </rect>
@@ -390,8 +537,8 @@ QPushButton#pushButton_9:hover {
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>20</y>
+       <x>130</x>
+       <y>10</y>
        <width>418</width>
        <height>534</height>
       </rect>
@@ -552,7 +699,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
 }</string>
           </property>
           <property name="text">
-           <string>С</string>
+           <string> С         </string>
           </property>
          </widget>
         </item>
@@ -563,7 +710,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>10</width>
+            <width>80</width>
             <height>20</height>
            </size>
           </property>
@@ -582,13 +729,28 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
           </property>
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>101</width>
             <height>0</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-background-color:rgb(173, 127, 168);
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
@@ -733,8 +895,23 @@ background-color:rgb(173, 127, 168);
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-background-color:rgb(173, 127, 168);
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
@@ -1198,8 +1375,23 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">QComboBox {
-background-color:rgb(173, 127, 168);
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
@@ -1342,6 +1534,26 @@ background-color:rgb(173, 127, 168);
             <width>101</width>
             <height>0</height>
            </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">ComboBox{
+ padding: 1px 2px; 
+ font: normal 13px Roboto; 
+ color: #fff; 
+ background-color: #0e9dc7;
+ text-align: right;
+ border-radius:3px;
+}
+
+ QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+ 
+QComboBox:drop-down{ text-align: center;
+background-color:#0e9dc7;}
+ 
+QComboBox::drop-down:hover{ text-align: center;
+border-left:1px solid #a9a9a8;
+background-color:  rgb(15, 179, 227);
+}</string>
           </property>
           <property name="maxCount">
            <number>59</number>
@@ -1658,7 +1870,7 @@ background-color:rgb(173, 127, 168);
         </property>
        </spacer>
       </item>
-      <item>
+      <item alignment="Qt::AlignHCenter">
        <widget class="QPushButton" name="pushButton_7">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -1874,12 +2086,127 @@ QPushButton#pushButton_5:hover {
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>on_problems_add()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>278</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>115</x>
+     <y>424</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_4</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>qBox1(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>536</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>135</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_6</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>qBox2(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>725</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>89</x>
+     <y>390</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_8</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>qBox4(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>725</x>
+     <y>269</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>93</x>
+     <y>467</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>free_time()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>485</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>131</x>
+     <y>513</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_7</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>qBox3(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>498</x>
+     <y>269</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>47</x>
+     <y>433</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calendarWidget_2</sender>
+   <signal>clicked(QDate)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>on_bd_task(QDate)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>644</x>
+     <y>233</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>109</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>qBox1(int)</slot>
   <slot>qBox2(int)</slot>
   <slot>qBox3(int)</slot>
   <slot>qBox4(int)</slot>
   <slot>free_time()</slot>
+  <slot>on_problems_add()</slot>
+  <slot>on_bd_task(QDate)</slot>
  </slots>
 </ui>

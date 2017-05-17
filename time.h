@@ -3,13 +3,14 @@
 
 #include <QMessageBox>
 #include <QVector>
+#include <QWidget>
 
 using namespace std;
 
-class Time
+class Time: public QWidget
 {
 public:
-    Time();
+    Time(QWidget *parent = 0);
     void my_sort(int (*a)[4], int index);
     bool free_time();
     void setTimeBorders(int index, int a);
@@ -30,6 +31,16 @@ private:
     int busy_time[10][4];
     int number_of_intvls =0;
     int work_var[4];
+
+    // измененное
+        int X1, X2; // координаты отрезка для отрисовки
+        int lMarg, upMarg; // переменные для правильной отрисовки линии в любом размере
+        int lastIndex;  // индекс последнего доступного в массиве интервала
+
+    protected:
+        void paintEvent(QPaintEvent *event) override;
+        void mousePressEvent(QMouseEvent *event);
+        void mouseReleaseEvent(QMouseEvent *event);
 
 
 

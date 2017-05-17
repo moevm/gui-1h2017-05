@@ -1,8 +1,21 @@
 #include "time.h"
 #include <QDebug>
+#include <QPaintEvent>
+#include <QPainter>
 
-Time::Time()
+Time::Time(QWidget *parent) :
+    QWidget(parent)
 {
+    //новое
+    setMaximumSize(1000, 300);
+    X1 = X2 = 0;
+        lastIndex = -1;
+        setWindowTitle(tr("Input time"));
+        resize(1300, 200);
+        lMarg = width()/26;
+        upMarg = height()/4;
+
+
     // Инициализация массива
     for (int  i = 0; i < 10; i++){
         {
@@ -216,4 +229,66 @@ bool Time::free_time()
 void Time::setTimeBorders(int index, int a)
 {
     timeBorders[index] = a;
+}
+// ДОБАВЛЕННОЕ
+void Time::paintEvent(QPaintEvent *event)
+{
+    lMarg = width()/26;
+    upMarg = height()/4;
+
+    QPainter painter(this);
+    painter.setBrush(QColor(255, 255, 255));
+    //painter.drawRect(50, 50, 1200, 100);
+    painter.drawRect(lMarg, upMarg, 24*lMarg, 2*upMarg);
+    int x(lMarg), y(upMarg);
+
+    for (int i=0; i<=lastIndex && i < 10; i++) {
+        painter.setBrush(QColor(175, 218, 252));
+        //painter.setBrush(QColor(159, 226, 191));
+        //painter.setBrush(QColor(80, 200, 120));
+        //painter.setBrush(QColor(255, 0, 51));
+        int fromX = busy_time[i][0]*lMarg+lMarg+busy_time[i][1]*lMarg/60;
+        int toX = busy_time[i][2]*lMarg+lMarg+busy_time[i][3]*lMarg/60;
+        painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+        X1 = X2 = 0;
+    }
+
+    for (int i=0; i<=24; i++) {
+        painter.drawLine(x, y, x, y+upMarg/4+3);
+        painter.drawLine(x, y+2*upMarg, x, y+2*upMarg-upMarg/4-3);
+
+        painter.drawText(x-13, y-20, 30, 20, Qt::AlignCenter, QString::number(i));
+        x+=lMarg;
+    }
+}
+
+void Time::mousePressEvent(QMouseEvent *event)
+{
+    if(event->pos().x() > lMarg && event->pos().x() <= width()-lMarg
+            && event->pos().y() >= upMarg && event->pos().y() <= height()-upMarg)
+    {
+        X1 = event->pos().x();
+    }
+}
+
+void Time::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (X1 != 0 && event->pos().x()>= X1 && event->pos().x() >= lMarg)
+    {
+        if (event->pos().x() > width()-lMarg) X2 = width()-lMarg;
+        else X2 = event->pos().x();
+
+        lastIndex++;
+        busy_time[lastIndex][0] = (X1-lMarg)/lMarg;
+        qDebug() << "Start hour: " << busy_time[lastIndex][0];
+        busy_time[lastIndex][1] = ((X1-lMarg)%lMarg * 60)/lMarg;
+        qDebug() << "Start minute: " << busy_time[lastIndex][1];
+        busy_time[lastIndex][2] = (X2-lMarg)/lMarg;
+        qDebug() << "End hour: " << busy_time[lastIndex][2];
+        busy_time[lastIndex][3] = ((X2-lMarg)%lMarg * 60)/lMarg;
+        qDebug() << "End minute: " << busy_time[lastIndex][3];
+        qDebug() << "**********************";
+
+        update();
+    }
 }
