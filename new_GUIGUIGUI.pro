@@ -4,11 +4,11 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = gui
+TARGET = new_GUIGUIGUI
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,9 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         keknaizer.cpp \
-    time.cpp
+    time.cpp \
+    task.cpp \
+    problems.cpp \
+    database.cpp \
+    timeline.cpp
 
 HEADERS  += keknaizer.h \
-    time.h
+    time.h \
+    task.h \
+    problems.h \
+    database.h \
+    timeline.h
 
 FORMS    += keknaizer.ui
+
+RESOURCES += \
+    db.qrc

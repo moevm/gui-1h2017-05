@@ -6,6 +6,7 @@
 #include "time.h"
 #include "problems.h"
 #include "task.h"
+#include "database.h"
 
 using namespace std;
 
@@ -37,13 +38,23 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+//    void on_pushButton_4_clicked();
+
     void on_pushButton_4_clicked();
+
+    //вывод текущих задач из БД
+    void on_bd_task(QDate qd);
+
+
+    //по нажатию на "мои задачи"
+    void on_my_tasks_tap();
 
 private:
     Ui::keknaizer *ui;
     Time time;
     vector<task> to_do_list;
     problems *pr;
+    DataBase kdb;
 
 };
 
