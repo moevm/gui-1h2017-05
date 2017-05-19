@@ -7,6 +7,7 @@
 #include "problems.h"
 #include "task.h"
 #include "database.h"
+#include "timeline.h"
 
 using namespace std;
 

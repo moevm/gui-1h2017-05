@@ -35,19 +35,6 @@ private:
 
     QVector<QVector<int>> busy_time;
 
-
-    // измененное
-        int X1, X2; // координаты отрезка для отрисовки
-        int lMarg, upMarg; // переменные для правильной отрисовки линии в любом размере
-        int lastIndex;  // индекс последнего доступного в массиве интервала
-
-    protected:
-        void paintEvent(QPaintEvent *event) override;
-        void mousePressEvent(QMouseEvent *event);
-        void mouseReleaseEvent(QMouseEvent *event);
-
-
-
 };
 
 #endif // TIME_H
