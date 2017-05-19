@@ -9,7 +9,6 @@ Time::Time(QWidget *parent) :
     //новое
     setMaximumSize(1000, 300);
     X1 = X2 = 0;
-        lastIndex = -1;
         setWindowTitle(tr("Input time"));
         resize(1300, 200);
         lMarg = width()/26;
@@ -110,12 +109,12 @@ bool Time::free_time()
     time_from_user.push_back(end_m);
 
     bool flag = true;
-    if (busy_time.size() == 10){
+    /*if (busy_time.size() == 10){
         //qDebug() << "Take it easy, maaan.";
         flag = false;
         return flag;
     }
-    else if ((end_h < begin_h ) || ((begin_h == end_h) && (end_m <begin_m )) ){
+    else */if ((end_h < begin_h ) || ((begin_h == end_h) && (end_m <begin_m )) ){
 
         QMessageBox *msg = new QMessageBox(NULL);
         msg->setText("Неверно введено время.");
@@ -320,7 +319,7 @@ void Time::paintEvent(QPaintEvent *event)
     painter.drawRect(lMarg, upMarg, 24*lMarg, 2*upMarg);
     int x(lMarg), y(upMarg);
 
-    for (int i=0; i<=lastIndex && i < 10; i++) {
+    for (int i=0; i<busy_time.size() /*&& i < 10*/; i++) {
         painter.setBrush(QColor(175, 218, 252));
         //painter.setBrush(QColor(159, 226, 191));
         //painter.setBrush(QColor(80, 200, 120));
@@ -351,22 +350,41 @@ void Time::mousePressEvent(QMouseEvent *event)
 
 void Time::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (X1 != 0 && event->pos().x()>= X1 && event->pos().x() >= lMarg)
-    {
+//    if (X1 != 0 && event->pos().x()>= X1 && event->pos().x() >= lMarg)
+//    {
         if (event->pos().x() > width()-lMarg) X2 = width()-lMarg;
         else X2 = event->pos().x();
+        if (event->pos().x() < lMarg) X2 = lMarg;
 
-        lastIndex++;
-        busy_time[lastIndex][0] = (X1-lMarg)/lMarg;
-        qDebug() << "Start hour: " << busy_time[lastIndex][0];
-        busy_time[lastIndex][1] = ((X1-lMarg)%lMarg * 60)/lMarg;
-        qDebug() << "Start minute: " << busy_time[lastIndex][1];
-        busy_time[lastIndex][2] = (X2-lMarg)/lMarg;
-        qDebug() << "End hour: " << busy_time[lastIndex][2];
-        busy_time[lastIndex][3] = ((X2-lMarg)%lMarg * 60)/lMarg;
-        qDebug() << "End minute: " << busy_time[lastIndex][3];
+        timeBorders[0] = (X1-lMarg)/lMarg;
+        timeBorders[1] = ((X1-lMarg)%lMarg * 60)/lMarg;
+        timeBorders[2] = (X2-lMarg)/lMarg;
+        timeBorders[3] = ((X2-lMarg)%lMarg * 60)/lMarg;
+
+        if (timeBorders[0] > timeBorders[2]) {
+            int temp = timeBorders[2];
+            timeBorders[2] = timeBorders[0];
+            timeBorders[0] = temp;
+
+            temp = timeBorders[3];
+            timeBorders[3] = timeBorders[1];
+            timeBorders[1] = temp;
+        }
+        if (timeBorders[0] == timeBorders[2] && timeBorders[1] > timeBorders[3]){
+            int temp = timeBorders[3];
+            timeBorders[3] = timeBorders[1];
+            timeBorders[1] = temp;
+        }
+
+        free_time();
+
+//        qDebug() << "Start hour: " << busy_time.last()[0];
+//        qDebug() << "Start minute: " << busy_time.last()[1];
+//        qDebug() << "End hour: " << busy_time.last()[2];
+//        qDebug() << "End minute: " << busy_time.last()[3];
+        qDebug() << busy_time;
         qDebug() << "**********************";
 
         update();
-    }
+//    }
 }

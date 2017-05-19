@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>908</width>
-    <height>645</height>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@ background-color:#12202f;
      <x>180</x>
      <y>40</y>
      <width>631</width>
-     <height>561</height>
+     <height>671</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -2007,6 +2007,16 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
       </item>
      </layout>
     </widget>
+    <widget class="Time" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>560</y>
+       <width>561</width>
+       <height>80</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="page_4"/>
   </widget>
@@ -2140,6 +2150,14 @@ QPushButton#pushButton_5:hover {
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Time</class>
+   <extends>QWidget</extends>
+   <header>time.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
