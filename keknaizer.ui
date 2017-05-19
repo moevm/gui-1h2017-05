@@ -34,7 +34,7 @@ border-radius:8px;
 }</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QLabel" name="label_12">
@@ -472,6 +472,9 @@ QCalendarWidget QAbstractItemView:enabled
 
 QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
      </property>
+     <property name="verticalHeaderFormat">
+      <enum>QCalendarWidget::ISOWeekNumbers</enum>
+     </property>
     </widget>
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
@@ -786,7 +789,7 @@ background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
-           <number>23</number>
+           <number>24</number>
           </property>
           <item>
            <property name="text">
@@ -900,6 +903,11 @@ background-color:  rgb(15, 179, 227);
           </item>
           <item>
            <property name="text">
+            <string>22</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>23</string>
            </property>
           </item>
@@ -947,7 +955,7 @@ background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
-           <number>59</number>
+           <number>60</number>
           </property>
           <item>
            <property name="text">
@@ -1237,6 +1245,11 @@ background-color:  rgb(15, 179, 227);
           <item>
            <property name="text">
             <string>57</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>58</string>
            </property>
           </item>
           <item>
@@ -1427,7 +1440,7 @@ background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
-           <number>23</number>
+           <number>24</number>
           </property>
           <item>
            <property name="text">
@@ -1541,6 +1554,11 @@ background-color:  rgb(15, 179, 227);
           </item>
           <item>
            <property name="text">
+            <string>22</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>23</string>
            </property>
           </item>
@@ -1588,7 +1606,7 @@ background-color:  rgb(15, 179, 227);
 }</string>
           </property>
           <property name="maxCount">
-           <number>59</number>
+           <number>60</number>
           </property>
           <item>
            <property name="text">
@@ -1878,6 +1896,11 @@ background-color:  rgb(15, 179, 227);
           <item>
            <property name="text">
             <string>57</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>58</string>
            </property>
           </item>
           <item>
