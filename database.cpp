@@ -3,7 +3,7 @@
 DataBase::DataBase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("../new_GUIGUIGUI/keknaizer.sqlite");  //тут путь - Перенести бд в папку с Exe
+    db.setDatabaseName("../new_GUIGUIGUI/keknaizer.sqlite");  //тут путь
 
     if (!db.open()) {
             qDebug() << "Что-то пошло не так!" + QDir::homePath ();
@@ -12,23 +12,7 @@ DataBase::DataBase()
         qDebug() << "Открылась!";
     }
 
-
-//       QSqlQuery query;
-//       query.exec("SELECT name_of_task, difficult, d  escription FROM my_tasks");
-
-//       //Выводим значения из запроса
-//       while (query.next())
-//        {
-//       QString name_of_task = query.value(0).toString();
-//       QString difficult = query.value(1).toString();
-//       QString description = query.value(2).toString();
-//       qDebug() << name_of_task+","+difficult +","+description;
-
-//        }
-
-//       QDate aziza = QDate::currentDate();
-//       qDebug() << aziza.toString("yy-MM-dd");
-//    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDate::currentDate(), 3, "Намылить, растереть, погладить, смыть", QDate::currentDate());
+    qDebug() << QDate::currentDate() << QDate::currentDate();
 
 }
 
@@ -64,10 +48,6 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
 
     QVector<QVector<QString>> for_output(30);//напишу пока тут 100
     QSqlQuery my_query;
-
-
-    //QString new_curr_date = currDate.toString("yy-MM-dd");
-
     int i = 0;//для подсчета элементов
 
     my_query.prepare("SELECT name_of_task, deadline, difficult, description FROM my_tasks WHERE deadline = :currdate");
@@ -138,5 +118,97 @@ QVector<QString> DataBase::all_deadlines()
 
     }
     return dates;
+}
+
+//для таблицы свободного времени
+bool DataBase::add_free_user_time(QDate date_beg, QVector<QVector<int>> free_time, QDate date_end)
+{
+    QDate work_date = date_beg;// рабочая переменная для даты
+    QVector<int> times(4);
+    int count = date_beg.daysTo(date_end); // считается количество дней между вводимой начальной датой и конечной
+
+    for(int i = 0; i < count+1; i++){ //пока +1
+        work_date = date_beg.addDays(i);// добавляем день к начальной дате( сначала 0)
+
+        for(int j = 0; j < free_time.size(); j++){
+
+            for(int z = 0;z < 4; z++){
+                times[z]= free_time[j][z]; // записываем в рабочий вектор свободное время
+            }
+            QSqlQuery my_query;
+            my_query.prepare("INSERT INTO free_user_time (Date, begin_hour, begin_minute, end_hour, end_minute)"
+                                          "VALUES (:Date, :begin_hour, :begin_minute, :end_hour, :end_minute);");
+            my_query.bindValue(":Date", work_date);
+            my_query.bindValue(":begin_hour", times[0]);
+            my_query.bindValue(":begin_minute", times[1]);
+            my_query.bindValue(":end_hour", times[2]);
+            my_query.bindValue(":end_minute", times[3]);
+            if( !my_query.exec() ) {
+                    qDebug() << db.lastError().text();
+                    return false;
+                }
+        }
+    }
+    return true;
+}
+
+QVector<QVector<int>> DataBase::get_free_user_time(QDate date)
+{
+    QVector<QVector<int>> ret_freedom;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT begin_hour, begin_minute, end_hour, end_minute FROM free_user_time WHERE Date = :date");
+    my_query.bindValue(":date",date);
+    my_query.exec();
+    while(my_query.next()){
+        ret_freedom.push_back(QVector<int>()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
+        ret_freedom.last().push_back(my_query.value(0).toInt());
+        ret_freedom.last().push_back(my_query.value(1).toInt());
+        ret_freedom.last().push_back(my_query.value(2).toInt());
+        ret_freedom.last().push_back(my_query.value(3).toInt());
+    }
+    return ret_freedom;
+}
+
+//для таблица распределенного времени
+bool DataBase::add_dis_time(QDate one_date, QVector<QVector<int> > time, QString one_task_name)
+{
+    QVector<int> work_times(4);
+    for(int i = 0; i < time.size(); i++){
+        for(int z = 0;z < 4; z++){
+            work_times[z]= time[i][z]; // записываем в рабочий вектор свободное время
+        }
+        QSqlQuery my_query;
+        my_query.prepare("INSERT INTO distibuted_time (date, begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name )"
+                                      "VALUES (:date, :begin_task_hour, :begin_task_minute, :end_task_hour, :end_task_minute, :task_name);");
+        my_query.bindValue(":date", one_date);
+        my_query.bindValue(":begin_task_hour", work_times[0]);
+        my_query.bindValue(":begin_task_minute", work_times[1]);
+        my_query.bindValue(":end_task_hour", work_times[2]);
+        my_query.bindValue(":end_task_minute", work_times[3]);
+        my_query.bindValue(":task_name", one_task_name);
+        if( !my_query.exec() ) {
+                qDebug() << db.lastError().text();
+                return false;
+            }
+    }
+    return true;
+}
+
+QVector<QVector<QString>> DataBase::get_dis_time(QDate one_date)
+{
+    QVector<QVector<QString>> ret_dis;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name  FROM distibuted_time WHERE date = :date");
+    my_query.bindValue(":date",one_date);
+    my_query.exec();
+    while(my_query.next()){
+        ret_dis.push_back(QVector<QString>()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
+        ret_dis.last().push_back(my_query.value(0).toString()); // сохраняем цифвеки как QString
+        ret_dis.last().push_back(my_query.value(1).toString());
+        ret_dis.last().push_back(my_query.value(2).toString());
+        ret_dis.last().push_back(my_query.value(3).toString());
+        ret_dis.last().push_back(my_query.value(4).toString());// тут сохраняется навание задачи
+    }
+    return ret_dis;
 }
 
