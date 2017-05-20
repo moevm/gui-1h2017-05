@@ -12,7 +12,6 @@ DataBase::DataBase()
         qDebug() << "Открылась!";
     }
 
-
 //       QSqlQuery query;
 //       query.exec("SELECT name_of_task, difficult, description FROM my_tasks");
 
@@ -29,7 +28,6 @@ DataBase::DataBase()
 //       QDate aziza = QDate::currentDate();
 //       qDebug() << aziza.toString("yy-MM-dd");
 //    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDate::currentDate(), 3, "Намылить, растереть, погладить, смыть", QDate::currentDate());
-
 }
 
 DataBase::~DataBase(){
@@ -64,7 +62,6 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
 
     QVector<QVector<QString>> for_output(30);//напишу пока тут 100
     QSqlQuery my_query;
-
 
     //QString new_curr_date = currDate.toString("yy-MM-dd");
 

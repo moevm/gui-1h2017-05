@@ -158,73 +158,70 @@ bool Time::free_time()
     }
 
     //qDebug() << "Занято: ";
-    for (int i = 0; i < number_of_intvls; i++) {
-                       qDebug() << "C " << busy_time[i][0] << " : " << busy_time[i][1] << " до " << busy_time[i][2] << " : " << busy_time[i][3];
-               }
+//    for (int i = 0; i < number_of_intvls; i++) {
+//                       qDebug() << "C " << busy_time[i][0] << " : " << busy_time[i][1] << " до " << busy_time[i][2] << " : " << busy_time[i][3];
+//               }
 
     //qDebug() << "-----------";
     //qDebug() << "Свободно: ";
 
-    int free_index = 0;
-//    for(int i = 0; i < number_of_intvls; i++) {
-//        qDebug() << busy_time[i][0] << ;
-//    }
+//    int free_index = 0;
 
-    if ((busy_time[0][0] != 0)&& (busy_time[0][1]!=0)){ //потом взять и вернуться к этому
-        qDebug() << "Зашел";
-        free_vec[0][0] = 0;
-        free_vec[0][1] = 0;
-        free_vec[0][2] = busy_time[0][0] ;
-        free_vec[0][3] = busy_time[0][1]-1;
-        if(free_vec[0][3] < 0){
-           // free[i][3] +=60;
-            free_vec[0][3] +=60;
-           // free[i][2]--;
-            free_vec[0][2]--;
-        }
-        free_index++;
-    }
-
-//    for(int i = 0; i < number_of_intvls-1; i++){
-////        if (i ==0){
-
-////        }
-//        //free[i][0] = busy_time[i][2]; //час
-//        free_vec[i][0] = busy_time[i][2];
-//        //free[i][1] = busy_time[i][3] +1; // минуты
-//         free_vec[i][1] = busy_time[i][3] +1;
-//        if (free_vec[i][1]%60 == 0){ // если было 59
-//           // free[i][1] = 0;
-//             free_vec[i][1] = 0;
-//            //free[i][0]++;
-//             free_vec[i][0]++;
-//        }
-
-//        //free[i][2] = busy_time[i+1][0];
-//        free_vec[i][2] =  busy_time[i+1][0];
-//        //free[i][3] = busy_time[i+1][1]-1;
-//        free_vec[i][3] = busy_time[i+1][1]-1;
-//        if(free_vec[i][3] < 0){
+//    if ((busy_time[0][0] != 0)&& (busy_time[0][1]!=0)){
+//        qDebug() << "Зашел";
+//        free_vec[0][0] = 0;
+//        free_vec[0][1] = 0;
+//        free_vec[0][2] = busy_time[0+1][0] ;
+//        free_vec[0][3] = busy_time[0+1][1]-1;
+//        if(free_vec[0][3] < 0){
 //           // free[i][3] +=60;
-//            free_vec[i][3] +=60;
+//            free_vec[0][3] +=60;
 //           // free[i][2]--;
-//            free_vec[i][2]--;
+//            free_vec[0][2]--;
 //        }
-//        //free_index++;
+//        free_index++;
 //    }
 
-    if((busy_time[number_of_intvls][2] != 23)&& (busy_time[number_of_intvls][3]!=59)){
-        free_vec[free_index][0] = busy_time[number_of_intvls][2];
-        free_vec[free_index][1] = busy_time[number_of_intvls][3] +1;
-        if (free_vec[free_index][1]%60 == 0){ // если было 59
+    for(int i = 0; i < number_of_intvls-1; i++){
+//        if (i ==0){
+
+//        }
+        //free[i][0] = busy_time[i][2]; //час
+        free_vec[i][0] = busy_time[i][2];
+        //free[i][1] = busy_time[i][3] +1; // минуты
+         free_vec[i][1] = busy_time[i][3] +1;
+        if (free_vec[i][1]%60 == 0){ // если было 59
            // free[i][1] = 0;
-             free_vec[free_index][1] = 0;
+             free_vec[i][1] = 0;
             //free[i][0]++;
-             free_vec[free_index][0]++;
+             free_vec[i][0]++;
         }
-        free_vec[0][2] = 23 ;
-        free_vec[0][3] = 59;
+
+        //free[i][2] = busy_time[i+1][0];
+        free_vec[i][2] =  busy_time[i+1][0];
+        //free[i][3] = busy_time[i+1][1]-1;
+        free_vec[i][3] = busy_time[i+1][1]-1;
+        if(free_vec[i][3] < 0){
+           // free[i][3] +=60;
+            free_vec[i][3] +=60;
+           // free[i][2]--;
+            free_vec[i][2]--;
+        }
+        //free_index++;
     }
+
+//    if((busy_time[number_of_intvls][2] != 23)&& (busy_time[number_of_intvls][3]!=59)){
+//        free_vec[free_index][0] = busy_time[number_of_intvls][2];
+//        free_vec[free_index][1] = busy_time[number_of_intvls][3] +1;
+//        if (free_vec[free_index][1]%60 == 0){ // если было 59
+//           // free[i][1] = 0;
+//             free_vec[free_index][1] = 0;
+//            //free[i][0]++;
+//             free_vec[free_index][0]++;
+//        }
+//        free_vec[0][2] = 23 ;
+//        free_vec[0][3] = 59;
+//    }
 
     return flag;
 }

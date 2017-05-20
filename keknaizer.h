@@ -3,10 +3,17 @@
 
 #include <QWidget>
 #include <QTime>
+
+#include <QMenu>
+#include <QCloseEvent>
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QGraphicsDropShadowEffect>
 #include "time.h"
 #include "problems.h"
 #include "task.h"
 #include "database.h"
+#include "popup.h"
 
 using namespace std;
 
@@ -25,6 +32,13 @@ public:
 
     ~keknaizer();
 
+     void mouseMoveEvent(QMouseEvent* e);
+     void mousePressEvent(QMouseEvent* e);
+     void mouseReleaseEvent(QMouseEvent* e);
+     void closeEvent(QCloseEvent * event);
+
+     float dx;
+     float dy;
 private slots:
     void free_time();
     void qBox1(int a);
@@ -46,8 +60,8 @@ private slots:
     void on_bd_task(QDate qd);
 
 
-    //по нажатию на "мои задачи"
-    void on_my_tasks_tap();
+    void iconActivated(QSystemTrayIcon::ActivationReason reason);
+    void on_pushButton_10_clicked();
 
 private:
     Ui::keknaizer *ui;
@@ -55,6 +69,8 @@ private:
     vector<task> to_do_list;
     problems *pr;
     DataBase kdb;
+    QSystemTrayIcon  * trayIcon;
+    PopUp *popUp;
 
 };
 
