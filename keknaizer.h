@@ -27,10 +27,10 @@ public:
 
 private slots:
     void free_time();
-    void qBox1(int a);
-    void qBox2(int a);
-    void qBox3(int a);
-    void qBox4(int a);
+//    void qBox1(int a);
+//    void qBox2(int a);
+//    void qBox3(int a);
+//    void qBox4(int a);
 
     void on_problems_add();
 

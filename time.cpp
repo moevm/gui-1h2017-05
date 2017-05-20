@@ -7,12 +7,12 @@ Time::Time(QWidget *parent) :
     QWidget(parent)
 {
     //новое
-    setMaximumSize(1000, 300);
+    //setMaximumSize(1000, 300);
     X1 = X2 = 0;
         setWindowTitle(tr("Input time"));
         resize(1300, 200);
-        lMarg = width()/26;
-        upMarg = height()/4;
+        lMarg = width()/14;
+        upMarg = height()/8;
 
     for (int i=0; i<4; i++) timeBorders[i] = 0;
 
@@ -310,57 +310,70 @@ void Time::setTimeBorders(int index, int a)
 // ДОБАВЛЕННОЕ
 void Time::paintEvent(QPaintEvent *event)
 {
-    lMarg = width()/26;
-    upMarg = height()/4;
+    lMarg = width()/14;
+    upMarg = height()/8;
 
     QPainter painter(this);
-    painter.setBrush(QColor(255, 255, 255));
-    //painter.drawRect(50, 50, 1200, 100);
-    painter.drawRect(lMarg, upMarg, 24*lMarg, 2*upMarg);
+    painter.setBrush(QColor(240, 240, 240));
+    // Рисуем 2 поля для ввода:
+    painter.drawRect(lMarg, upMarg,12*lMarg, 2*upMarg);
+    painter.drawRect(lMarg, 5*upMarg,12*lMarg, 2*upMarg);
     int x(lMarg), y(upMarg);
 
-    for (int i=0; i<busy_time.size() /*&& i < 10*/; i++) {
-        painter.setBrush(QColor(175, 218, 252));
-        //painter.setBrush(QColor(159, 226, 191));
-        //painter.setBrush(QColor(80, 200, 120));
-        //painter.setBrush(QColor(255, 0, 51));
+    // Рисуем промежутки занятости
+    for (int i=0; i<busy_time.size(); i++) {
+        painter.setBrush(QColor(106, 177, 199));  // (52, 216, 0)
         int fromX = busy_time[i][0]*lMarg+lMarg+busy_time[i][1]*lMarg/60;
         int toX = busy_time[i][2]*lMarg+lMarg+busy_time[i][3]*lMarg/60;
-        painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+        if (busy_time[i][0]>=12) {
+            toX-=12*lMarg;
+            fromX-=12*lMarg;
+        }
+
+        if (busy_time[i][0]<12) painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+        else painter.drawRect(fromX, 5*upMarg, toX-fromX, 2*upMarg);
         X1 = X2 = 0;
     }
-
-    for (int i=0; i<=24; i++) {
+    // Рисуем шкалу
+    for (int i=0; i<=12; i++) {
+        y = upMarg;
         painter.drawLine(x, y, x, y+upMarg/4+3);
         painter.drawLine(x, y+2*upMarg, x, y+2*upMarg-upMarg/4-3);
-
         painter.drawText(x-13, y-20, 30, 20, Qt::AlignCenter, QString::number(i));
+
+        y = 5*upMarg;
+        painter.drawLine(x, y, x, y+upMarg/4+3);
+        painter.drawLine(x, y+2*upMarg, x, y+2*upMarg-upMarg/4-3);
+        painter.drawText(x-13, y-20, 30, 20, Qt::AlignCenter, QString::number(i+12));
         x+=lMarg;
     }
 }
 
 void Time::mousePressEvent(QMouseEvent *event)
 {
-    if(event->pos().x() > lMarg && event->pos().x() <= width()-lMarg
-            && event->pos().y() >= upMarg && event->pos().y() <= height()-upMarg)
-    {
-        X1 = event->pos().x();
+    if(event->pos().x() > lMarg && event->pos().x() <= width()-lMarg) {
+        if (event->pos().y() >= upMarg && event->pos().y() <= 3*upMarg) X1 = event->pos().x();
+        else if (event->pos().y() >= 5*upMarg && event->pos().y() <= 7*upMarg) X1 = event->pos().x()+12*lMarg;
     }
 }
 
 void Time::mouseReleaseEvent(QMouseEvent *event)
 {
-//    if (X1 != 0 && event->pos().x()>= X1 && event->pos().x() >= lMarg)
-//    {
-        if (event->pos().x() > width()-lMarg) X2 = width()-lMarg;
-        else X2 = event->pos().x();
-        if (event->pos().x() < lMarg) X2 = lMarg;
+    // Хитрым образом сохраняем координаты точки отпуска
+    if (event->pos().x() > width()-lMarg) X2 = width()-lMarg;
+    else X2 = event->pos().x();
+    if (event->pos().x() < lMarg) X2 = lMarg;
 
+    if (event->pos().y() >= 5*upMarg && event->pos().y() <= 7*upMarg)
+        X2 += 12*lMarg;
+
+    // считаем концы промежука времени
         timeBorders[0] = (X1-lMarg)/lMarg;
         timeBorders[1] = ((X1-lMarg)%lMarg * 60)/lMarg;
         timeBorders[2] = (X2-lMarg)/lMarg;
         timeBorders[3] = ((X2-lMarg)%lMarg * 60)/lMarg;
 
+    // проверка на то, чтобы левый конец промежутка был меньше правого
         if (timeBorders[0] > timeBorders[2]) {
             int temp = timeBorders[2];
             timeBorders[2] = timeBorders[0];
@@ -376,6 +389,11 @@ void Time::mouseReleaseEvent(QMouseEvent *event)
             timeBorders[1] = temp;
         }
 
+        if ((timeBorders[2]==12||timeBorders[2]==24) && timeBorders[3]==1) timeBorders[3] = 0;
+
+        if (timeBorders[0]==-1) return;
+
+    // сортировка промежутков занятости и подсчет промежутков свободного времени
         free_time();
 
 //        qDebug() << "Start hour: " << busy_time.last()[0];
@@ -386,5 +404,4 @@ void Time::mouseReleaseEvent(QMouseEvent *event)
         qDebug() << "**********************";
 
         update();
-//    }
 }

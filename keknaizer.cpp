@@ -49,33 +49,33 @@ void keknaizer::free_time()
 //    }
 
 //        qDebug() << "-----------";
-        ui->plainTextEdit_2->clear();
-        for (int i = 0; i < time.getmyVec().size(); i++){//через функцию, УБРАЛ -1
-            ui->plainTextEdit_2->insertPlainText("C " + QString::number((time.getmyVec())[i][0]) + " : "  + QString::number((time.getmyVec())[i][1]) + " до " +  QString::number((time.getmyVec())[i][2]) +  " : "  + QString::number((time.getmyVec())[i][3]) + "\n" );
-        }
+//        ui->plainTextEdit_2->clear();
+//        for (int i = 0; i < time.getmyVec().size(); i++){//через функцию, УБРАЛ -1
+//            ui->plainTextEdit_2->insertPlainText("C " + QString::number((time.getmyVec())[i][0]) + " : "  + QString::number((time.getmyVec())[i][1]) + " до " +  QString::number((time.getmyVec())[i][2]) +  " : "  + QString::number((time.getmyVec())[i][3]) + "\n" );
+//        }
     }
 
 }
 
-void keknaizer::qBox1(int a)
-{
-    time.setTimeBorders(0, a);
-}
+//void keknaizer::qBox1(int a)
+//{
+//    time.setTimeBorders(0, a);
+//}
 
-void keknaizer::qBox2(int a)
-{
-    time.setTimeBorders(1, a);
-}
+//void keknaizer::qBox2(int a)
+//{
+//    time.setTimeBorders(1, a);
+//}
 
-void keknaizer::qBox3(int a)
-{
-    time.setTimeBorders(2, a);
-}
+//void keknaizer::qBox3(int a)
+//{
+//    time.setTimeBorders(2, a);
+//}
 
-void keknaizer::qBox4(int a)
-{
-    time.setTimeBorders(3, a);
-}
+//void keknaizer::qBox4(int a)
+//{
+//    time.setTimeBorders(3, a);
+//}
 
 
 void keknaizer::on_pushButton_2_clicked()
