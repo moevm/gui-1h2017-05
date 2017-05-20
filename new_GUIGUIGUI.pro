@@ -29,16 +29,19 @@ SOURCES += main.cpp\
     task.cpp \
     problems.cpp \
     database.cpp \
-    timeline.cpp
+    timeline.cpp \
+    popup.cpp
 
 HEADERS  += keknaizer.h \
     time.h \
     task.h \
     problems.h \
     database.h \
-    timeline.h
+    timeline.h \
+    popup.h
 
 FORMS    += keknaizer.ui
 
 RESOURCES += \
-    db.qrc
+    db.qrc \
+    img.qrc
