@@ -14,7 +14,7 @@ DataBase::DataBase()
 
 
 //       QSqlQuery query;
-//       query.exec("SELECT name_of_task, difficult, description FROM my_tasks");
+//       query.exec("SELECT name_of_task, difficult, d  escription FROM my_tasks");
 
 //       //Выводим значения из запроса
 //       while (query.next())

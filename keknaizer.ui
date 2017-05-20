@@ -831,7 +831,7 @@ QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
        <height>171</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0,0">
+     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -920,22 +920,6 @@ QPushButton#pushButton_7:hover {
         </property>
         <property name="text">
          <string>Запомнить</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_20">
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-        </property>
-        <property name="text">
-         <string>Ваше свободное время:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
