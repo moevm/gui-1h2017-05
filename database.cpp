@@ -3,7 +3,7 @@
 DataBase::DataBase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("../new_GUIGUIGUI/keknaizer.sqlite");  //тут путь
+    db.setDatabaseName("../new_GUIGUIGUI/keknaizer.sqlite");  //тут путь - Перенести бд в папку с Exe
 
     if (!db.open()) {
             qDebug() << "Что-то пошло не так!" + QDir::homePath ();
@@ -11,8 +11,7 @@ DataBase::DataBase()
     else{
         qDebug() << "Открылась!";
     }
-<<<<<<< HEAD
-=======
+
 
 //       QSqlQuery query;
 //       query.exec("SELECT name_of_task, difficult, description FROM my_tasks");
@@ -30,7 +29,7 @@ DataBase::DataBase()
 //       QDate aziza = QDate::currentDate();
 //       qDebug() << aziza.toString("yy-MM-dd");
 //    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDate::currentDate(), 3, "Намылить, растереть, погладить, смыть", QDate::currentDate());
->>>>>>> refs/remotes/origin/master
+
 }
 
 DataBase::~DataBase(){
@@ -65,12 +64,10 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
 
     QVector<QVector<QString>> for_output(30);//напишу пока тут 100
     QSqlQuery my_query;
-<<<<<<< HEAD
-=======
+
 
     //QString new_curr_date = currDate.toString("yy-MM-dd");
 
->>>>>>> refs/remotes/origin/master
     int i = 0;//для подсчета элементов
 
     my_query.prepare("SELECT name_of_task, deadline, difficult, description FROM my_tasks WHERE deadline = :currdate");

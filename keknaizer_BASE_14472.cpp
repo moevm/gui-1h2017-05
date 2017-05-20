@@ -5,15 +5,11 @@
 #include <QMessageBox>
 #include <QDate>
 
-
 keknaizer::keknaizer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::keknaizer)
 {
     ui->setupUi(this);
-
-    popUp = new PopUp();
-
     //time = new Time();
     //ui->stackedWidget->addWidget(new Time());
 
@@ -25,43 +21,8 @@ keknaizer::keknaizer(QWidget *parent) :
         mytext->push_back("i");
     }
 
-//    ui->comboBox_4->addItems(*mytext);
-//    ui->comboBox_7->addItems(*mytext);
-//    mytext->clear();
-//    for(int j =0; j< 60; j++){
-//        mytext->push_back("i");
-//    }
-//    ui->comboBox_6->addItems(*mytext);
-//    ui->comboBox_8->addItems(*mytext);
-
     //прячем дерево задач
     ui->treeWidget->hide();
-    ui->pushButton_5->hide();   // Скрыли кнопку
-    //это для крутоты
-    ui->treeWidget->setAlternatingRowColors(true);
-    ui->treeWidget->setAnimated(true);
-    ui->treeWidget->setWordWrap(true);
-
-
-   trayIcon = new QSystemTrayIcon(this);
-   trayIcon->setIcon(QIcon(":/icon.png"));
-   QMenu * menu = new QMenu(this);
-   QAction * viewWindow = new QAction(trUtf8("Развернуть окно"), this);
-   QAction * quitAction = new QAction(trUtf8("Выход"), this);
-
-
-   connect(viewWindow, SIGNAL(triggered()), this, SLOT(show()));
-   connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
-
-   menu->addAction(viewWindow);
-   menu->addAction(quitAction);
-
-
-   trayIcon->setContextMenu(menu);
-   trayIcon->show();
-
-   connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-           this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
 }
 
@@ -79,13 +40,34 @@ void keknaizer::free_time()
 //    }
 
 //        qDebug() << "-----------";
-//        ui->plainTextEdit_2->clear();
-//        for (int i = 0; i < time.getmyVec().size(); i++){//через функцию, УБРАЛ -1
-//            ui->plainTextEdit_2->insertPlainText("C " + QString::number((time.getmyVec())[i][0]) + " : "  + QString::number((time.getmyVec())[i][1]) + " до " +  QString::number((time.getmyVec())[i][2]) +  " : "  + QString::number((time.getmyVec())[i][3]) + "\n" );
-//        }
+        ui->plainTextEdit_2->clear();
+        for (int i = 0; i < time.getNumbInterv(); i++){//через функцию, УБРАЛ -1
+            ui->plainTextEdit_2->insertPlainText("C " + QString::number((time.getmyVec())[i][0]) + " : "  + QString::number((time.getmyVec())[i][1]) + " до " +  QString::number((time.getmyVec())[i][2]) +  " : "  + QString::number((time.getmyVec())[i][3]) + "\n" );
+        }
     }
 
 }
+
+void keknaizer::qBox1(int a)
+{
+    time.setTimeBorders(0, a);
+}
+
+void keknaizer::qBox2(int a)
+{
+    time.setTimeBorders(1, a);
+}
+
+void keknaizer::qBox3(int a)
+{
+    time.setTimeBorders(2, a);
+}
+
+void keknaizer::qBox4(int a)
+{
+    time.setTimeBorders(3, a);
+}
+
 
 void keknaizer::on_pushButton_2_clicked()
 {
@@ -101,6 +83,7 @@ void keknaizer::on_pushButton_4_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
+
 
 //вот эта функция
 void keknaizer::on_bd_task(QDate qd) //проверить
@@ -195,7 +178,6 @@ void keknaizer::on_my_tasks_tap()
 
 void keknaizer::on_problems_add()
 {
-
     if((ui->plainTextEdit_3->toPlainText() != "") && (ui->plainTextEdit_4->toPlainText() != ""))
     {
         if(ui->calendarWidget->selectedDate() < QDate::currentDate())
@@ -220,79 +202,5 @@ void keknaizer::on_problems_add()
         QMessageBox *msg = new QMessageBox(NULL);
         msg->setText("Не все данные были введены");
         msg->show();
-    }
-}
-
-
-void keknaizer::mouseMoveEvent( QMouseEvent* e ) {
-//    if( e->buttons() | Qt::LeftButton ) {
-//        setGeometry(
-//            pos().x() + ( e->x() - dx ),
-//            pos().y() + ( e->y() - dy ),
-//            width(),
-//            height()
-//        );
-//    }
-}
-
-void keknaizer::mousePressEvent( QMouseEvent* e ) {
-//    if( e->button() == Qt::LeftButton ) {
-//        dx = e->x();
-//        dy = e->y();
-//        setCursor( Qt::OpenHandCursor );
-//    }
-}
-
-void keknaizer::mouseReleaseEvent( QMouseEvent* e ) {
-//    if( e->button() == Qt::LeftButton ) {
-//        setCursor( Qt::ArrowCursor );
-//    }
-}
-
-void keknaizer::on_pushButton_10_clicked()
-{
-    if (this->isMinimized()) {
-        this->showNormal();
-    } else {
-        this->showMinimized();
-    }
-}
-
-void keknaizer::closeEvent(QCloseEvent * event)
-{
-    /* Если окно видимо и чекбокс отмечен, то завершение приложения
-     * игнорируется, а окно просто скрывается, что сопровождается
-     * соответствующим всплывающим сообщением
-     */
-    if(this->isVisible()){
-        event->ignore();
-        this->hide();
-        QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(QSystemTrayIcon::Information);
-
-        trayIcon->showMessage("Keknaizer",
-                              trUtf8("Приложение свернуто в трей. Для того чтобы "
-                                     "развернуть окно приложения, щелкните по иконке приложения в трее."),
-                              icon,
-                              2000);
-    }
-}
-
-void keknaizer::iconActivated(QSystemTrayIcon::ActivationReason reason)
-{
-    switch (reason){
-    case QSystemTrayIcon::Trigger:
-
-            /* если окно видимо, то оно скрывается,
-             * и наоборот, если скрыто, то разворачивается на экран
-             * */
-            if(!this->isVisible()){
-                this->show();
-            } else {
-                this->hide();
-            }
-
-        break;
-    default:
-        break;
     }
 }
