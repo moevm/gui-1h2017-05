@@ -11,71 +11,21 @@ DataBase::DataBase()
     else{
         qDebug() << "Открылась!";
     }
+        QVector<task> a = get_all_tasks_by_date_and_diff();
+       for(int i = 0; i < a.size(); i++){
+           qDebug() << a[i].getName() << " " << a[i].getDeadline()<< " " << a[i].getDifficult() << " " << a[i].getDescription();
+       }
 
- //   if (!db.open()) {
- //         qDebug() << db.lastError().text();
-  //  }
-
-    //qDebug() << "Я СОЗДАЛСЯ";
-    //QSqlQuery db_query;
-       // DDL query
-//   QString str = "CREATE TABLE my_tasks ("
-//           "number integer PRIMARY KEY AUTOINCREMENT, "
-//           "name_of_task VARCHAR(50), "
-//           "deadline TIMESTAMP, "
-//           "difficult INTEGER, "
-//           "description VARCHAR(255), "
-//           "cur_date TIMESTAMP, "
-//           ");";
-
-  //  QSqlQuery query;
-    //("SELECT * FROM my_tasks");
-  //  if(!query.exec("SELECT * FROM my_tasks")){
-  //      qDebug() << "НУ СУКА НУ КУДА БЛЯТЬ ТЫ ЛЕЗЕШЬ НАХУЙ";
-   // }
-    //query.exec();
-   // int idNum = query.record().indexOf("number");
-    //int idName = query.record().indexOf("name_of_task");
-//    int idName = query.record().indexOf("name_of_task");
-//    int idName = query.record().indexOf("name_of_task");
-    //while(query.next())
-  // {
-      // QString name = query.value(idNum).toString();
-     //  qDebug() << name;
-      // qDebug() << "не охуеть блять";
-   // }
-       QSqlQuery query;
-       query.exec("SELECT name_of_task, difficult, description FROM my_tasks");
-
-       //Выводим значения из запроса
-       while (query.next())
-        {
-       QString name_of_task = query.value(0).toString();
-       QString difficult = query.value(1).toString();
-       QString description = query.value(2).toString();
-       qDebug() << name_of_task+","+difficult +","+description+'\n';
-
-        }
-// QDate::currentDate().day()+QDate::currentDate().month()+QDate::currentDate().year()
-    qDebug() << "Well done, kek? " << addTask("Почесать соседке спинку", QDateTime::currentDateTime(), 5, "Намылить, растереть, погладить, смыть", QDateTime::currentDateTime());
-
-//   bool b = db_query.exec(str);
-//   if (!b) {
-//       qDebug() << "Вроде не удается создать таблицу, провертье карманы!";
-//   }
-
-
-
-       //Осуществляем запрос
 }
 
 DataBase::~DataBase(){
     db.close();
 }
 
-bool DataBase::addTask(QString nameOfTask, QDateTime deadline, int difficult, QString description, QDateTime currDate)
+bool DataBase::addTask(QString nameOfTask, QDate deadline, int difficult, QString description, QDate currDate)
 {
     QSqlQuery my_query;
+
     my_query.prepare("INSERT INTO my_tasks (name_of_task, deadline, difficult, description, cur_date)"
                                   "VALUES (:name_of_task, :deadline, :difficult, :description, :cur_date);");
 
@@ -85,6 +35,8 @@ bool DataBase::addTask(QString nameOfTask, QDateTime deadline, int difficult, QS
     my_query.bindValue(":description", description);
     my_query.bindValue(":cur_date", currDate);
 
+
+
     if( !my_query.exec() ) {
             qDebug() << db.lastError().text();
             return false;
@@ -92,13 +44,18 @@ bool DataBase::addTask(QString nameOfTask, QDateTime deadline, int difficult, QS
     return true;
 }
 
-QVector<QVector<QString>> DataBase::cur_tasks(QDateTime currDate)
+//получить все задачи в этот дедлайн
+QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
 {
 
-    QVector<QVector<QString>> for_output(100);//напишу пока тут 100
+    QVector<QVector<QString>> for_output(30);//напишу пока тут 100
     QSqlQuery my_query;
-    my_query.exec("SELECT (name_of_task, deadline, difficult, description) FROM my_tasks WHERE deadline = currDate");
-    for (int i = 0; my_query.next();i++){
+    int i = 0;//для подсчета элементов
+
+    my_query.prepare("SELECT name_of_task, deadline, difficult, description FROM my_tasks WHERE deadline = :currdate");
+    my_query.bindValue(":currdate",currDate);
+    my_query.exec();
+    for (i; my_query.next();i++){
         QString name_of_task = my_query.value(0).toString();
         QString deadline = my_query.value(1).toString();
         QString difficult = my_query.value(2).toString();
@@ -145,7 +102,132 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDateTime currDate)
     }
 
 
-
+    for_output.resize (i);
     return for_output;
+}
+
+QVector<QString> DataBase::all_deadlines()
+{
+    QVector<QString> dates;
+
+    QSqlQuery sqlquery;
+    sqlquery.prepare("SELECT DISTINCT deadline FROM my_tasks");
+
+    sqlquery.exec();
+    for (int i = 0; sqlquery.next();i++){
+        QString deadline = sqlquery.value(0).toString();
+        dates.push_back(deadline);
+
+    }
+    return dates;
+}
+
+//для таблицы свободного времени
+bool DataBase::add_free_user_time(QDate date_beg, QVector<QVector<int>> free_time, QDate date_end)
+{
+    QDate work_date = date_beg;// рабочая переменная для даты
+    QVector<int> times(4);
+    int count = date_beg.daysTo(date_end); // считается количество дней между вводимой начальной датой и конечной
+
+    for(int i = 0; i < count+1; i++){ //пока +1
+        work_date = date_beg.addDays(i);// добавляем день к начальной дате( сначала 0)
+
+        for(int j = 0; j < free_time.size(); j++){
+
+            for(int z = 0;z < 4; z++){
+                times[z]= free_time[j][z]; // записываем в рабочий вектор свободное время
+            }
+            QSqlQuery my_query;
+            my_query.prepare("INSERT INTO free_user_time (Date, begin_hour, begin_minute, end_hour, end_minute)"
+                                          "VALUES (:Date, :begin_hour, :begin_minute, :end_hour, :end_minute);");
+            my_query.bindValue(":Date", work_date);
+            my_query.bindValue(":begin_hour", times[0]);
+            my_query.bindValue(":begin_minute", times[1]);
+            my_query.bindValue(":end_hour", times[2]);
+            my_query.bindValue(":end_minute", times[3]);
+            if( !my_query.exec() ) {
+                    qDebug() << db.lastError().text();
+                    return false;
+                }
+        }
+    }
+    return true;
+}
+
+QVector<QVector<int>> DataBase::get_free_user_time(QDate date)
+{
+    QVector<QVector<int>> ret_freedom;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT begin_hour, begin_minute, end_hour, end_minute FROM free_user_time WHERE Date = :date");
+    my_query.bindValue(":date",date);
+    my_query.exec();
+    while(my_query.next()){
+        ret_freedom.push_back(QVector<int>()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
+        ret_freedom.last().push_back(my_query.value(0).toInt());
+        ret_freedom.last().push_back(my_query.value(1).toInt());
+        ret_freedom.last().push_back(my_query.value(2).toInt());
+        ret_freedom.last().push_back(my_query.value(3).toInt());
+    }
+    return ret_freedom;
+}
+
+//для таблица распределенного времени
+bool DataBase::add_dis_time(QDate one_date, QVector<QVector<int> > time, QString one_task_name)
+{
+    QVector<int> work_times(4);
+    for(int i = 0; i < time.size(); i++){
+        for(int z = 0;z < 4; z++){
+            work_times[z]= time[i][z]; // записываем в рабочий вектор свободное время
+        }
+        QSqlQuery my_query;
+        my_query.prepare("INSERT INTO distibuted_time (date, begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name )"
+                                      "VALUES (:date, :begin_task_hour, :begin_task_minute, :end_task_hour, :end_task_minute, :task_name);");
+        my_query.bindValue(":date", one_date);
+        my_query.bindValue(":begin_task_hour", work_times[0]);
+        my_query.bindValue(":begin_task_minute", work_times[1]);
+        my_query.bindValue(":end_task_hour", work_times[2]);
+        my_query.bindValue(":end_task_minute", work_times[3]);
+        my_query.bindValue(":task_name", one_task_name);
+        if( !my_query.exec() ) {
+                qDebug() << db.lastError().text();
+                return false;
+            }
+    }
+    return true;
+}
+
+QVector<QVector<QString>> DataBase::get_dis_time(QDate one_date)
+{
+    QVector<QVector<QString>> ret_dis;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name  FROM distibuted_time WHERE date = :date");
+    my_query.bindValue(":date",one_date);
+    my_query.exec();
+    while(my_query.next()){
+        ret_dis.push_back(QVector<QString>()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
+        ret_dis.last().push_back(my_query.value(0).toString()); // сохраняем цифвеки как QString
+        ret_dis.last().push_back(my_query.value(1).toString());
+        ret_dis.last().push_back(my_query.value(2).toString());
+        ret_dis.last().push_back(my_query.value(3).toString());
+        ret_dis.last().push_back(my_query.value(4).toString());// тут сохраняется навание задачи
+    }
+    return ret_dis;
+}
+
+//получить все задачи, сортированные по дедлайнам и по сложности(начиная с большей)
+QVector<task> DataBase::get_all_tasks_by_date_and_diff()
+{
+    QVector<task> ret_tasks;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT name_of_task, deadline, difficult, description  FROM my_tasks ORDER BY deadline, difficult DESC");
+    my_query.exec();
+    while(my_query.next()){
+        ret_tasks.push_back(task()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
+        ret_tasks.last().setName(my_query.value(0).toString());
+        ret_tasks.last().setDeadline(my_query.value(1).toDate());
+        ret_tasks.last().setDifficult(my_query.value(2).toInt());
+        ret_tasks.last().setDescription(my_query.value(3).toString());
+    }
+    return ret_tasks;
 }
 
