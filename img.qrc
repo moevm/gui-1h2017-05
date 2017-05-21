@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>left.png</file>
         <file>right.png</file>
+        <file>icon.png</file>
     </qresource>
 </RCC>

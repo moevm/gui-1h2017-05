@@ -35,17 +35,16 @@ keknaizer::keknaizer(QWidget *parent) :
 //    ui->comboBox_8->addItems(*mytext);
 
     //прячем дерево задач
-    ui->treeWidget->hide();
-
+   // ui->treeWidget->hide();
+    ui->pushButton_5->hide();   // Скрыли кнопку
     //это для крутоты
     ui->treeWidget->setAlternatingRowColors(true);
     ui->treeWidget->setAnimated(true);
     ui->treeWidget->setWordWrap(true);
 
 
-    trayIcon = new QSystemTrayIcon(this);
-   trayIcon->setIcon(this->style()->standardIcon(QStyle::SP_ComputerIcon));
-
+   trayIcon = new QSystemTrayIcon(this);
+   trayIcon->setIcon(QIcon(":/icon.png"));
    QMenu * menu = new QMenu(this);
    QAction * viewWindow = new QAction(trUtf8("Развернуть окно"), this);
    QAction * quitAction = new QAction(trUtf8("Выход"), this);
@@ -73,7 +72,7 @@ keknaizer::~keknaizer()
 
 void keknaizer::free_time()
 {
-    if (time.free_time()) {
+    if (ui->time_widget->free_time()) {
 //        for (int i = 0; i < time.getNumbInterv()-1; i++) {
 //                       qDebug() << "C " << (time.getmyVec())[i][0] << " : " << (time.getmyVec())[i][1] << " до " << (time.getmyVec())[i][2] << " : " << (time.getmyVec())[i][3];
 //        }
@@ -259,6 +258,16 @@ void keknaizer::on_pushButton_10_clicked()
     }
 }
 
+void keknaizer::cancel_time()
+{
+   ui->time_widget->setBusy_time_clear();
+   ui->time_widget->setFree_vec_clear();
+   ui->time_widget->set_borders_false();
+   qDebug() << ui->time_widget->getBusy_time();
+   qDebug() << ui->time_widget->getmyVec();
+
+}
+
 void keknaizer::closeEvent(QCloseEvent * event)
 {
     /* Если окно видимо и чекбокс отмечен, то завершение приложения
@@ -297,3 +306,4 @@ void keknaizer::iconActivated(QSystemTrayIcon::ActivationReason reason)
         break;
     }
 }
+

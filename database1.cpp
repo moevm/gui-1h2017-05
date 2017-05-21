@@ -11,10 +11,8 @@ DataBase::DataBase()
     else{
         qDebug() << "Открылась!";
     }
-        QVector<task> a = get_all_tasks_by_date_and_diff();
-       for(int i = 0; i < a.size(); i++){
-           qDebug() << a[i].getName() << " " << a[i].getDeadline()<< " " << a[i].getDifficult() << " " << a[i].getDescription();
-       }
+
+    qDebug() << QDate::currentDate() << QDate::currentDate();
 
 }
 
@@ -212,22 +210,5 @@ QVector<QVector<QString>> DataBase::get_dis_time(QDate one_date)
         ret_dis.last().push_back(my_query.value(4).toString());// тут сохраняется навание задачи
     }
     return ret_dis;
-}
-
-//получить все задачи, сортированные по дедлайнам и по сложности(начиная с большей)
-QVector<task> DataBase::get_all_tasks_by_date_and_diff()
-{
-    QVector<task> ret_tasks;
-    QSqlQuery my_query;
-    my_query.prepare("SELECT name_of_task, deadline, difficult, description  FROM my_tasks ORDER BY deadline, difficult DESC");
-    my_query.exec();
-    while(my_query.next()){
-        ret_tasks.push_back(task()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
-        ret_tasks.last().setName(my_query.value(0).toString());
-        ret_tasks.last().setDeadline(my_query.value(1).toDate());
-        ret_tasks.last().setDifficult(my_query.value(2).toInt());
-        ret_tasks.last().setDescription(my_query.value(3).toString());
-    }
-    return ret_tasks;
 }
 

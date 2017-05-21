@@ -56,10 +56,12 @@ private slots:
 
     void iconActivated(QSystemTrayIcon::ActivationReason reason);
     void on_pushButton_10_clicked();
+    //типо вот добовляем сейщас навцй слат
+    void cancel_time();
 
 private:
     Ui::keknaizer *ui;
-    Time time;
+    //Time time;
     vector<task> to_do_list;
     problems *pr;
     DataBase kdb;
