@@ -26,6 +26,10 @@ public:
     QVector<QVector<QString> > get_dis_time(QDate one_date); // получение распределенного времени на день вместе с названием задачи (поэтому QString)
 
     QVector<task> get_all_tasks_by_date_and_diff();
+
+    QVector<QDate> get_free_dates();
+
+    bool delete_same_dates(QDate begin, QDate end, QVector<QDate> times);
 private:
     QSqlDatabase db;
 

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,15 +28,20 @@ SOURCES += main.cpp\
     time.cpp \
     task.cpp \
     problems.cpp \
-    database.cpp
+    database.cpp \
+    timeline.cpp \
+    popup.cpp
 
 HEADERS  += keknaizer.h \
     time.h \
     task.h \
     problems.h \
-    database.h
+    database.h \
+    timeline.h \
+    popup.h
 
 FORMS    += keknaizer.ui
 
 RESOURCES += \
-    db.qrc
+    db.qrc \
+    img.qrc

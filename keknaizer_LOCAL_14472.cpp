@@ -5,15 +5,11 @@
 #include <QMessageBox>
 #include <QDate>
 
-
 keknaizer::keknaizer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::keknaizer)
 {
     ui->setupUi(this);
-
-    popUp = new PopUp();
-
     //time = new Time();
     //ui->stackedWidget->addWidget(new Time());
 
@@ -35,36 +31,7 @@ keknaizer::keknaizer(QWidget *parent) :
 //    ui->comboBox_8->addItems(*mytext);
 
     //прячем дерево задач
-   // ui->treeWidget->hide();
-    ui->pushButton_5->hide();   // Скрыли кнопку
-    //это для крутоты
-    ui->treeWidget->setAlternatingRowColors(true);
-    ui->treeWidget->setAnimated(true);
-    ui->treeWidget->setWordWrap(true);
-
-    //инициализация pushbutto_11
-    ui->pushButton_11->setText(ui->calendarWidget_3->selectedDate().toString());
-
-
-   trayIcon = new QSystemTrayIcon(this);
-   trayIcon->setIcon(QIcon(":/icon.png"));
-   QMenu * menu = new QMenu(this);
-   QAction * viewWindow = new QAction(trUtf8("Развернуть окно"), this);
-   QAction * quitAction = new QAction(trUtf8("Выход"), this);
-
-
-   connect(viewWindow, SIGNAL(triggered()), this, SLOT(show()));
-   connect(quitAction, SIGNAL(triggered()), this, SLOT(close()));
-
-   menu->addAction(viewWindow);
-   menu->addAction(quitAction);
-
-
-   trayIcon->setContextMenu(menu);
-   trayIcon->show();
-
-   connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-           this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
+    ui->treeWidget->hide();
 
 }
 
@@ -75,7 +42,7 @@ keknaizer::~keknaizer()
 
 void keknaizer::free_time()
 {
-    if (ui->time_widget->free_time()) {
+    if (time.free_time()) {
 //        for (int i = 0; i < time.getNumbInterv()-1; i++) {
 //                       qDebug() << "C " << (time.getmyVec())[i][0] << " : " << (time.getmyVec())[i][1] << " до " << (time.getmyVec())[i][2] << " : " << (time.getmyVec())[i][3];
 //        }
@@ -89,6 +56,27 @@ void keknaizer::free_time()
     }
 
 }
+
+//void keknaizer::qBox1(int a)
+//{
+//    time.setTimeBorders(0, a);
+//}
+
+//void keknaizer::qBox2(int a)
+//{
+//    time.setTimeBorders(1, a);
+//}
+
+//void keknaizer::qBox3(int a)
+//{
+//    time.setTimeBorders(2, a);
+//}
+
+//void keknaizer::qBox4(int a)
+//{
+//    time.setTimeBorders(3, a);
+//}
+
 
 void keknaizer::on_pushButton_2_clicked()
 {
@@ -104,6 +92,7 @@ void keknaizer::on_pushButton_4_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
+
 
 //вот эта функция
 void keknaizer::on_bd_task(QDate qd) //проверить
@@ -198,7 +187,6 @@ void keknaizer::on_my_tasks_tap()
 
 void keknaizer::on_problems_add()
 {
-
     if((ui->plainTextEdit_3->toPlainText() != "") && (ui->plainTextEdit_4->toPlainText() != ""))
     {
         if(ui->calendarWidget->selectedDate() < QDate::currentDate())
@@ -225,137 +213,3 @@ void keknaizer::on_problems_add()
         msg->show();
     }
 }
-
-
-void keknaizer::mouseMoveEvent( QMouseEvent* e ) {
-//    if( e->buttons() | Qt::LeftButton ) {
-//        setGeometry(
-//            pos().x() + ( e->x() - dx ),
-//            pos().y() + ( e->y() - dy ),
-//            width(),
-//            height()
-//        );
-//    }
-}
-
-void keknaizer::mousePressEvent( QMouseEvent* e ) {
-//    if( e->button() == Qt::LeftButton ) {
-//        dx = e->x();
-//        dy = e->y();
-//        setCursor( Qt::OpenHandCursor );
-//    }
-}
-
-void keknaizer::mouseReleaseEvent( QMouseEvent* e ) {
-//    if( e->button() == Qt::LeftButton ) {
-//        setCursor( Qt::ArrowCursor );
-//    }
-}
-
-void keknaizer::on_pushButton_10_clicked()
-{
-    if (this->isMinimized()) {
-        this->showNormal();
-    } else {
-        this->showMinimized();
-    }
-}
-
-void keknaizer::cancel_time()
-{
-   ui->time_widget->setBusy_time_clear();
-   ui->time_widget->setFree_vec_clear();
-   ui->time_widget->set_borders_false();
-   qDebug() << ui->time_widget->getBusy_time();
-   qDebug() << ui->time_widget->getmyVec();
-
-}
-
-void keknaizer::add_freedom()
-{
-
-
-
-    QVector<QVector<int>> work_freedom = ui->time_widget->getmyVec();
-    if(work_freedom.empty())
-    {
-        QMessageBox *msg = new QMessageBox(NULL);
-        msg->setText("Введите свое занятое время");
-        msg->show();
-    }
-    else{
-        kdb.delete_same_dates(QDate::fromString(ui->pushButton_11->text(),"ddd MMM dd yyyy"),
-                              QDate::fromString(ui->pushButton_12->text(), "ddd MMM dd yyyy"),
-                              kdb.get_free_dates());
-        kdb.add_free_user_time(QDate::fromString(ui->pushButton_11->text(),"ddd MMM dd yyyy"),
-                               work_freedom,
-                               QDate::fromString(ui->pushButton_12->text(),"ddd MMM dd yyyy"));
-        emit ui->pushButton_6->clicked();
-    }
-
-}
-
-void keknaizer::update_dates()
-{
-    if(!ui->pushButton_11->isEnabled()){
-        ui->pushButton_11->setText(ui->calendarWidget_3->selectedDate().toString());
-    }else{
-        ui->pushButton_12->setText(ui->calendarWidget_3->selectedDate().toString());
-    }
-}
-
-void keknaizer::try_change_color()
-{
-    if(sender()==ui->pushButton_11){
-        ui->pushButton_11->setStyleSheet("background: red");
-        ui->pushButton_11->setDisabled(true);
-        ui->pushButton_12->setEnabled(true);
-         ui->pushButton_12->setStyleSheet("background: white");
-    }
-    else{
-        ui->pushButton_12->setStyleSheet("background: red");
-        ui->pushButton_12->setDisabled(true);
-        ui->pushButton_11->setEnabled(true);
-        ui->pushButton_11->setStyleSheet("background: white");
-    }
-}
-
-void keknaizer::closeEvent(QCloseEvent * event)
-{
-    /* Если окно видимо и чекбокс отмечен, то завершение приложения
-     * игнорируется, а окно просто скрывается, что сопровождается
-     * соответствующим всплывающим сообщением
-     */
-//    if(this->isVisible()){
-//        event->ignore();
-//        this->hide();
-//        QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::MessageIcon(QSystemTrayIcon::Information);
-
-//        trayIcon->showMessage("Keknaizer",
-//                              trUtf8("Приложение свернуто в трей. Для того чтобы "
-//                                     "развернуть окно приложения, щелкните по иконке приложения в трее."),
-//                              icon,
-//                              2000);
-//    }
-}
-
-void keknaizer::iconActivated(QSystemTrayIcon::ActivationReason reason)
-{
-    switch (reason){
-    case QSystemTrayIcon::Trigger:
-
-            /* если окно видимо, то оно скрывается,
-             * и наоборот, если скрыто, то разворачивается на экран
-             * */
-            if(!this->isVisible()){
-                this->show();
-            } else {
-                this->hide();
-            }
-
-        break;
-    default:
-        break;
-    }
-}
-

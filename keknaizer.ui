@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>604</height>
+    <width>923</width>
+    <height>724</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,16 +15,16 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget#keknaizer {
-background-color:#12202f;
+background-color:#12202f; 
 }</string>
   </property>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>200</x>
      <y>40</y>
-     <width>631</width>
-     <height>561</height>
+     <width>661</width>
+     <height>671</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -34,92 +34,16 @@ border-radius:8px;
 }</string>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="page">
-    <widget class="QLabel" name="label_12">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>400</y>
-       <width>149</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>70</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-     </property>
-     <property name="text">
-      <string>Ничего не делать</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>410</x>
-       <y>360</y>
-       <width>151</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#pushButton_6{
-   padding: 1px 2px; 
-    font: normal 13px;
-    border: none;
-    color: #fff; 
-    background-color: #0e9dc7;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
-    text-align: center;
-    border-bottom-right-radius:4px;
-    border-top-left-radius:4px;
-    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
-    }
-     
-QPushButton#pushButton_6:hover {
-    color: #fff; 
-    background-color: rgb(15, 179, 227);
-    }</string>
-     </property>
-     <property name="text">
-      <string>Добавить новую задачу</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>450</y>
-       <width>491</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>200</x>
-       <y>20</y>
-       <width>149</width>
-       <height>17</height>
+       <x>260</x>
+       <y>10</y>
+       <width>121</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -137,7 +61,8 @@ QPushButton#pushButton_6:hover {
      <property name="styleSheet">
       <string notr="true">QLabel {
 color: #dfdfdf;
-font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+font: 18px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+font:bold;
 }</string>
      </property>
      <property name="text">
@@ -145,81 +70,358 @@ font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      </property>
     </widget>
     <widget class="QCalendarWidget" name="calendarWidget_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>30</y>
-       <width>331</width>
-       <height>271</height>
+       <x>350</x>
+       <y>60</y>
+       <width>290</width>
+       <height>275</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Arial Rounded MT Bold</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string/>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="accessibleName">
+      <string/>
+     </property>
+     <property name="accessibleDescription">
+      <string/>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">
-QCalendarWidget QWidget#qt_calendar_navigationbar {
- background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
+      <string notr="true">QCalendarWidget QWidget#qt_calendar_navigationbar {
+ background-color: none;
  }
-QCalendarWidget QToolButton {
+
+QCalendarWidget QToolButton{
  height: 30px;
- width: 130px;
+ width: 70px;
  color: white;
  font-size: 14px;
  icon-size: 0.5px, 0.5px;
- background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
- 
+ background-color: #7109aa;
 }
+
+QCalendarWidget QWidget#qt_calendar_prevmonth {
+background-image:url(:/left.png);
+background-repeat: no-repeat;
+background-position:center;
+ }
+
+QCalendarWidget QWidget#qt_calendar_nextmonth {
+background-image:url(:/right.png);
+background-repeat: no-repeat;
+background-position:center;
+ }
+
+QCalendarWidget QToolButton#qt_calendar_yearbutton{
+width:50px;
+selection-color: rgb(85, 255, 127);
+disabled=&quot;disabled&quot;;
+}
+
+
+QCalendarWidget QToolButton#qt_calendar_yearbutton::menu-indicator{
+color:white;
+width:10px;
+}
+
 QCalendarWidget QMenu {
- width: 150px;
+ width: 100px;
  left: 20px;
- color: white;
+ color: black;
  font-size: 12px;
- background-color: rgb(100, 100, 100);
+ background-color: #ad66d5; /*выбор месяца*/
+}
+
+QCalendarWidget QMenu::item:selected {
+ color: white;
+ background-color: #48036f; /*выбор месяца*/
 }
 QCalendarWidget QSpinBox { 
- width: 150px; 
+ width: 40px; 
  font-size:14px; 
  color: white; 
- background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); 
- selection-background-color: rgb(136, 136, 136);
- selection-color: rgb(255, 255, 255);
+ background-color: #7109aa;
+/* background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); */
+/* selection-background-color: rgb(136, 136, 136);*/
+ selection-color: black;
 }
+
 QCalendarWidget QSpinBox::up-button {
- subcontrol-origin: border; 
+ subcontrol-origin: border;
  subcontrol-position: top right; 
- width:65px;
  }
 QCalendarWidget QSpinBox::down-button {
-subcontrol-origin: border;
+ subcontrol-origin: border;
  subcontrol-position: bottom right; 
- width:65px;
 }
+
+
 QCalendarWidget QSpinBox::up-arrow {
-  width:10px;
-  height:10px;
+ background-color:;
+  width:5px;
+ height:5px; 
  }
 QCalendarWidget QSpinBox::down-arrow { 
-width:56px;
- height:56px; 
+ width:5px;
+ height:5px; 
+}
+
+QCalendarWidget QWidget {
+ alternate-background-color: #006a55; 
 }
  
 
-QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }
- 
-
-QCalendarWidget QAbstractItemView:enabled 
-{
+QAbstractItemView:enabled {
  font-size:12px;  
  color: rgb(180, 180, 180);  
- background-color: black;  
- selection-background-color: rgb(64, 64, 64); 
+ background-color: black ;  
+ selection-background-color:rgb(64, 64, 64); 
  selection-color: rgb(150, 50, 200); 
 }
  
 
-QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
+QAbstractItemView::item:hover {
+ color: rgb(180, 180, 180);  
+ background-color: rgb(255, 0, 4) ;
+}
+
+
+QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
+
+</string>
      </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhNone</set>
+     </property>
+     <property name="gridVisible">
+      <bool>false</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QCalendarWidget::SingleSelection</enum>
+     </property>
+     <property name="horizontalHeaderFormat">
+      <enum>QCalendarWidget::ShortDayNames</enum>
+     </property>
+     <property name="verticalHeaderFormat">
+      <enum>QCalendarWidget::NoVerticalHeader</enum>
+     </property>
+     <property name="navigationBarVisible">
+      <bool>true</bool>
+     </property>
+     <property name="dateEditEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dateEditAcceptDelay">
+      <number>1500</number>
+     </property>
+    </widget>
+    <widget class="QTreeWidget" name="treeWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>291</width>
+       <height>276</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">/*QTreeWidget::item{
+    background-color: rgb(25, 25, 25);
+    color: rgb(255, 255, 0); 
+}
+
+QTreeWidget::item:selected{
+    background-color: #157efb;
+    color: rgb(255, 0, 0);
+}
+*/
+
+QHeaderView{
+   background-color: #222c3c;
+}
+
+QHeaderView::section {
+    background-color:  rgb(35, 35, 35);
+    color: rgb(57, 255, 106);
+   border-radius: 4px;
+   /* border: 1px solid #6c6c6c;*/
+}
+
+/*QTreeWidget::branch:has-children {
+     image: url(rightarrow.png)
+}
+QTreeWidget::branch:open {
+     image: url(downarrow.png)
+}
+*/
+
+
+QTreeView {
+    show-decoration-selected: 1; 
+   color: white;
+    background-color:rgb(118, 58, 148);
+   border-bottom-right-radius:16px;
+    border-top-left-radius:8px;
+   font-size:13px;
+   alternate-background-color: rgb(133, 53, 225);
+ }
+
+QScrollBar{
+   background:  rgb(35, 35, 35);
+   width:8px;
+}
+
+
+QScrollBar:vertical {
+
+width: 15px; margin: 0px;
+}
+QScrollBar::handle:vertical { 
+min-height: 20px;
+ margin: 5px 3px 5px 3px; 
+border-radius: 4px;
+/*background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #4c443d, stop: 1 #2f2b26); */
+background:#2a5885;
+}
+QScrollBar::add-page:vertical {
+ background: none;
+ }
+QScrollBar::sub-page:vertical {
+ background: none; 
+}
+QScrollBar::add-line:vertical {
+ /*margin-bottom: 21px;*/ 
+height: 21px; 
+subcontrol-position: bottom;
+ subcontrol-origin: content;
+ border: none;
+}
+QScrollBar::sub-line:vertical { 
+margin-top: 21px; 
+height: 18px; 
+subcontrol-position: bottom; 
+subcontrol-origin: content; 
+border: none;}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+ background: none; 
+}
+
+/*
+QScrollBar::handle {
+    background: rgb(78, 184,255);
+}
+ 
+QScrollBar::add-line,  QScrollBar::sub-line {
+     background: none;
+}
+ 
+ QScrollBar::add-page, QScrollBar::sub-page {
+     background: none;
+}
+*/
+ QTreeView::item {
+   
+     /*border: 1px solid #d9d9d9;
+     border-top
+     border-top-color: #1b2431;
+     border-bottom-color: #1b2431; 
+    border-top-color: #1b2431;
+    border-top-style: inset; 
+    border-top-width: 2px;
+    border-left-color: #1b2431; 
+    border-left-style: inset;
+    border-left-width: 2px; */
+ }
+
+/*
+ 
+ 
+ QTreeView::item:hover {
+     background: #7607c7;
+     
+ }
+ 
+ QTreeView::item:selected {
+     
+     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+ }
+ 
+ QTreeView::item:selected:active{
+     border-color:rgb(118, 58, 148);
+     background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
+ }
+ 
+ QTreeView::item:selected:!active {
+     
+ }*/
+
+QTreeView::branch:has-children:{
+    background-color:rgb(118, 58, 148);
+    image: url(:/bell.png)  no- repeat;
+}
+
+/*QTreeView::branch:open {
+    image: url(branch-open.png);
+}
+QTreeView::branch:closed:has-children {
+    image: url(:/bell.png)  no- repeat;
+}
+*/
+</string>
+     </property>
+     <property name="rootIsDecorated">
+      <bool>true</bool>
+     </property>
+     <property name="itemsExpandable">
+      <bool>true</bool>
+     </property>
+     <property name="animated">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="headerHidden">
+      <bool>false</bool>
+     </property>
+     <property name="columnCount">
+      <number>1</number>
+     </property>
+     <attribute name="headerShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string/>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QWidget" name="page_2">
@@ -245,7 +447,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>30</y>
        <width>171</width>
        <height>31</height>
@@ -264,7 +466,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
     <widget class="QLabel" name="label_21">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>110</y>
        <width>171</width>
        <height>31</height>
@@ -283,7 +485,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
     <widget class="QComboBox" name="comboBox_9">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>150</y>
        <width>151</width>
        <height>31</height>
@@ -338,7 +540,7 @@ background-color:  rgb(15, 179, 227);
     <widget class="QLabel" name="label_22">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>190</y>
        <width>191</width>
        <height>31</height>
@@ -354,87 +556,10 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
       <string>Подробное описание задачи:</string>
      </property>
     </widget>
-    <widget class="QCalendarWidget" name="calendarWidget">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>60</y>
-       <width>331</width>
-       <height>271</height>
-      </rect>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-QCalendarWidget QWidget#qt_calendar_navigationbar {
- background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
- }
-QCalendarWidget QToolButton {
- height: 30px;
- width: 130px;
- color: white;
- font-size: 14px;
- icon-size: 0.5px, 0.5px;
- background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333);
- 
-}
-QCalendarWidget QMenu {
- width: 150px;
- left: 20px;
- color: white;
- font-size: 12px;
- background-color: rgb(100, 100, 100);
-}
-QCalendarWidget QSpinBox { 
- width: 150px; 
- font-size:14px; 
- color: white; 
- background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); 
- selection-background-color: rgb(136, 136, 136);
- selection-color: rgb(255, 255, 255);
-}
-QCalendarWidget QSpinBox::up-button {
- subcontrol-origin: border; 
- subcontrol-position: top right; 
- width:65px;
- }
-QCalendarWidget QSpinBox::down-button {
-subcontrol-origin: border;
- subcontrol-position: bottom right; 
- width:65px;
-}
-QCalendarWidget QSpinBox::up-arrow {
-  width:10px;
-  height:10px;
- }
-QCalendarWidget QSpinBox::down-arrow { 
-width:56px;
- height:56px; 
-}
- 
-
-QCalendarWidget QWidget { alternate-background-color: rgb(128, 128, 128); }
- 
-
-QCalendarWidget QAbstractItemView:enabled 
-{
- font-size:12px;  
- color: rgb(180, 180, 180);  
- background-color: black;  
- selection-background-color: rgb(64, 64, 64); 
- selection-color: rgb(150, 50, 200); 
-}
- 
-
-QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>110</x>
        <y>380</y>
        <width>111</width>
        <height>31</height>
@@ -447,7 +572,6 @@ QCalendarWidget QAbstractItemView:disabled { color: rgb(64, 64, 64); }</string>
     border: none;
     color: #fff; 
     background-color: #0e9dc7;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:4px;
     border-top-left-radius:4px;
@@ -466,7 +590,7 @@ QPushButton#pushButton_8:hover {
     <widget class="QPushButton" name="pushButton_9">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>450</x>
        <y>380</y>
        <width>101</width>
        <height>31</height>
@@ -479,7 +603,6 @@ QPushButton#pushButton_8:hover {
     border: none;
     color: #fff; 
     background-color: #0e9dc7;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:4px;
     border-top-left-radius:4px;
@@ -498,7 +621,7 @@ QPushButton#pushButton_9:hover {
     <widget class="QPlainTextEdit" name="plainTextEdit_3">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>220</y>
        <width>251</width>
        <height>111</height>
@@ -515,1373 +638,452 @@ QPushButton#pushButton_9:hover {
     <widget class="QPlainTextEdit" name="plainTextEdit_4">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>60</y>
        <width>171</width>
        <height>31</height>
       </rect>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="page_3">
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QCalendarWidget" name="calendarWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>10</y>
-       <width>418</width>
-       <height>534</height>
+       <x>350</x>
+       <y>60</y>
+       <width>290</width>
+       <height>275</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>3</number>
-      </property>
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="label_13">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>70</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel {
-color: #dfdfdf;
-font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-        </property>
-        <property name="text">
-         <string>Укажите вашу занятость:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_8">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <spacer name="horizontalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>76</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_14">
-          <property name="minimumSize">
-           <size>
-            <width>30</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>Часы</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_12">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>79</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_15">
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>Минуты</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_13">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>10</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_9">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <widget class="QLabel" name="label_16">
-          <property name="minimumSize">
-           <size>
-            <width>20</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string> С         </string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_14">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>80</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_4">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>101</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">ComboBox{
- padding: 1px 2px; 
- font: normal 13px Roboto; 
- color: #fff; 
- background-color: #0e9dc7;
- text-align: right;
- border-radius:3px;
+     <property name="font">
+      <font>
+       <family>Arial Rounded MT Bold</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="accessibleName">
+      <string/>
+     </property>
+     <property name="accessibleDescription">
+      <string/>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCalendarWidget QWidget#qt_calendar_navigationbar {
+ background-color: none;
+ }
+
+QCalendarWidget QToolButton{
+ height: 30px;
+ width: 70px;
+ color: white;
+ font-size: 14px;
+ icon-size: 0.5px, 0.5px;
+ background-color: #7109aa;
 }
 
- QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
- 
-QComboBox:drop-down{ text-align: center;
-background-color:#0e9dc7;}
- 
-QComboBox::drop-down:hover{ text-align: center;
-border-left:1px solid #a9a9a8;
-background-color:  rgb(15, 179, 227);
-}</string>
-          </property>
-          <property name="maxCount">
-           <number>23</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>7</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>8</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>9</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>10</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>11</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>12</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>13</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>14</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>15</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>16</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>17</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>18</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>19</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>20</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>21</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>23</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_15">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>80</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_6">
-          <property name="minimumSize">
-           <size>
-            <width>101</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">ComboBox{
- padding: 1px 2px; 
- font: normal 13px Roboto; 
- color: #fff; 
- background-color: #0e9dc7;
- text-align: right;
- border-radius:3px;
+QCalendarWidget QWidget#qt_calendar_prevmonth {
+background-image:url(:/left.png);
+background-repeat: no-repeat;
+background-position:center;
+ }
+
+QCalendarWidget QWidget#qt_calendar_nextmonth {
+background-image:url(:/right.png);
+background-repeat: no-repeat;
+background-position:center;
+ }
+
+QCalendarWidget QToolButton#qt_calendar_yearbutton{
+width:50px;
+selection-color: rgb(85, 255, 127);
+disabled=&quot;disabled&quot;;
 }
 
- QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
- 
-QComboBox:drop-down{ text-align: center;
-background-color:#0e9dc7;}
- 
-QComboBox::drop-down:hover{ text-align: center;
-border-left:1px solid #a9a9a8;
-background-color:  rgb(15, 179, 227);
-}</string>
-          </property>
-          <property name="maxCount">
-           <number>59</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>7</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>8</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>9</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>10</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>11</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>12</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>13</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>14</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>15</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>16</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>17</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>18</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>19</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>20</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>21</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>22</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>23</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>24</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>25</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>26</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>27</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>28</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>29</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>30</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>31</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>32</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>33</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>34</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>35</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>36</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>37</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>38</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>39</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>40</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>41</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>42</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>43</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>44</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>45</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>46</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>47</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>48</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>49</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>50</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>51</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>52</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>53</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>54</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>55</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>56</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>57</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>59</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_10">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <spacer name="horizontalSpacer_16">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>76</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_17">
-          <property name="minimumSize">
-           <size>
-            <width>30</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>Часы</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_17">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>79</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_18">
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>Минуты</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_18">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>10</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_11">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetDefaultConstraint</enum>
-        </property>
-        <item>
-         <widget class="QLabel" name="label_19">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>20</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>До</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_19">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>88</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_7">
-          <property name="minimumSize">
-           <size>
-            <width>101</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">ComboBox{
- padding: 1px 2px; 
- font: normal 13px Roboto; 
- color: #fff; 
- background-color: #0e9dc7;
- text-align: right;
- border-radius:3px;
+
+QCalendarWidget QToolButton#qt_calendar_yearbutton::menu-indicator{
+color:white;
+width:10px;
 }
 
- QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
- 
-QComboBox:drop-down{ text-align: center;
-background-color:#0e9dc7;}
- 
-QComboBox::drop-down:hover{ text-align: center;
-border-left:1px solid #a9a9a8;
-background-color:  rgb(15, 179, 227);
-}</string>
-          </property>
-          <property name="maxCount">
-           <number>23</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>7</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>8</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>9</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>10</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>11</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>12</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>13</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>14</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>15</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>16</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>17</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>18</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>19</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>20</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>21</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>23</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_20">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>80</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_8">
-          <property name="minimumSize">
-           <size>
-            <width>101</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">ComboBox{
- padding: 1px 2px; 
- font: normal 13px Roboto; 
- color: #fff; 
- background-color: #0e9dc7;
- text-align: right;
- border-radius:3px;
+QCalendarWidget QMenu {
+ width: 100px;
+ left: 20px;
+ color: black;
+ font-size: 12px;
+ background-color: #ad66d5; /*выбор месяца*/
 }
 
- QComboBox:focus{color: #fff; text-align: center;border:1px solid #bfbfbf;background-color: rgb(15, 179, 227);}
+QCalendarWidget QMenu::item:selected {
+ color: white;
+ background-color: #48036f; /*выбор месяца*/
+}
+QCalendarWidget QSpinBox { 
+ width: 40px; 
+ font-size:14px; 
+ color: white; 
+ background-color: #7109aa;
+/* background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); */
+/* selection-background-color: rgb(136, 136, 136);*/
+ selection-color: black;
+}
+
+QCalendarWidget QSpinBox::up-button {
+ subcontrol-origin: border;
+ subcontrol-position: top right; 
+ }
+QCalendarWidget QSpinBox::down-button {
+ subcontrol-origin: border;
+ subcontrol-position: bottom right; 
+}
+
+
+QCalendarWidget QSpinBox::up-arrow {
+ background-color:;
+  width:5px;
+ height:5px; 
+ }
+QCalendarWidget QSpinBox::down-arrow { 
+ width:5px;
+ height:5px; 
+}
+
+QCalendarWidget QWidget {
+ alternate-background-color: #006a55; 
+}
  
-QComboBox:drop-down{ text-align: center;
-background-color:#0e9dc7;}
+
+QAbstractItemView:enabled {
+ font-size:12px;  
+ color: rgb(180, 180, 180);  
+ background-color: black ;  
+ selection-background-color:rgb(64, 64, 64); 
+ selection-color: rgb(150, 50, 200); 
+}
  
-QComboBox::drop-down:hover{ text-align: center;
-border-left:1px solid #a9a9a8;
-background-color:  rgb(15, 179, 227);
+
+QAbstractItemView::item:hover {
+ color: rgb(180, 180, 180);  
+ background-color: rgb(255, 0, 4) ;
+}
+
+
+QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
+
+</string>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhNone</set>
+     </property>
+     <property name="gridVisible">
+      <bool>false</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QCalendarWidget::SingleSelection</enum>
+     </property>
+     <property name="horizontalHeaderFormat">
+      <enum>QCalendarWidget::ShortDayNames</enum>
+     </property>
+     <property name="verticalHeaderFormat">
+      <enum>QCalendarWidget::NoVerticalHeader</enum>
+     </property>
+     <property name="navigationBarVisible">
+      <bool>true</bool>
+     </property>
+     <property name="dateEditEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dateEditAcceptDelay">
+      <number>1500</number>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="page_3">
+    <widget class="Time" name="time_widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>340</y>
+       <width>551</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget#widget {
+   color: rgb(31, 122, 104);
+   font-size: 16px bold;
 }</string>
-          </property>
-          <property name="maxCount">
-           <number>59</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>0</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>7</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>8</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>9</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>10</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>11</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>12</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>13</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>14</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>15</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>16</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>17</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>18</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>19</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>20</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>21</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>22</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>23</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>24</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>25</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>26</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>27</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>28</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>29</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>30</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>31</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>32</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>33</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>34</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>35</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>36</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>37</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>38</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>39</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>40</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>41</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>42</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>43</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>44</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>45</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>46</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>47</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>48</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>49</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>50</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>51</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>52</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>53</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>54</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>55</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>56</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>57</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>59</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_12">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QPushButton" name="pushButton_7">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton#pushButton_7{
+     </property>
+    </widget>
+    <widget class="QCalendarWidget" name="calendarWidget_3">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>60</y>
+       <width>290</width>
+       <height>275</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial Rounded MT Bold</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="accessibleName">
+      <string/>
+     </property>
+     <property name="accessibleDescription">
+      <string/>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QCalendarWidget QWidget#qt_calendar_navigationbar {
+ background-color: none;
+ }
+
+QCalendarWidget QToolButton{
+ height: 30px;
+ width: 70px;
+ color: white;
+ font-size: 14px;
+ icon-size: 0.5px, 0.5px;
+ background-color: #7109aa;
+}
+
+QCalendarWidget QWidget#qt_calendar_prevmonth {
+background-image:url(:/left.png);
+background-repeat: no-repeat;
+background-position:center;
+ }
+
+QCalendarWidget QWidget#qt_calendar_nextmonth {
+background-image:url(:/right.png);
+background-repeat: no-repeat;
+background-position:center;
+ }
+
+QCalendarWidget QToolButton#qt_calendar_yearbutton{
+width:50px;
+selection-color: rgb(85, 255, 127);
+disabled=&quot;disabled&quot;;
+}
+
+
+QCalendarWidget QToolButton#qt_calendar_yearbutton::menu-indicator{
+color:white;
+width:10px;
+}
+
+QCalendarWidget QMenu {
+ width: 100px;
+ left: 20px;
+ color: black;
+ font-size: 12px;
+ background-color: #ad66d5; /*выбор месяца*/
+}
+
+QCalendarWidget QMenu::item:selected {
+ color: white;
+ background-color: #48036f; /*выбор месяца*/
+}
+QCalendarWidget QSpinBox { 
+ width: 40px; 
+ font-size:14px; 
+ color: white; 
+ background-color: #7109aa;
+/* background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop: 0 #cccccc, stop: 1 #333333); */
+/* selection-background-color: rgb(136, 136, 136);*/
+ selection-color: black;
+}
+
+QCalendarWidget QSpinBox::up-button {
+ subcontrol-origin: border;
+ subcontrol-position: top right; 
+ }
+QCalendarWidget QSpinBox::down-button {
+ subcontrol-origin: border;
+ subcontrol-position: bottom right; 
+}
+
+
+QCalendarWidget QSpinBox::up-arrow {
+ background-color:;
+  width:5px;
+ height:5px; 
+ }
+QCalendarWidget QSpinBox::down-arrow { 
+ width:5px;
+ height:5px; 
+}
+
+QCalendarWidget QWidget {
+ alternate-background-color: #006a55; 
+}
+ 
+
+QAbstractItemView:enabled {
+ font-size:12px;  
+ color: rgb(180, 180, 180);  
+ background-color: black ;  
+ selection-background-color:rgb(64, 64, 64); 
+ selection-color: rgb(150, 50, 200); 
+}
+ 
+
+QAbstractItemView::item:hover {
+ color: rgb(180, 180, 180);  
+ background-color: rgb(255, 0, 4) ;
+}
+
+
+QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
+
+</string>
+     </property>
+     <property name="inputMethodHints">
+      <set>Qt::ImhNone</set>
+     </property>
+     <property name="gridVisible">
+      <bool>false</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QCalendarWidget::SingleSelection</enum>
+     </property>
+     <property name="horizontalHeaderFormat">
+      <enum>QCalendarWidget::ShortDayNames</enum>
+     </property>
+     <property name="verticalHeaderFormat">
+      <enum>QCalendarWidget::NoVerticalHeader</enum>
+     </property>
+     <property name="navigationBarVisible">
+      <bool>true</bool>
+     </property>
+     <property name="dateEditEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dateEditAcceptDelay">
+      <number>1500</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>560</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+    padding: 1px 2px; 
+    font: normal 15px Roboto; 
+
+    border-top: 3px solid #0e9dc7; 
+    border-left: 3px solid #0e9dc7;  
+   border-bottom: 3px solid #0e9dc7; 
+    border-right: 3px solid #0e9dc7; 
+
+    color:  #0e9dc7; 
+   /* background-color: #0e9dc7;*/
+   background-color:none;
+ 
+    text-align: center;
+    border-bottom-right-radius:4px;
+    border-top-left-radius:4px;
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_6:hover {
+    color: #fff; 
+    background-color: rgb(15, 179, 227);
+    }</string>
+     </property>
+     <property name="text">
+      <string>Отмена</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_7">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>560</y>
+       <width>130</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>130</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto,Helvetica Neue 53,Helvetica Neue,Helvetica,Arial,sans-serif</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_7{
    padding: 1px 2px; 
-    font: normal 13px Roboto; 
+    font: normal 15px Roboto; 
     border: none;
     color: #fff; 
     background-color: #0e9dc7;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:4px;
     border-top-left-radius:4px;
@@ -1892,55 +1094,127 @@ QPushButton#pushButton_7:hover {
     color: #fff; 
     background-color: rgb(15, 179, 227);
     }</string>
-        </property>
-        <property name="text">
-         <string>Запомнить</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_13">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_20">
-        <property name="styleSheet">
-         <string notr="true">QLabel {
+     </property>
+     <property name="text">
+      <string>Запомнить</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>20</y>
+       <width>184</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>70</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
 color: #dfdfdf;
-font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
 }</string>
-        </property>
-        <property name="text">
-         <string>Ваше свободное время:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_14">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>17</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
-      </item>
-     </layout>
+     </property>
+     <property name="text">
+      <string>Укажите вашу занятость:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>40</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выберите дату начала занятости</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>120</y>
+       <width>211</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Начальный и конечный день занятости</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>С</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>По</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_11">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>150</y>
+       <width>161</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_11 {
+background-color: rgb(255, 0, 0);
+}</string>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_12">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>190</y>
+       <width>161</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="page_4"/>
@@ -1948,9 +1222,9 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>141</width>
+     <x>40</x>
+     <y>130</y>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -1961,7 +1235,6 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
     border: none;
     color: #fff; 
     background-color: #704ea0;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:8px;
     border-top-left-radius:8px;
@@ -1974,15 +1247,15 @@ QPushButton#pushButton_2:hover {
     }</string>
    </property>
    <property name="text">
-    <string>Мои задачи            </string>
+    <string>Мои задачи</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>150</y>
-     <width>141</width>
+     <x>40</x>
+     <y>180</y>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -1993,7 +1266,6 @@ QPushButton#pushButton_2:hover {
     border: none;
     color: #fff; 
     background-color: #704ea0;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:8px;
     border-top-left-radius:8px; 
@@ -2006,15 +1278,15 @@ QPushButton#pushButton_3:hover {
     }</string>
    </property>
    <property name="text">
-    <string>Добавить задачу    </string>
+    <string>Добавить задачу</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>141</width>
+     <x>40</x>
+     <y>230</y>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -2025,7 +1297,6 @@ QPushButton#pushButton_3:hover {
     border: none;
     color: #fff; 
     background-color: #704ea0;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:8px;
     border-top-left-radius:8px;
@@ -2044,9 +1315,9 @@ QPushButton#pushButton_4:hover {
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>250</y>
-     <width>141</width>
+     <x>40</x>
+     <y>280</y>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -2057,7 +1328,6 @@ QPushButton#pushButton_4:hover {
     border: none;
     color: #fff; 
     background-color: #704ea0;
-    transition:border .25s linear, color .25s linear,background-color .25s linear;
     text-align: center;
     border-bottom-right-radius:8px;
     border-top-left-radius:8px;
@@ -2070,11 +1340,81 @@ QPushButton#pushButton_5:hover {
     }</string>
    </property>
    <property name="text">
-    <string>Изменить задачи     </string>
+    <string>Изменить задачи</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>0</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton {
+   padding: 1px 2px; 
+    font: 20px ; 
+    border: none;
+    font-family:ACADEMY ENGRAVED LET;
+    color: white; 
+    background-color: none;
+    text-align: center;
+    }
+
+
+QPushButton#pushButton:hover {
+    color: #fff; 
+    background-color: rgb(212, 10, 13);
+    }
+</string>
+   </property>
+   <property name="text">
+    <string>✖</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_10">
+   <property name="geometry">
+    <rect>
+     <x>860</x>
+     <y>0</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton#pushButton_10{ 
+    font: 20px ; 
+    border: none;
+    font-family:chasm;
+    color: white; 
+    background-color: none;
+    text-align: center;
+    font-weight:bold;
+    }
+
+
+QPushButton#pushButton_10:hover {
+    color: #fff; 
+    background-color:rgb(170, 170, 255);
+    }
+</string>
+   </property>
+   <property name="text">
+    <string>—</string>
    </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Time</class>
+   <extends>QWidget</extends>
+   <header>time.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -2084,92 +1424,12 @@ QPushButton#pushButton_5:hover {
    <slot>on_problems_add()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>278</x>
-     <y>402</y>
+     <x>310</x>
+     <y>420</y>
     </hint>
     <hint type="destinationlabel">
      <x>115</x>
      <y>424</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>comboBox_4</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>keknaizer</receiver>
-   <slot>qBox1(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>536</x>
-     <y>170</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>135</x>
-     <y>350</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>comboBox_6</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>keknaizer</receiver>
-   <slot>qBox2(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>725</x>
-     <y>170</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>89</x>
-     <y>390</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>comboBox_8</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>keknaizer</receiver>
-   <slot>qBox4(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>725</x>
-     <y>269</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>93</x>
-     <y>467</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_7</sender>
-   <signal>clicked()</signal>
-   <receiver>keknaizer</receiver>
-   <slot>free_time()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>485</x>
-     <y>316</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>131</x>
-     <y>513</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>comboBox_7</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>keknaizer</receiver>
-   <slot>qBox3(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>498</x>
-     <y>269</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>47</x>
-     <y>433</y>
     </hint>
    </hints>
   </connection>
@@ -2189,6 +1449,134 @@ QPushButton#pushButton_5:hover {
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>891</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>874</x>
+     <y>136</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>on_my_tasks_tap()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>115</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>cancel_time()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>621</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>75</x>
+     <y>574</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>time_widget</receiver>
+   <slot>repaint()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>604</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>543</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>add_freedom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>721</x>
+     <y>634</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>659</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_11</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>try_change_color()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>401</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_12</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>try_change_color()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calendarWidget_3</sender>
+   <signal>clicked(QDate)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>update_dates()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>810</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>884</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>qBox1(int)</slot>
@@ -2198,5 +1586,10 @@ QPushButton#pushButton_5:hover {
   <slot>free_time()</slot>
   <slot>on_problems_add()</slot>
   <slot>on_bd_task(QDate)</slot>
+  <slot>on_my_tasks_tap()</slot>
+  <slot>cancel_time()</slot>
+  <slot>add_freedom()</slot>
+  <slot>try_change_color()</slot>
+  <slot>update_dates()</slot>
  </slots>
 </ui>

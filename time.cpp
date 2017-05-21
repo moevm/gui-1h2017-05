@@ -320,6 +320,23 @@ void Time::set_borders_false()
 {
     borders[0] = borders[1] = false;
 }
+
+void Time::setFree_vec_clear()
+{
+    free_vec.clear();
+
+}
+
+QVector<QVector<int> > Time::getBusy_time() const
+{
+    return busy_time;
+}
+
+void Time::setBusy_time_clear()
+{
+    busy_time.clear();
+}
+
 // ДОБАВЛЕННОЕ
 void Time::paintEvent(QPaintEvent *event)
 {
@@ -369,6 +386,9 @@ void Time::mousePressEvent(QMouseEvent *event)
         else if (event->pos().y() >= 5*upMarg && event->pos().y() <= 7*upMarg) X1 = event->pos().x()+12*lMarg;
     }
 }
+
+
+
 
 void Time::mouseReleaseEvent(QMouseEvent *event)
 {

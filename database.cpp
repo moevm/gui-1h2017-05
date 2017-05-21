@@ -16,6 +16,9 @@ DataBase::DataBase()
            qDebug() << a[i].getName() << " " << a[i].getDeadline()<< " " << a[i].getDifficult() << " " << a[i].getDescription();
        }
 
+       //qDebug() << get_free_dates();
+       qDebug() << delete_same_dates(QDate(2017,4,1), QDate(2017,5,31), get_free_dates());
+
 }
 
 DataBase::~DataBase(){
@@ -230,4 +233,41 @@ QVector<task> DataBase::get_all_tasks_by_date_and_diff()
     }
     return ret_tasks;
 }
+//запрос на даты
+QVector<QDate> DataBase::get_free_dates()
+{
+    QVector<QDate> ret_free_dates;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT Date FROM free_user_time  GROUP by Date ");
+    my_query.exec();
+    while(my_query.next()){
+        ret_free_dates.push_back((my_query.value(0).toDate()));
+    }
+    return ret_free_dates;
+}
+
+bool DataBase::delete_same_dates(QDate begin, QDate end, QVector<QDate> times)
+{
+    int count_dates = begin.daysTo(end);
+     QSqlQuery my_query;
+     QDate work_date;
+
+    for(int i = 0; i < count_dates+1; i++){
+        work_date = begin.addDays(i);
+        qDebug() << work_date;
+        if (times.contains(work_date)){
+            my_query.prepare("DELETE  FROM free_user_time WHERE Date = :new_date ");
+            my_query.bindValue(":new_date", work_date);
+            if( !my_query.exec() ) {
+                    qDebug() << db.lastError().text();
+                    return false;
+                }
+        }
+
+    }
+    return true;
+}
+
+
+
 
