@@ -15,19 +15,6 @@ DataBase::DataBase()
        for(int i = 0; i < a.size(); i++){
            qDebug() << a[i].getName() << " " << a[i].getDeadline()<< " " << a[i].getDifficult() << " " << a[i].getDescription();
        }
-
-       //qDebug() << get_free_dates();
-      // qDebug() << delete_same_dates(QDate(2017,4,1), QDate(2017,5,31), get_free_dates());
-//       QVector<freedom> b = all_free_times();
-//       for(int j = 0; j < b.size(); j++){
-//           qDebug() << b[j].getDate() << " " << b[j].getBeg_hour()<< " " << b[j].getBeg_minute() << " " << b[j].getEnd_hour()<< " " << b[j].getEnd_minute();
-//       }
-//       b.remove(0,b.size()-1);
-//       for(int j = 0; j < b.size(); j++){
-//           qDebug() << b[j].getDate() << " " << b[j].getBeg_hour()<< " " << b[j].getBeg_minute() << " " << b[j].getEnd_hour()<< " " << b[j].getEnd_minute();
-//       }
-//       qDebug() << delete_and_insert_in_free_time(b);
-
 }
 
 DataBase::~DataBase(){
