@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     problems.cpp \
     database.cpp \
     timeline.cpp \
-    popup.cpp
+    popup.cpp \
+    freedom.cpp
 
 HEADERS  += keknaizer.h \
     time.h \
@@ -38,7 +39,8 @@ HEADERS  += keknaizer.h \
     problems.h \
     database.h \
     timeline.h \
-    popup.h
+    popup.h \
+    freedom.h
 
 FORMS    += keknaizer.ui
 

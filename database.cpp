@@ -231,3 +231,84 @@ QVector<task> DataBase::get_all_tasks_by_date_and_diff()
     return ret_tasks;
 }
 
+QVector<freedom> DataBase::all_free_times()
+{
+    QVector<freedom> ret_free;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT * FROM free_user_time  ORDER by Date ");
+    my_query.exec();
+    while(my_query.next()){
+        ret_free.push_back(freedom());
+        ret_free.last().setDate(my_query.value(0).toDate());
+        ret_free.last().setBeg_hour(my_query.value(1).toInt());
+        ret_free.last().setBeg_minute(my_query.value(2).toInt());
+        ret_free.last().setEnd_hour(my_query.value(3).toInt());
+        ret_free.last().setEnd_minute(my_query.value(4).toInt());
+    }
+    return ret_free;
+}
+
+bool DataBase::delete_and_insert_in_free_time(QVector<freedom> my_freedom)
+{
+    //удаление
+    QSqlQuery my_query;
+    my_query.prepare("DELETE  FROM free_user_time ");
+    if( !my_query.exec() ) {
+            qDebug() << db.lastError().text() << "FAIL IN DELETING";
+            return false;
+        }
+    //добавление
+
+    for(int i = 0; i < my_freedom.size(); i++){
+
+        my_query.prepare("INSERT INTO free_user_time (Date, begin_hour, begin_minute, end_hour, end_minute)"
+                                      "VALUES (:Date, :begin_hour, :begin_minute, :end_hour, :end_minute);");
+        my_query.bindValue(":Date", my_freedom[i].getDate());
+        my_query.bindValue(":begin_hour", my_freedom[i].getBeg_hour());
+        my_query.bindValue(":begin_minute", my_freedom[i].getBeg_minute());
+        my_query.bindValue(":end_hour", my_freedom[i].getEnd_hour());
+        my_query.bindValue(":end_minute", my_freedom[i].getEnd_minute());
+        if( !my_query.exec() ) {
+                qDebug() << db.lastError().text() << "FAIL IN INSERTING";
+                return false;
+            }
+
+    }
+    return true;
+
+}
+
+//запрос на даты
+QVector<QDate> DataBase::get_free_dates()
+{
+    QVector<QDate> ret_free_dates;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT Date FROM free_user_time  GROUP by Date ");
+    my_query.exec();
+    while(my_query.next()){
+        ret_free_dates.push_back((my_query.value(0).toDate()));
+    }
+    return ret_free_dates;
+}
+
+bool DataBase::delete_same_dates(QDate begin, QDate end, QVector<QDate> times)
+{
+    int count_dates = begin.daysTo(end);
+     QSqlQuery my_query;
+     QDate work_date;
+
+    for(int i = 0; i < count_dates+1; i++){
+        work_date = begin.addDays(i);
+        qDebug() << work_date;
+        if (times.contains(work_date)){
+            my_query.prepare("DELETE  FROM free_user_time WHERE Date = :new_date ");
+            my_query.bindValue(":new_date", work_date);
+            if( !my_query.exec() ) {
+                    qDebug() << db.lastError().text();
+                    return false;
+                }
+        }
+
+    }
+    return true;
+}

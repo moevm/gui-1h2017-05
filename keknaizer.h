@@ -36,6 +36,7 @@ public:
 
      float dx;
      float dy;
+     QVector<freedom> distributedTime;   // вектор распределенного времени пользователя
 
 private slots:
     void free_time();
@@ -58,6 +59,14 @@ private slots:
     void on_pushButton_10_clicked();
     //типо вот добовляем сейщас навцй слат
     void cancel_time();
+    //добавить свободное время в БД
+    void add_freedom();
+
+    //обновление текущей и конечной даты
+    void update_dates();
+
+    void try_change_color();
+
 
 private:
     Ui::keknaizer *ui;
@@ -65,9 +74,9 @@ private:
     vector<task> to_do_list;
     problems *pr;
     DataBase kdb;
-
     QSystemTrayIcon  * trayIcon;
     PopUp *popUp;
+    void time_algorithm();
 
 };
 

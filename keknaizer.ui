@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>keknaizer</class>
  <widget class="QWidget" name="keknaizer">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -40,7 +43,7 @@ border-radius:8px;
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>260</x>
+       <x>280</x>
        <y>10</y>
        <width>121</width>
        <height>31</height>
@@ -62,7 +65,6 @@ border-radius:8px;
       <string notr="true">QLabel {
 color: #dfdfdf;
 font: 18px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
-font:bold;
 }</string>
      </property>
      <property name="text">
@@ -76,7 +78,7 @@ font:bold;
      <property name="geometry">
       <rect>
        <x>350</x>
-       <y>60</y>
+       <y>110</y>
        <width>290</width>
        <height>275</height>
       </rect>
@@ -201,7 +203,7 @@ QCalendarWidget QWidget {
 QAbstractItemView:enabled {
  font-size:12px;  
  color: rgb(180, 180, 180);  
- background-color: black ;  
+ background-color:rgb(26, 26, 39) ;  
  selection-background-color:rgb(64, 64, 64); 
  selection-color: rgb(150, 50, 200); 
 }
@@ -246,7 +248,7 @@ QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>60</y>
+       <y>110</y>
        <width>291</width>
        <height>276</height>
       </rect>
@@ -429,7 +431,7 @@ QTreeView::branch:closed:has-children {
      <property name="geometry">
       <rect>
        <x>330</x>
-       <y>30</y>
+       <y>80</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -448,7 +450,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>30</y>
+       <y>80</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -467,7 +469,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>110</y>
+       <y>160</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -486,7 +488,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>150</y>
+       <y>200</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -541,7 +543,7 @@ background-color:  rgb(15, 179, 227);
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>190</y>
+       <y>240</y>
        <width>191</width>
        <height>31</height>
       </rect>
@@ -560,7 +562,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>380</y>
+       <y>430</y>
        <width>111</width>
        <height>31</height>
       </rect>
@@ -591,7 +593,7 @@ QPushButton#pushButton_8:hover {
      <property name="geometry">
       <rect>
        <x>450</x>
-       <y>380</y>
+       <y>430</y>
        <width>101</width>
        <height>31</height>
       </rect>
@@ -622,7 +624,7 @@ QPushButton#pushButton_9:hover {
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>220</y>
+       <y>270</y>
        <width>251</width>
        <height>111</height>
       </rect>
@@ -639,7 +641,7 @@ QPushButton#pushButton_9:hover {
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>60</y>
+       <y>110</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -652,7 +654,7 @@ QPushButton#pushButton_9:hover {
      <property name="geometry">
       <rect>
        <x>350</x>
-       <y>60</y>
+       <y>110</y>
        <width>290</width>
        <height>275</height>
       </rect>
@@ -777,7 +779,7 @@ QCalendarWidget QWidget {
 QAbstractItemView:enabled {
  font-size:12px;  
  color: rgb(180, 180, 180);  
- background-color: black ;  
+ background-color: rgb(26, 26, 39);  
  selection-background-color:rgb(64, 64, 64); 
  selection-color: rgb(150, 50, 200); 
 }
@@ -824,7 +826,7 @@ QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>340</y>
+       <y>390</y>
        <width>551</width>
        <height>201</height>
       </rect>
@@ -843,7 +845,7 @@ QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
      <property name="geometry">
       <rect>
        <x>350</x>
-       <y>60</y>
+       <y>110</y>
        <width>290</width>
        <height>275</height>
       </rect>
@@ -968,7 +970,7 @@ QCalendarWidget QWidget {
 QAbstractItemView:enabled {
  font-size:12px;  
  color: rgb(180, 180, 180);  
- background-color: black ;  
+ background-color: rgb(26, 26, 39) ;  
  selection-background-color:rgb(64, 64, 64); 
  selection-color: rgb(150, 50, 200); 
 }
@@ -1013,7 +1015,7 @@ QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>560</y>
+       <y>610</y>
        <width>121</width>
        <height>41</height>
       </rect>
@@ -1051,7 +1053,7 @@ QPushButton#pushButton_6:hover {
      <property name="geometry">
       <rect>
        <x>470</x>
-       <y>560</y>
+       <y>610</y>
        <width>130</width>
        <height>40</height>
       </rect>
@@ -1128,6 +1130,158 @@ font: 16px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
      </property>
      <property name="text">
       <string>Укажите вашу занятость:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>80</y>
+       <width>221</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
+     <property name="text">
+      <string>Выберите дату начала занятости</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>160</y>
+       <width>261</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
+     <property name="text">
+      <string>Начальный и конечный день занятости</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>210</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
+     <property name="text">
+      <string>С</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>47</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+color: #dfdfdf;
+font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
+}</string>
+     </property>
+     <property name="text">
+      <string>По</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_11">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>200</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_11 {
+    padding: 1px 2px; 
+    font: normal 14px Roboto; 
+    border: none;
+    color: rgb(55, 125, 255); 
+    background-color: none ;
+    text-align: center;
+    border-bottom: 3px solid rgb(25, 170, 0); 
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+
+QPushButton#pushButton_11:hover {
+    color: #fff; 
+    /*background-color: #967cb9;*/
+    border: 3px solid rgb(25, 170, 0); 
+    }</string>
+     </property>
+     <property name="text">
+      <string>Начальный день</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_12">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>240</y>
+       <width>161</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#pushButton_12 {
+    padding: 1px 2px; 
+    font: normal 14px Roboto; 
+    border: none;
+    color:rgb(244, 16, 69); 
+    background-color: none ;
+    text-align: center;
+   border-bottom: 3px solid rgb(255, 170, 0); 
+  
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+    }
+     
+QPushButton#pushButton_12:hover {
+    color: #fff; 
+    /*background-color: #967cb9;*/
+    border: 3px solid rgb(255, 170, 0);
+    }</string>
+     </property>
+     <property name="text">
+      <string>Конечный день</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -1348,22 +1502,6 @@ QPushButton#pushButton_10:hover {
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_7</sender>
-   <signal>clicked()</signal>
-   <receiver>keknaizer</receiver>
-   <slot>free_time()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>799</x>
-     <y>639</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>131</x>
-     <y>513</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>calendarWidget_2</sender>
    <signal>clicked(QDate)</signal>
    <receiver>keknaizer</receiver>
@@ -1443,6 +1581,70 @@ QPushButton#pushButton_10:hover {
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>add_freedom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>721</x>
+     <y>634</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>659</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_11</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>try_change_color()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>202</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>401</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_12</sender>
+   <signal>clicked()</signal>
+   <receiver>keknaizer</receiver>
+   <slot>try_change_color()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calendarWidget_3</sender>
+   <signal>clicked(QDate)</signal>
+   <receiver>keknaizer</receiver>
+   <slot>update_dates()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>810</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>884</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>qBox1(int)</slot>
@@ -1454,5 +1656,8 @@ QPushButton#pushButton_10:hover {
   <slot>on_bd_task(QDate)</slot>
   <slot>on_my_tasks_tap()</slot>
   <slot>cancel_time()</slot>
+  <slot>add_freedom()</slot>
+  <slot>try_change_color()</slot>
+  <slot>update_dates()</slot>
  </slots>
 </ui>
