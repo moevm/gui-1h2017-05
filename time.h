@@ -18,10 +18,16 @@ public:
     int getNumbInterv() {return busy_time.size();}
      QVector<QVector<int>> getmyVec(){return free_vec;}
 
+     void setFree_vec_clear();
+
+     QVector<QVector<int> > getBusy_time() const;
+     void setBusy_time_clear();  //clear
+ void paintEvent(QPaintEvent *event) override;
+ void set_borders_false();
 private:
-    int timeBorders[4];
-    QVector<QVector<int>> free_vec;
-    //int free[10][4];    // массив свободного времени
+     int timeBorders[4];
+     QVector<QVector<int>> free_vec;
+     //int free[10][4];    // массив свободного времени
 
 
 //    int begin_h =0;
@@ -41,7 +47,7 @@ private:
         int lMarg, upMarg; // переменные для правильной отрисовки линии в любом размере
 
     protected:
-        void paintEvent(QPaintEvent *event) override;
+
         void mousePressEvent(QMouseEvent *event);
         void mouseReleaseEvent(QMouseEvent *event);
 

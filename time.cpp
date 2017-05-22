@@ -2,8 +2,9 @@
 #include <QDebug>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QDateTime>
 
-Time::Time(QWidget *parent) :
+Time::Time(QWidget *parent) : //ДОБАВИТЬ, ЧТОБЫ НЕЛЬЗЯ БЫЛО ВНОСИТ ОДИНАКОВЫЕ ДАТЫ НАЧАЛА И КОНЦА
     QWidget(parent)
 {
     //новое
@@ -95,6 +96,7 @@ void Time::my_sort(QVector<QVector<int>> &a, int index)
 
 bool Time::free_time()
 {
+
     int begin_h, begin_m, end_h, end_m;
     begin_h = timeBorders[0];
     begin_m = timeBorders[1];
@@ -114,7 +116,15 @@ bool Time::free_time()
         flag = false;
         return flag;
     }
-    else */if ((end_h < begin_h ) || ((begin_h == end_h) && (end_m <begin_m )) ){
+    else */
+    if( begin_h == end_h && begin_m == end_m){
+        QMessageBox *msg = new QMessageBox(NULL);
+        msg->setText("Неверно введено время.");
+        msg->show();
+        flag = false;
+        return flag;
+    }
+    else if ((end_h < begin_h ) || ((begin_h == end_h) && (end_m <begin_m )) ){
 
         QMessageBox *msg = new QMessageBox(NULL);
         msg->setText("Неверно введено время.");
@@ -125,25 +135,16 @@ bool Time::free_time()
     else {
 
         for(int i = 0; i < busy_time.size(); i++){
-            qDebug() <<((end_h < busy_time[i][2]) && (end_h > busy_time[i][0]))<<//  конечный в промежутке
-                    ((begin_h > busy_time[i][0]) && (begin_h < busy_time[i][2]) )<<// нача час в промежутке
-                    ((end_h == /*begin_h ==*/ busy_time[i][0]) && ( end_m > busy_time[i][1]) && (begin_h < busy_time[i][0] || (begin_h ==busy_time[i][0] && begin_m < busy_time[i][3] ))   )<< //в начале часа
-                    ((/*end_h ==*/ begin_h == busy_time[i][2]) && ( begin_m < busy_time[i][3]) && (end_h > busy_time[i][2] || (end_h == busy_time[i][2] && end_m >busy_time[i][1] )) )<<
-                    (begin_h == busy_time[i][0] && ( begin_m > busy_time[i][1]))<<
-                    (end_h  == busy_time[i][2] && end_m < busy_time[i][3])<<
-                    (begin_h >= busy_time[i][0] && end_h <= busy_time[i][2] && begin_h != end_h) <<
-                    (begin_h <= busy_time[i][0] && (end_h >= busy_time[i][2]) && begin_h != end_h)
-                    ;
+//            qDebug() <<(QTime(begin_h,begin_m) <= QTime(busy_time[i][0], busy_time[i][1]) && QTime(end_h,end_m) >= QTime(busy_time[i][2],busy_time[i][3])) <<
+//                    (QTime(end_h,end_m) <= QTime(busy_time[i][2],busy_time[i][3]) && QTime(end_h,end_m) > QTime(busy_time[i][0], busy_time[i][1])) <<
+//                     (QTime(begin_h,begin_m) >= QTime(busy_time[i][0], busy_time[i][1]) && QTime(begin_h,begin_m) < QTime(busy_time[i][2],busy_time[i][3]) ) <<
+//                      (QTime(begin_h,begin_m) > QTime(busy_time[i][0], busy_time[i][1]) && QTime(end_h,end_m) < QTime(busy_time[i][2],busy_time[i][3]) )
+//                    ;
 
-            if(
-                    ((end_h < busy_time[i][2]) && (end_h > busy_time[i][0]))||//  конечный в промежутке
-                    ((begin_h > busy_time[i][0]) && (begin_h < busy_time[i][2]) )|| // нача час в промежутке
-                    ((end_h == /*begin_h ==*/ busy_time[i][0]) && ( end_m > busy_time[i][1]) && (begin_h < busy_time[i][0] || (begin_h ==busy_time[i][0] && begin_m < busy_time[i][3] ))   )|| //в начале часа
-                    ((/*end_h ==*/ begin_h == busy_time[i][2]) && ( begin_m < busy_time[i][3]) && (end_h > busy_time[i][2] || (end_h == busy_time[i][2] && end_m >busy_time[i][1] )) )||
-                    (begin_h == busy_time[i][0] && ( begin_m > busy_time[i][1]) && end_h!=begin_h)|| //??????
-                    (end_h  == busy_time[i][2] && end_m < busy_time[i][3]  && end_h!=begin_h )||
-                    (begin_h >= busy_time[i][0] && end_h <= busy_time[i][2] && begin_h != end_h) ||
-                    (begin_h <= busy_time[i][0] && (end_h >= busy_time[i][2]) && begin_h != end_h)// ??????
+            if(  (QTime(begin_h,begin_m) <= QTime(busy_time[i][0], busy_time[i][1]) && QTime(end_h,end_m) >= QTime(busy_time[i][2],busy_time[i][3])) ||
+                  (QTime(end_h,end_m) <= QTime(busy_time[i][2],busy_time[i][3]) && QTime(end_h,end_m) > QTime(busy_time[i][0], busy_time[i][1])) ||
+                   (QTime(begin_h,begin_m) >= QTime(busy_time[i][0], busy_time[i][1]) && QTime(begin_h,begin_m) < QTime(busy_time[i][2],busy_time[i][3]) ) ||
+                    (QTime(begin_h,begin_m) > QTime(busy_time[i][0], busy_time[i][1]) && QTime(end_h,end_m) < QTime(busy_time[i][2],busy_time[i][3]) )
                     )
             {
 
@@ -161,19 +162,17 @@ bool Time::free_time()
     busy_time.last().push_back(begin_m);
     busy_time.last().push_back(end_h);
     busy_time.last().push_back(end_m);
-    //number_of_intvls++;
-    qDebug() <<busy_time;
+
+   // qDebug() <<busy_time;
 
     for (int j = 0; j < 4; j++){
        my_sort(busy_time,j);
     }
 
-    //qDebug() << "Занято: ";
-//    for (int i = 0; i < busy_time.si; i++) {
-//                       //qDebug() << "C " << busy_time[i][0] << " : " << busy_time[i][1] << " до " << busy_time[i][2] << " : " << busy_time[i][3];
-//               }
-    qDebug() << busy_time;
-    qDebug() << free_vec.size();
+//    qDebug() << busy_time;
+//    qDebug() << free_vec.size();
+
+    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ДО проверки начального" << free_vec;
 
     if (((busy_time[0][0] != 0)) || ((busy_time[0][0] == 0)&& (busy_time[0][1]!=0)) ){ // подумать как быть с изменением
             if(borders[0] == false){
@@ -190,31 +189,23 @@ bool Time::free_time()
                 free_vec.first()[2] = (busy_time[0][0]);
                 free_vec.first()[3] = (busy_time[0][1]); //пока уберу -1
             }
-
-//            if(free_vec[0][3] < 0){ // ЭТО БЫЛО ДЛЯ  -1
-//               // free[i][3] +=60;
-//                free_vec[0][3] +=60;
-//               // free[i][2]--;
-//                free_vec[0][2]--;
-//            }
-
             borders[0] = true;
-       // }
-
-       // free_index++;
     }
+
+
+    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки начального" << free_vec;
 
     //ВОЗМОЖНО
     if((busy_time[0][0] == 0)&& (busy_time[0][1]==0)){
         if(borders[0] == true){
-            free_vec.erase(free_vec.begin());
+            free_vec.remove(0); // заменяю на remove
             borders[0] = false;
         }
 
     }
 
-    //Правая граница
-    qDebug() << "  ДО правой границы " << free_vec;
+    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки НА УДАЛЕНИЕ НАЧАЛЬНОГО" << free_vec;
+
 
     if((busy_time.last()[2] != 23) || (busy_time.last()[2] == 23)&& (busy_time.last()[3]!=59)){
 
@@ -222,12 +213,6 @@ bool Time::free_time()
             free_vec.push_back(QVector<int>());
             free_vec.last().push_back(busy_time.last()[2]) ;
             free_vec.last().push_back(busy_time.last()[3]) ; // ПОКА УБРАЛ +1 И ТО, ЧТО НИЖЕ
-    //        if (free_vec[free_index][1]%60 == 0){ // если было 59
-    //           // free[i][1] = 0;
-    //             free_vec[free_index][1] = 0;
-    //            //free[i][0]++;
-    //             free_vec[free_index][0]++;
-    //        }
             free_vec.last().push_back(23) ;
             free_vec.last().push_back(59);
         }
@@ -240,13 +225,17 @@ bool Time::free_time()
         borders[1] = true;
     }
 
+        qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки КОНЕЧНОГО" << free_vec;
+
     //ВОЗМОЖНО 2 !
     if((busy_time.last()[2] == 23)&& (busy_time.last()[3]==59)){
         if(borders[1] == true){
-            free_vec.erase(free_vec.end()-1); //-1, потому что end - на 1 больше
+            free_vec.remove(free_vec.size()-1); //-1, потому что end - на 1 больше
             borders[1] = false;
         }
     }
+
+           qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки НА УДАЛЕНИЕ КОНЕЧНОГО" << free_vec;
 
     int k = 0;
     int j;
@@ -262,15 +251,15 @@ bool Time::free_time()
     qDebug() << j ;
 
     if(borders[0] && borders[1]){
-        free_vec.erase(free_vec.begin()+1,free_vec.end()-1); //удалить все кроме левой и правой границы
+        free_vec.remove(1,free_vec.size()-2); //удалить все кроме левой и правой границы
         qDebug() << "Первое условие!";
     }
     else if(borders[0]){
-        free_vec.erase(free_vec.begin()+1,free_vec.end());//удалить все, кроме левой, так как нет правой
+        free_vec.remove(1,free_vec.size()-1);//удалить все, кроме левой, так как нет правой
          qDebug() << "Второе условие!";
     }
     else if(borders[1]){
-        free_vec.erase(free_vec.begin(),free_vec.end()-1);//удалить все, кроме правой, так как нет левой ?? ТУТ ХЗ
+        free_vec.remove(0,free_vec.size()-1);//удалить все, кроме правой, так как нет левой ?? ТУТ ХЗ
          qDebug() << "Третье условие!";
     }
     else{
@@ -279,26 +268,45 @@ bool Time::free_time()
     }
 
 
-    //borders[1] == true ? j = busy_time.size()-1 : j = busy_time.size()-2; //учет границы правой
+    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки границ и очистки" << free_vec;
+
+
+    //borders[1] == true ? j = busy_time.size()-1 : j = busy_time.size()-2; //учет границы
+
+    QVector<int> wwwork;
+
     bool del = false;
-    for(int i = 0; i < j; i++){
-    qDebug() << "ZAZAZAZAZZ";
-        if(!((busy_time[i][2] == busy_time[i+1][0]) && (busy_time[i][3] ==busy_time[i+1][1] )))
-        {
-            if(!free_vec.empty() && !del){
-                free_vec.insert(free_vec.end()-1,QVector<int>()); //ПРОБУЕММ end
+    for(int i = 0; i < j; i++){  //ОШИБКА ВОЗНИКАеТ В ЭТОМ ЦИКЛЕ
+        if(!((busy_time[i][2] == busy_time[i+1][0]) && (busy_time[i][3] ==busy_time[i+1][1] ))){ // ПРОВЕРКА НА ЕДИНИЧНЫЕ ОТРЕЗКИ
+            if(borders[0] & borders[1]){
+                wwwork << busy_time[i][2] << busy_time[i][3]<<busy_time[i+1][0] <<busy_time[i+1][1];
+                free_vec.insert(free_vec.end()-1,wwwork);
+                wwwork.clear();
             }
-            else {
-                free_vec.push_back(QVector<int>());
-                del = true;
+            else if(borders[0]) {
+                wwwork << busy_time[i][2] << busy_time[i][3]<<busy_time[i+1][0] <<busy_time[i+1][1];
+                free_vec.push_back(wwwork);
+                wwwork.clear();
             }
-            qDebug() << "ПРоверка после вставки!! " << free_vec;
-            free_vec[i+k].push_back(busy_time[i][2]);
-             free_vec[i+k].push_back(busy_time[i][3]) ; // УБРАЛ +1
-            free_vec[i+k].push_back(busy_time[i+1][0]);
-            free_vec[i+k].push_back(busy_time[i+1][1]); //УБРАЛ -1
+            else if(borders[1]){
+                wwwork << busy_time[i][2] << busy_time[i][3]<<busy_time[i+1][0] <<busy_time[i+1][1];
+                free_vec.insert(free_vec.end()-1,wwwork);
+                wwwork.clear();
+            }
+            else{ // 4 условие
+                wwwork << busy_time[i][2] << busy_time[i][3]<<busy_time[i+1][0] <<busy_time[i+1][1];
+                free_vec.push_back(wwwork);
+                wwwork.clear();
+            }
         }
     }
+
+
+    qDebug() << "ОКОНЧАТЕЛЬНЫЙ вывод после вставки всех элементов  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ" << free_vec;
+
+    //можно сделать метод, который будет делать окончательные преобразования перед записью в БД - удалять элементы, у которых единичные отрезки
+    // либо можно их сразу не записывать, проверяя условие - ПОПРОБУЮ пока это
+
     del = false;
     return flag;
 }
@@ -307,6 +315,28 @@ void Time::setTimeBorders(int index, int a)
 {
     timeBorders[index] = a;
 }
+
+void Time::set_borders_false()
+{
+    borders[0] = borders[1] = false;
+}
+
+void Time::setFree_vec_clear()
+{
+    free_vec.clear();
+
+}
+
+QVector<QVector<int> > Time::getBusy_time() const
+{
+    return busy_time;
+}
+
+void Time::setBusy_time_clear()
+{
+    busy_time.clear();
+}
+
 // ДОБАВЛЕННОЕ
 void Time::paintEvent(QPaintEvent *event)
 {
@@ -357,6 +387,9 @@ void Time::mousePressEvent(QMouseEvent *event)
     }
 }
 
+
+
+
 void Time::mouseReleaseEvent(QMouseEvent *event)
 {
     // Хитрым образом сохраняем координаты точки отпуска
@@ -393,6 +426,10 @@ void Time::mouseReleaseEvent(QMouseEvent *event)
 
         if (timeBorders[0]==-1) return;
 
+        if(timeBorders[2] == 24) {
+            timeBorders[2] = 23;
+            timeBorders[3] = 59;
+        }
     // сортировка промежутков занятости и подсчет промежутков свободного времени
         free_time();
 
@@ -400,8 +437,49 @@ void Time::mouseReleaseEvent(QMouseEvent *event)
 //        qDebug() << "Start minute: " << busy_time.last()[1];
 //        qDebug() << "End hour: " << busy_time.last()[2];
 //        qDebug() << "End minute: " << busy_time.last()[3];
-        qDebug() << busy_time;
+        //qDebug() << busy_time;
         qDebug() << "**********************";
 
         update();
 }
+
+/* 9 круг ада нашего кода:
+
+   ((end_h < busy_time[i][2]) && (end_h > busy_time[i][0]))||//  конечный в промежутке
+                    ((begin_h > busy_time[i][0]) && (begin_h < busy_time[i][2]) )|| // нача час в промежутке
+                   ((end_h == /*begin_h ==*/ // busy_time[i][0]) && ( end_m > busy_time[i][1]) && (begin_h < busy_time[i][0] || (begin_h ==busy_time[i][0] && begin_m < busy_time[i][3] ))   )|| //в начале часа
+                   // ((/*end_h ==*/ begin_h == busy_time[i][2]) && ( begin_m < busy_time[i][3]) && (end_h > busy_time[i][2] || (end_h == busy_time[i][2] && end_m >busy_time[i][1] )) )||
+                    //(begin_h == busy_time[i][0] && ( begin_m > busy_time[i][1]) && end_h!=begin_h)|| //??????
+                    //(end_h  == busy_time[i][2] && end_m < busy_time[i][3]  && end_h!=begin_h )||
+                   // (begin_h >= busy_time[i][0] && end_h <= busy_time[i][2] && begin_h != end_h) //||
+                   // (begin_h <= busy_time[i][0] && (end_h >= busy_time[i][2]) && begin_h != end_h)// ??????
+
+
+
+//((end_h < busy_time[i][2]) && (end_h > busy_time[i][0]))<<//  конечный в промежутке
+//                    ((begin_h > busy_time[i][0]) && (begin_h < busy_time[i][2]) )<<// нача час в промежутке
+//                    ((end_h == /*begin_h ==*/ busy_time[i][0]) && ( end_m > busy_time[i][1]) && (begin_h < busy_time[i][0] || (begin_h ==busy_time[i][0] && begin_m < busy_time[i][3] ))   )<< //в начале часа
+//                    ((/*end_h ==*/ begin_h == busy_time[i][2]) && ( begin_m < busy_time[i][3]) && (end_h > busy_time[i][2] || (end_h == busy_time[i][2] && end_m >busy_time[i][1] )) )<<
+//                    (begin_h == busy_time[i][0] && ( begin_m > busy_time[i][1]))<<
+//                    //(end_h  == busy_time[i][2] && end_m < busy_time[i][3])<<
+//                    (begin_h >= busy_time[i][0] && end_h <= busy_time[i][2] && begin_h != end_h) <<
+//                    //(begin_h <= busy_time[i][0] && (end_h >= busy_time[i][2]) && begin_h != end_h) <<
+//                     " " << begin_h  << " " << begin_m<< " " << end_h<< " " <<end_m
+
+
+
+////if(!((busy_time[i][2] == busy_time[i+1][0]) && (busy_time[i][3] ==busy_time[i+1][1] )))
+//{
+//    if(!free_vec.empty() && !del){
+//        free_vec.insert(free_vec.end()-1,QVector<int>()); //ПРОБУЕММ end
+//    }
+//    else {
+//        free_vec.push_back(QVector<int>());
+//        del = true;
+//    }
+//   // qDebug() << "ПРоверка после вставки!! " << free_vec;
+//    free_vec[i+k].push_back(busy_time[i][2]);
+//     free_vec[i+k].push_back(busy_time[i][3]) ; // УБРАЛ +1
+//    free_vec[i+k].push_back(busy_time[i+1][0]);
+//    free_vec[i+k].push_back(busy_time[i+1][1]); //УБРАЛ -1
+//}

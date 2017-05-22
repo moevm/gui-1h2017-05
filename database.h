@@ -6,6 +6,8 @@
 #include <QtSql/QSqlError>
 #include <QtSql>
 #include <QVector>
+#include <task.h>
+#include <freedom.h>
 
 //using namespace std;
 
@@ -23,6 +25,16 @@ public:
     //для таблицы распределенного времени
     bool add_dis_time(QDate one_date, QVector<QVector<int>> time, QString one_task_name);//добавление расредленного времени под задачу
     QVector<QVector<QString> > get_dis_time(QDate one_date); // получение распределенного времени на день вместе с названием задачи (поэтому QString)
+
+    QVector<task> get_all_tasks_by_date_and_diff();
+
+    QVector<QDate> get_free_dates();
+
+    bool delete_same_dates(QDate begin, QDate end, QVector<QDate> times);
+
+    //для Сержа
+    QVector<freedom> all_free_times();
+    bool delete_and_insert_in_free_time(QVector<freedom> my_freedom);
 private:
     QSqlDatabase db;
 
