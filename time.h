@@ -4,6 +4,8 @@
 #include <QMessageBox>
 #include <QVector>
 #include <QWidget>
+#include <freedom.h>
+#include <database.h>
 
 using namespace std;
 
@@ -22,25 +24,24 @@ public:
 
      QVector<QVector<int> > getBusy_time() const;
      void setBusy_time_clear();  //clear
- void paintEvent(QPaintEvent *event) override;
- void set_borders_false();
+     void paintEvent(QPaintEvent *event) override;
+     void set_borders_false();
+     void setClickable(bool ind);
+
+     QVector<freedom> getDistrubuted_time() const;
+     void setDistrubuted_time(const QVector<freedom> &value);
+
+     QDate getChosenDate() const;
+     void setChosenDate(const QDate &value);
+
 private:
      int timeBorders[4];
      QVector<QVector<int>> free_vec;
-     //int free[10][4];    // массив свободного времени
-
-
-//    int begin_h =0;
-//    int begin_m =0;
-//    int end_h =0;
-//    int end_m =0;
-//    int busy_time[10][4];
-//    int number_of_intvls =0;
-//    int work_var[4];
      bool borders[2];
-
-    QVector<QVector<int>> busy_time;
-
+     QVector<QVector<int>> busy_time;
+     QVector<freedom> distrubuted_time;
+     bool isClickable;
+     QDate chosenDate;
 
     // измененное
         int X1, X2; // координаты отрезка для отрисовки

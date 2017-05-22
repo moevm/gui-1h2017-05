@@ -66,9 +66,11 @@ private slots:
 
     void try_change_color();
 
+    void updateDistrLine();
+
 
 private:
-    void time_algorithm();  // Алгоритм распределения времени
+    QVector<freedom> time_algorithm();  // Алгоритм распределения времени
 
     Ui::keknaizer *ui;
     //Time time;

@@ -24,6 +24,9 @@ public:
     int getEnd_minute() const;
     void setEnd_minute(int value);
 
+    QString getTask_name() const;
+    void setTask_name(const QString &value);
+
 private:
 
     QDate date;
@@ -31,6 +34,7 @@ private:
     int beg_minute;
     int end_hour;
     int end_minute;
+    QString task_name;
 
 };
 

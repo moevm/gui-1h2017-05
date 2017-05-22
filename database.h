@@ -23,8 +23,9 @@ public:
     bool add_free_user_time(QDate date_beg, QVector<QVector<int>> free_time, QDate date_end); // добавление свободного времени в бд
     QVector<QVector<int>> get_free_user_time(QDate date);//получение свободного времени из бд на конкретную дату
     //для таблицы распределенного времени
-    bool add_dis_time(QDate one_date, QVector<QVector<int>> time, QString one_task_name);//добавление расредленного времени под задачу
-    QVector<QVector<QString> > get_dis_time(QDate one_date); // получение распределенного времени на день вместе с названием задачи (поэтому QString)
+    bool add_dis_time(QVector<freedom> distr_time);//добавление расредленного времени под задачу
+    QVector<freedom> get_dis_time(QDate one_date); // получение распределенного времени на день вместе с названием задачи (поэтому QString)
+    QVector<freedom> get_all_dis_time();
 
     QVector<task> get_all_tasks_by_date_and_diff();
 
@@ -34,7 +35,8 @@ public:
 
     //для Сержа
     QVector<freedom> all_free_times();
-    bool delete_and_insert_in_free_time(QVector<freedom> my_freedom);
+//    bool delete_and_insert_in_free_time(QVector<freedom> my_freedom);
+    bool DataBase::delete_and_insert_in_dis_time(QVector<freedom> distr_time);
 private:
     QSqlDatabase db;
 

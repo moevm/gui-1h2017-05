@@ -18,7 +18,7 @@ Time::Time(QWidget *parent) : //ДОБАВИТЬ, ЧТОБЫ НЕЛЬЗЯ БЫЛ
     for (int i=0; i<4; i++) timeBorders[i] = 0;
 
     borders[0] = borders[1] = false; //ПРОВЕРИТЬ
-
+    isClickable = false;
 }
 
 void Time::my_sort(QVector<QVector<int>> &a, int index)
@@ -337,6 +337,30 @@ void Time::setBusy_time_clear()
     busy_time.clear();
 }
 
+void Time::setClickable(bool ind) {
+    isClickable = ind;
+}
+
+QVector<freedom> Time::getDistrubuted_time() const
+{
+    return distrubuted_time;
+}
+
+void Time::setDistrubuted_time(const QVector<freedom> &value)
+{
+    distrubuted_time = value;
+}
+
+QDate Time::getChosenDate() const
+{
+    return chosenDate;
+}
+
+void Time::setChosenDate(const QDate &value)
+{
+    chosenDate = value;
+}
+
 // ДОБАВЛЕННОЕ
 void Time::paintEvent(QPaintEvent *event)
 {
@@ -344,26 +368,48 @@ void Time::paintEvent(QPaintEvent *event)
     upMarg = height()/8;
 
     QPainter painter(this);
-    painter.setBrush(QColor(240, 240, 240));
+    if (isClickable) painter.setBrush(QColor(240, 240, 240));
+    else painter.setBrush(QColor(106, 177, 199));
     // Рисуем 2 поля для ввода:
     painter.drawRect(lMarg, upMarg,12*lMarg, 2*upMarg);
     painter.drawRect(lMarg, 5*upMarg,12*lMarg, 2*upMarg);
     int x(lMarg), y(upMarg);
 
-    // Рисуем промежутки занятости
-    for (int i=0; i<busy_time.size(); i++) {
-        painter.setBrush(QColor(106, 177, 199));  // (52, 216, 0)
-        int fromX = busy_time[i][0]*lMarg+lMarg+busy_time[i][1]*lMarg/60;
-        int toX = busy_time[i][2]*lMarg+lMarg+busy_time[i][3]*lMarg/60;
-        if (busy_time[i][0]>=12) {
-            toX-=12*lMarg;
-            fromX-=12*lMarg;
-        }
+    if (isClickable) {
+        // Рисуем промежутки занятости
+        for (int i=0; i<busy_time.size(); i++) {
+            painter.setBrush(QColor(106, 177, 199));  // (52, 216, 0)
+            int fromX = busy_time[i][0]*lMarg+lMarg+busy_time[i][1]*lMarg/60;
+            int toX = busy_time[i][2]*lMarg+lMarg+busy_time[i][3]*lMarg/60;
+            if (busy_time[i][0]>=12) {
+                toX-=12*lMarg;
+                fromX-=12*lMarg;
+            }
 
-        if (busy_time[i][0]<12) painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
-        else painter.drawRect(fromX, 5*upMarg, toX-fromX, 2*upMarg);
-        X1 = X2 = 0;
+            if (busy_time[i][0]<12) painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+            else painter.drawRect(fromX, 5*upMarg, toX-fromX, 2*upMarg);
+            X1 = X2 = 0;
+        }
+    } else {
+
+        // Рисуем промежутки распределенного времени
+        for (int i=0; i<distrubuted_time.size(); i++) {
+            if (getChosenDate() == distrubuted_time[i].getDate()) {
+                painter.setBrush(QColor(106, 250, 100));  // (52, 216, 0)
+                int fromX = distrubuted_time[i].getBeg_hour()*lMarg+lMarg+distrubuted_time[i].getBeg_minute()*lMarg/60;
+                int toX = distrubuted_time[i].getEnd_hour()*lMarg+lMarg+distrubuted_time[i].getEnd_minute()*lMarg/60;
+                if (distrubuted_time[i].getBeg_hour()>=12) {
+                    toX-=12*lMarg;
+                    fromX-=12*lMarg;
+                }
+
+                if (distrubuted_time[i].getBeg_hour()<12) painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+                else painter.drawRect(fromX, 5*upMarg, toX-fromX, 2*upMarg);
+                X1 = X2 = 0;
+            }
+        }
     }
+
     // Рисуем шкалу
     for (int i=0; i<=12; i++) {
         y = upMarg;
@@ -381,7 +427,7 @@ void Time::paintEvent(QPaintEvent *event)
 
 void Time::mousePressEvent(QMouseEvent *event)
 {
-    if(event->pos().x() > lMarg && event->pos().x() <= width()-lMarg) {
+    if(isClickable && event->pos().x() > lMarg && event->pos().x() <= width()-lMarg) {
         if (event->pos().y() >= upMarg && event->pos().y() <= 3*upMarg) X1 = event->pos().x();
         else if (event->pos().y() >= 5*upMarg && event->pos().y() <= 7*upMarg) X1 = event->pos().x()+12*lMarg;
     }
@@ -392,6 +438,7 @@ void Time::mousePressEvent(QMouseEvent *event)
 
 void Time::mouseReleaseEvent(QMouseEvent *event)
 {
+    if (!isClickable) return;
     // Хитрым образом сохраняем координаты точки отпуска
     if (event->pos().x() > width()-lMarg) X2 = width()-lMarg;
     else X2 = event->pos().x();
@@ -432,12 +479,6 @@ void Time::mouseReleaseEvent(QMouseEvent *event)
         }
     // сортировка промежутков занятости и подсчет промежутков свободного времени
         free_time();
-
-//        qDebug() << "Start hour: " << busy_time.last()[0];
-//        qDebug() << "Start minute: " << busy_time.last()[1];
-//        qDebug() << "End hour: " << busy_time.last()[2];
-//        qDebug() << "End minute: " << busy_time.last()[3];
-        //qDebug() << busy_time;
         qDebug() << "**********************";
 
         update();

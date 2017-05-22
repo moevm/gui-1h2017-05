@@ -5,7 +5,6 @@
 #include <QMessageBox>
 #include <QDate>
 
-
 keknaizer::keknaizer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::keknaizer)
@@ -22,6 +21,9 @@ keknaizer::keknaizer(QWidget *parent) :
     ui->treeWidget->setAlternatingRowColors(true);
     ui->treeWidget->setAnimated(true);
     ui->treeWidget->setWordWrap(true);
+
+    ui->time_widget->setClickable(true);
+    ui->time_widget_2->setClickable(false);
 
     //инициализация pushbutto_11
     ui->pushButton_11->setText(ui->calendarWidget_3->selectedDate().toString());
@@ -47,7 +49,7 @@ keknaizer::keknaizer(QWidget *parent) :
    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
            this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
-   time_algorithm();
+   //time_algorithm();
 
 
 }
@@ -151,6 +153,11 @@ void keknaizer::on_bd_task(QDate qd) //проверить
     ui->treeWidget->insertTopLevelItems(0, items);
     ui->treeWidget->setColumnWidth(0,40);
     ui->treeWidget->setWordWrap(true); //Разрешаем переносы
+
+
+    // Обновляем дату для линии времени
+    ui->time_widget_2->setChosenDate(ui->calendarWidget_2->selectedDate());
+    ui->time_widget_2->update();
 }
 
 //Закрашивание дат календаря с дедлайнами
@@ -170,14 +177,12 @@ void keknaizer::on_my_tasks_tap()
           QDate date = QDate::fromString(unique_dates.at(i),"yyyy-MM-dd");
           ui->calendarWidget_2->setDateTextFormat(date,format);
      }
-       //items.last()->setSizeHint(1,QSize(10,10));
 
+     // Обновляем линию времени
+     updateDistrLine();
+     ui->time_widget_2->setChosenDate(ui->calendarWidget_2->selectedDate());
+     ui->time_widget_2->update();
 
-    //ui->treeWidget->insertTopLevelItems(0, items);
-
-    //delete items[];
-
-     //items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("item: %1").arg(i))));
 }
 
 void keknaizer::on_problems_add()
@@ -212,28 +217,45 @@ void keknaizer::on_problems_add()
 
 
 void keknaizer::mouseMoveEvent( QMouseEvent* e ) {
-//    if( e->buttons() | Qt::LeftButton ) {
-//        setGeometry(
-//            pos().x() + ( e->x() - dx ),
-//            pos().y() + ( e->y() - dy ),
-//            width(),
-//            height()
-//        );
-//    }
+   if ((abs(width() - dx) < width()/15 || width() + dx < width()+width()/25)
+           ||(abs(height() - dy) < height()/25 || height() + dy < height()+height()/20))
+   {
+    if( e->buttons() | Qt::LeftButton ) {
+        if (dx == 0 && dy == 0) {
+        setGeometry(
+            pos().x(),
+            pos().y(),
+            width(),
+            height()
+         );
+        }
+        else  {
+            setCursor( Qt::OpenHandCursor);
+            setGeometry(
+                pos().x() + ( e->x() - dx ),
+                pos().y() + ( e->y() - dy ),
+                width(),
+                height()
+             );
+            }
+
+     }
+   }
 }
 
 void keknaizer::mousePressEvent( QMouseEvent* e ) {
-//    if( e->button() == Qt::LeftButton ) {
-//        dx = e->x();
-//        dy = e->y();
-//        setCursor( Qt::OpenHandCursor );
-//    }
+    if(e->button() == Qt::LeftButton) {
+        dx = e->x();        //Границы : dx = 200 , dy = 40; dx = 860 , dy = 40; dx = 200 , dy = 710; dx = 860 , dy = 710;
+        dy = e->y();
+    }
 }
 
 void keknaizer::mouseReleaseEvent( QMouseEvent* e ) {
-//    if( e->button() == Qt::LeftButton ) {
-//        setCursor( Qt::ArrowCursor );
-//    }
+    if( e->button() == Qt::LeftButton ) {
+        setCursor( Qt::ArrowCursor );
+        dx=0;
+        dy=0;
+    }
 }
 
 void keknaizer::on_pushButton_10_clicked()
@@ -257,23 +279,27 @@ void keknaizer::cancel_time()
 
 void keknaizer::add_freedom()
 {
-
-
-
     QVector<QVector<int>> work_freedom = ui->time_widget->getmyVec();
     if(work_freedom.empty())
     {
         QMessageBox *msg = new QMessageBox(NULL);
         msg->setText("Введите свое занятое время");
         msg->show();
-    }
-    else{
+    } else if(QDate::fromString(ui->pushButton_11->text(),"ddd MMM dd yyyy") >
+              QDate::fromString(ui->pushButton_12->text(), "ddd MMM dd yyyy")) {
+            QMessageBox *msg = new QMessageBox(NULL);
+            msg->setText("Неверно введены даты занятости");
+            msg->show();
+
+    } else{
         kdb.delete_same_dates(QDate::fromString(ui->pushButton_11->text(),"ddd MMM dd yyyy"),
                               QDate::fromString(ui->pushButton_12->text(), "ddd MMM dd yyyy"),
                               kdb.get_free_dates());
         kdb.add_free_user_time(QDate::fromString(ui->pushButton_11->text(),"ddd MMM dd yyyy"),
                                work_freedom,
                                QDate::fromString(ui->pushButton_12->text(),"ddd MMM dd yyyy"));
+        // Запускаем алгоритм расчета времени
+        ui->time_widget_2->setDistrubuted_time(time_algorithm());
         emit ui->pushButton_6->clicked();
         //дублирую cancel_time
 //        ui->time_widget->setBusy_time_clear();
@@ -286,7 +312,8 @@ void keknaizer::add_freedom()
 
 void keknaizer::update_dates()
 {
-    if(!ui->pushButton_11->isEnabled()){
+
+    if(!ui->pushButton_11->isChecked() == true){
         ui->pushButton_11->setText(ui->calendarWidget_3->selectedDate().toString());
     }else{
         ui->pushButton_12->setText(ui->calendarWidget_3->selectedDate().toString());
@@ -296,17 +323,66 @@ void keknaizer::update_dates()
 void keknaizer::try_change_color()
 {
     if(sender()==ui->pushButton_11){
-        ui->pushButton_11->setStyleSheet("background: red");
-        ui->pushButton_11->setDisabled(true);
-        ui->pushButton_12->setEnabled(true);
-         ui->pushButton_12->setStyleSheet("background: white");
+        ui->pushButton_11->setStyleSheet("QPushButton#pushButton_11 {"
+                                         "padding: 1px 2px;"
+                                         "font: normal 14px Roboto;"
+                                         "border: none;"
+                                         "color: rgb(55, 125, 255);"
+                                         "background-color: none;"
+                                         "text-align: center;"
+                                         "border-bottom: 3px solid rgb(25, 170, 0);"
+                                         "font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;}"
+                                         "QPushButton#pushButton_11:hover {"
+                                         "color: #fff;"
+                                         "border: 3px solid rgb(25, 170, 0);}");
+       ui->pushButton_11->setChecked(false);
+       ui->pushButton_12->setChecked(true);
+       ui->pushButton_12->setStyleSheet("QPushButton#pushButton_12 {"
+                                        "padding: 1px 2px;"
+                                        "font: normal 14px Roboto;"
+                                        "border: none;"
+                                        "color: rgb(244, 16, 69);"
+                                        "background-color: none;"
+                                        "text-align: center;"
+                                        "border-bottom: 3px solid rgb(255, 170, 0);"
+                                        "font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;}"
+                                        "QPushButton#pushButton_11:hover {"
+                                        "color: #fff;"
+                                        "border: 3px solid rgb(255, 170, 0);}");
     }
     else{
-        ui->pushButton_12->setStyleSheet("background: red");
-        ui->pushButton_12->setDisabled(true);
-        ui->pushButton_11->setEnabled(true);
-        ui->pushButton_11->setStyleSheet("background: white");
+        ui->pushButton_12->setStyleSheet("QPushButton#pushButton_12 {"
+                                         "padding: 1px 2px;"
+                                         "font: normal 14px Roboto;"
+                                         "border: none;"
+                                         "color: rgb(55, 125, 255);"
+                                         "background-color: none;"
+                                         "text-align: center;"
+                                         "border-bottom: 3px solid rgb(25, 170, 0);"
+                                         "font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;}"
+                                         "QPushButton#pushButton_12:hover {"
+                                         "color: #fff;"
+                                         "border: 3px solid rgb(25, 170, 0);}");
+        ui->pushButton_12->setChecked(false);
+        ui->pushButton_11->setChecked(true);
+        ui->pushButton_11->setStyleSheet("QPushButton#pushButton_11 {"
+                                         "padding: 1px 2px;"
+                                         "font: normal 14px Roboto;"
+                                         "border: none;"
+                                         "color: rgb(244, 16, 69);"
+                                         "background-color: none;"
+                                         "text-align: center;"
+                                         "border-bottom: 3px solid rgb(255, 170, 0);"
+                                         "font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;}"
+                                         "QPushButton#pushButton_11:hover {"
+                                         "color: #fff;"
+                                         "border: 3px solid rgb(255, 170, 0);}");
     }
+}
+
+void keknaizer::updateDistrLine()
+{
+    ui->time_widget_2->setDistrubuted_time(kdb.get_all_dis_time());
 }
 
 void keknaizer::closeEvent(QCloseEvent * event)
@@ -348,14 +424,15 @@ void keknaizer::iconActivated(QSystemTrayIcon::ActivationReason reason)
     }
 }
 
-void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПРОСРОЧЕННЫЕ ДЕДЛАЙНЫ
+QVector<freedom> keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПРОСРОЧЕННЫЕ ДЕДЛАЙНЫ
 
     QVector<freedom> distributedTime;   // вектор распределенного времени пользователя
 
     // подготавливаем массив свободного времени пользователя
         // назначаем текущим временем миг + 5 минут
         QTime curTime = QTime::currentTime();
-        curTime.addSecs(300);
+        curTime = curTime.addSecs(300);
+        qDebug() << "Сейчас: "<<curTime;
 
         //считываем базу данных свободного времени
         QVector<freedom> free_vec = kdb.all_free_times();
@@ -371,18 +448,22 @@ void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПР�
         // Ищем индекс промежутка, в который попадает текущее время
         int index = 0;
         int vecSize = free_vec.size();
-        qDebug() << vecSize << " Это вексайз";
-        for (index; index < vecSize; index++) {
-            qDebug() << index << "-ый заход в цикл проверки";
-            if (curTime.hour() >= free_vec[index].getBeg_hour() &&
-                curTime.minute() >= free_vec[index].getBeg_minute())
-                if (curTime.hour() < free_vec[index].getEnd_hour() &&
-                    curTime.minute() < free_vec[index].getEnd_minute()) break;
-                else {index++; break;}
+//        qDebug() << vecSize << " Это вексайз";
+        for (index; index < vecSize; index++) {     // Индекс ищется
+//            qDebug() << index << "-ый заход в цикл проверки";
+            int left = QTime(free_vec[index].getBeg_hour(), free_vec[index].getBeg_minute()).secsTo(QTime(curTime.hour(), curTime.minute()))/60;
+            int right = QTime(curTime.hour(), curTime.minute()).secsTo(QTime(free_vec[index].getEnd_hour(), free_vec[index].getEnd_minute()))/60;
+            qDebug() << "Left = " << left;
+            qDebug() << "Right = " << right;
+            if (left >=0) {
+                if (right > 0) {
+                    free_vec[index].setBeg_hour(curTime.hour());
+                    free_vec[index].setBeg_minute(curTime.minute());
+                    break;
+                }
+            }
             //хат фекс 228,5
             else break;
-            //if(curTime.hour() < free_vec[index].getBeg_hour()) break;
-
         };
 
         //if (index==vecSize &&curTime.hour() < free_vec[index].getBeg_hour() ) index = 0;// я про вот это
@@ -390,11 +471,11 @@ void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПР�
         // проверка на всякий пожарный (А может ли к этому моменту закончиться свободное время?)
         if (index == vecSize) {
             qDebug() << "User vonuchka - zabil dobafit svobodniy vryemia || Свободное время закончилось";
-            return;
+            return distributedTime;
         }
         // убрали из массива свободного времени то время, которое пользователь уже не может использовать
         if (index) {
-            qDebug() << "Здесь удаляем элементы до " << index;
+//            qDebug() << "Здесь удаляем элементы до " << index;
             free_vec.remove(0, index); // Может быть заменить на сдвиг?
             // ????!!!! - Нужно ли?
             index = 0;
@@ -406,34 +487,31 @@ void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПР�
 
     while (!task_list.isEmpty()) {
 
-        qDebug() << "Список задач не пуст";
+//        qDebug() << "Список задач не пуст";
 
         // рассматриваемый deadline на текущем шаге
         QDate curDeadline = task_list.first().getDeadline();
 
-        qDebug() << curDeadline << "Текущий дедллайн";
+//        qDebug() << curDeadline << "Текущий дедллайн";
 
         // Считаем кол-во задач для текущего дедлайна
         QDate temp;
         int curTaskNumb(0);
         temp = curDeadline;
 
-        for(int i = 0; i < task_list.size(); i++){
-            qDebug() << task_list[i].getDeadline() <<  task_list[i].getName() << task_list[i].getDifficult() << task_list[i].getDescription() ;
-        }
+//        for(int i = 0; i < task_list.size(); i++){
+//            qDebug() << task_list[i].getDeadline() <<  task_list[i].getName() << task_list[i].getDifficult() << task_list[i].getDescription() ;
+//        }
 
         while(temp == curDeadline && curTaskNumb!=task_list.size() ){
 
-            qDebug() << "думаю что строчкой ниже" << curTaskNumb;
             temp = task_list[curTaskNumb].getDeadline(); // здесь нагнулся
-            qDebug() << "Сверху";
             curTaskNumb++;
         }
 
         for (int i = 0; i < curTaskNumb; i++) {
 
-            qDebug() << i << "-ый заход в цикл распределения времени для задачи текущего дедлайна";
-
+//            qDebug() << i << "-ый заход в цикл распределения времени для задачи текущего дедлайна";
 
             taskVolume = 0;  // объем задачи в часах
             // определяем коэффициент сложности задачи
@@ -459,55 +537,45 @@ void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПР�
             }
             taskVolume *= 60;   // Перевели объем задачи в минуты
             taskVolume += taskVolume/(1.51*6);     // ДОБАВИТЬ ПОЛЬЗОВАТЕЛЮ НАПОМИНАНИЯ О ТОМ, ЧТОБЫ ЧЕРЕЗ КАЖДЫЕ 1.5 часа ОН ДЕЛАЛ ПЕРЕРЫВ на 15 мин. NB
-
+            taskVolume += 15;   // добавили 15 минут на перерыв между делами
 
 
             // Выделение времени в нужном объеме
 
                 // Распределяем время на задачу
                 while (taskVolume > 0) {
-                    qDebug() << "Время еще не закончено";
-                    qDebug() << "Объем для задачи" << taskVolume;
+                    free_vec[index].setTask_name(task_list[i].getName());
+//                    qDebug() << "Время еще не закончено";
+//                    qDebug() << "Объем для задачи" << taskVolume;
 
                     int len = QTime(free_vec[index].getBeg_hour(),free_vec[index].getBeg_minute()).secsTo(QTime(free_vec[index].getEnd_hour(),free_vec[index].getEnd_minute()))/60;
                     // оставшееся время больше длины текущего промежутка?
 
-                    qDebug() << "Время свободного промежутка" << len;
+//                    qDebug() << "Время свободного промежутка" << len;
                     if (len <= taskVolume) {
-                        qDebug() << " Время свободного меньше требуемого";
+//                        qDebug() << " Время свободного меньше требуемого";
 
                         taskVolume -= len;
                         distributedTime.append(free_vec[index]);   //Продумать это место - удаление первого элемента из фриивек лолкекякутузбек
-//                        free_vec.removeFirst();
-//                        index--;
-
 
                          //ХАТ ХАТ ХАТ ФЕКС 1488 по-моему тут тоже нужно удалять из фрии век хуек-лол-кек
-
-
-                        if (++index == vecSize) {
+                        if (++index == vecSize) {   // Переделать условие - т.к. времени может хватить тютелька в тютельку
                             qDebug() << "Закончилось свободное время";
+                            qDebug() << "Cвободное время:";
                             for(int i = 0; i < free_vec.size(); i++){
                                 qDebug() << free_vec[i].getDate() << free_vec[i].getBeg_hour() <<free_vec[i].getBeg_minute() <<free_vec[i].getEnd_hour() <<free_vec[i].getEnd_minute() ;
                             }
-
+                            qDebug() << "Распределенное время:";
                             for(int i = 0; i < distributedTime.size(); i++){
                                 qDebug() << distributedTime[i].getDate() << distributedTime[i].getBeg_hour() <<distributedTime[i].getBeg_minute() <<distributedTime[i].getEnd_hour() <<distributedTime[i].getEnd_minute() ;
                             }
-                            return;
+
+                            free_vec.remove(0, index);  // Кажется, именно столько
+                            kdb.delete_and_insert_in_dis_time(distributedTime);
+                            return distributedTime;
                         }
-
-
 
                     } else {
-
-                        qDebug() << "Времени на распределение хватает";
-
-                        qDebug() << "Свободное время до модификации АЗУЗА";
-                        for(int i = 0; i < free_vec.size(); i++){
-                            qDebug() << free_vec[i].getDate() << free_vec[i].getBeg_hour() <<free_vec[i].getBeg_minute() <<free_vec[i].getEnd_hour() <<free_vec[i].getEnd_minute() ;
-                        }
-
 
                         // добавляем в новый элемент вектора распределенного времени левый конец промежутка свободного времени
                         distributedTime.append(freedom());
@@ -515,22 +583,21 @@ void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПР�
                         distributedTime.last().setBeg_minute(free_vec[index].getBeg_minute());
                         // посчитаем правый промежуток для распределенного времени
                         QTime adjoint(free_vec[index].getBeg_hour(),free_vec[index].getBeg_minute());
-                        qDebug() << "А собственно говоря что здесь происходит" << adjoint;
-                        adjoint = adjoint.addSecs((taskVolume+15)*60); // ДОБАВИЛ перерыв на 15 минут между разными делами
+//                        qDebug() << "А собственно говоря что здесь происходит" << adjoint;
+                        adjoint = adjoint.addSecs((taskVolume)*60); // ДОБАВИТЬ перерыв на 15 минут между разными делами
 
-                        qDebug() << "Модификайшн аджоинт" << adjoint;
+//                        qDebug() << "Модификайшн аджоинт" << adjoint;
                         free_vec[index].setBeg_hour(adjoint.hour());
                         free_vec[index].setBeg_minute(adjoint.minute());
                         // добавим в вектор распределенного времени правый конец промежутка
                         distributedTime.last().setEnd_hour(adjoint.hour());
                         distributedTime.last().setEnd_minute(adjoint.minute());
                         distributedTime.last().setDate(free_vec[index].getDate());
-
-
-                        qDebug() << "Свободное время ПОСЛЕ модификации АЗУЗАЗИЗАЗУЗАЗАЗА";
-                        for(int i = 0; i < free_vec.size(); i++){
-                            qDebug() << free_vec[i].getDate() << free_vec[i].getBeg_hour() <<free_vec[i].getBeg_minute() <<free_vec[i].getEnd_hour() <<free_vec[i].getEnd_minute() ;
-                        }
+                        distributedTime.last().setTask_name(free_vec[index].getTask_name());
+//                        qDebug() << "Свободное время ПОСЛЕ модификации АЗУЗАЗИЗАЗУЗАЗАЗА";
+//                        for(int i = 0; i < free_vec.size(); i++){
+//                            qDebug() << free_vec[i].getDate() << free_vec[i].getBeg_hour() <<free_vec[i].getBeg_minute() <<free_vec[i].getEnd_hour() <<free_vec[i].getEnd_minute() ;
+//                        }
 
                         taskVolume = -1;    // заодно и индикатор
                     }
@@ -543,21 +610,23 @@ void keknaizer::time_algorithm() { // СДЕЛАТЬ ПРОВЕРКУ НА ПР�
 
         task_list.remove(0, curTaskNumb);
 
-        qDebug() << "Убрали задачи из списка";
+//        qDebug() << "Убрали задачи из списка";
     }// закончили распределять время для всех задач из списка
 
     // убираем из вектора свободного времени те промежутки, которые уже распределили
     free_vec.remove(0, index);  // Кажется, именно столько
 
-    qDebug() << "Обычный конец раобы алгоритма";
+    qDebug() << "Обычный конец работы алгоритма - свободное время:";
     for(int i = 0; i < free_vec.size(); i++){
         qDebug() << free_vec[i].getDate() << free_vec[i].getBeg_hour() <<free_vec[i].getBeg_minute() <<free_vec[i].getEnd_hour() <<free_vec[i].getEnd_minute() ;
     }
-
+    qDebug() << "Распределенное время:";
     for(int i = 0; i < distributedTime.size(); i++){
         qDebug() << distributedTime[i].getDate() << distributedTime[i].getBeg_hour() <<distributedTime[i].getBeg_minute() <<distributedTime[i].getEnd_hour() <<distributedTime[i].getEnd_minute() ;
     }
 
-    //qDebug() << "Did we clear and paste new free time right? - " <<kdb.delete_and_insert_in_free_time(free_vec);
+    qDebug() << "Clear and paste new free distributed time? - " <<kdb.delete_and_insert_in_dis_time(distributedTime);
+    //qDebug() << "Paste new distributed time? - " <<kdb.add_dis_time(distributedTime);
+    return distributedTime;
 }
 

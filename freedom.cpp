@@ -59,3 +59,13 @@ void freedom::setEnd_minute(int value)
 {
     end_minute = value;
 }
+
+QString freedom::getTask_name() const
+{
+    return task_name;
+}
+
+void freedom::setTask_name(const QString &value)
+{
+    task_name = value;
+}

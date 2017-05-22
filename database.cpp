@@ -3,7 +3,7 @@
 DataBase::DataBase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("../new_GUIGUIGUI/keknaizer.sqlite");  //тут путь
+    db.setDatabaseName("../new_GUIGUIGUI/keknaizer.sqlite");  //
 
     if (!db.open()) {
             qDebug() << "Что-то пошло не так!" + QDir::homePath ();
@@ -184,22 +184,24 @@ QVector<QVector<int>> DataBase::get_free_user_time(QDate date)
 }
 
 //для таблица распределенного времени
-bool DataBase::add_dis_time(QDate one_date, QVector<QVector<int> > time, QString one_task_name)
-{
+//bool DataBase::add_dis_time(QDate one_date, QVector<QVector<int> > time, QString one_task_name)
+bool DataBase::add_dis_time(QVector<freedom> distr_time)
+{/*
     QVector<int> work_times(4);
     for(int i = 0; i < time.size(); i++){
         for(int z = 0;z < 4; z++){
             work_times[z]= time[i][z]; // записываем в рабочий вектор свободное время
-        }
+        }*/
+    for (int i = 0; i < distr_time.size(); i++) {
         QSqlQuery my_query;
         my_query.prepare("INSERT INTO distibuted_time (date, begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name )"
                                       "VALUES (:date, :begin_task_hour, :begin_task_minute, :end_task_hour, :end_task_minute, :task_name);");
-        my_query.bindValue(":date", one_date);
-        my_query.bindValue(":begin_task_hour", work_times[0]);
-        my_query.bindValue(":begin_task_minute", work_times[1]);
-        my_query.bindValue(":end_task_hour", work_times[2]);
-        my_query.bindValue(":end_task_minute", work_times[3]);
-        my_query.bindValue(":task_name", one_task_name);
+        my_query.bindValue(":date", distr_time[i].getDate());
+        my_query.bindValue(":begin_task_hour", distr_time[i].getBeg_hour());
+        my_query.bindValue(":begin_task_minute", distr_time[i].getBeg_minute());
+        my_query.bindValue(":end_task_hour", distr_time[i].getEnd_hour());
+        my_query.bindValue(":end_task_minute", distr_time[i].getEnd_minute());
+        my_query.bindValue(":task_name", distr_time[i].getTask_name());
         if( !my_query.exec() ) {
                 qDebug() << db.lastError().text();
                 return false;
@@ -208,22 +210,41 @@ bool DataBase::add_dis_time(QDate one_date, QVector<QVector<int> > time, QString
     return true;
 }
 
-QVector<QVector<QString>> DataBase::get_dis_time(QDate one_date)
+QVector<freedom> DataBase::get_dis_time(QDate one_date)
 {
-    QVector<QVector<QString>> ret_dis;
+    QVector<freedom> ret_dis;
     QSqlQuery my_query;
     my_query.prepare("SELECT begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name  FROM distibuted_time WHERE date = :date");
     my_query.bindValue(":date",one_date);
     my_query.exec();
     while(my_query.next()){
-        ret_dis.push_back(QVector<QString>()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
-        ret_dis.last().push_back(my_query.value(0).toString()); // сохраняем цифвеки как QString
-        ret_dis.last().push_back(my_query.value(1).toString());
-        ret_dis.last().push_back(my_query.value(2).toString());
-        ret_dis.last().push_back(my_query.value(3).toString());
-        ret_dis.last().push_back(my_query.value(4).toString());// тут сохраняется навание задачи
+        ret_dis.push_back(freedom()); //запись очередного свободного промежутка - вроде так (так как типа хранится в отсортированном виде)
+        ret_dis.last().setDate(my_query.value(0).toDate()); // сохраняем цифвеки как QString
+        ret_dis.last().setBeg_hour(my_query.value(1).toInt());
+        ret_dis.last().setBeg_minute(my_query.value(2).toInt());
+        ret_dis.last().setEnd_hour(my_query.value(3).toInt());
+        ret_dis.last().setEnd_minute(my_query.value(4).toInt());// тут сохраняется навание задачи
+        ret_dis.last().setTask_name(my_query.value(5).toString());
     }
     return ret_dis;
+}
+
+QVector<freedom> DataBase::get_all_dis_time() {
+
+    QVector<freedom>  dis_time;
+    QSqlQuery my_query;
+    my_query.prepare("SELECT * FROM distibuted_time  ORDER by date ");
+    my_query.exec();
+    while(my_query.next()){
+        dis_time.push_back(freedom());
+        dis_time.last().setDate(my_query.value(0).toDate());
+        dis_time.last().setBeg_hour(my_query.value(1).toInt());
+        dis_time.last().setBeg_minute(my_query.value(2).toInt());
+        dis_time.last().setEnd_hour(my_query.value(3).toInt());
+        dis_time.last().setEnd_minute(my_query.value(4).toInt());
+        dis_time.last().setTask_name(my_query.value(5).toString());
+    }
+    return dis_time;
 }
 
 //получить все задачи, сортированные по дедлайнам и по сложности(начиная с большей)
@@ -277,7 +298,7 @@ bool DataBase::delete_same_dates(QDate begin, QDate end, QVector<QDate> times)
     return true;
 }
 
-QVector<freedom > DataBase::all_free_times()
+QVector<freedom> DataBase::all_free_times()
 {
     QVector<freedom>  ret_free;
     QSqlQuery my_query;
@@ -290,30 +311,32 @@ QVector<freedom > DataBase::all_free_times()
         ret_free.last().setBeg_minute(my_query.value(2).toInt());
         ret_free.last().setEnd_hour(my_query.value(3).toInt());
         ret_free.last().setEnd_minute(my_query.value(4).toInt());
+        ret_free.last().setTask_name(my_query.value(5).toString());
     }
     return ret_free;
 }
 
-bool DataBase::delete_and_insert_in_free_time(QVector<freedom> my_freedom)
+bool DataBase::delete_and_insert_in_dis_time(QVector<freedom> distr_time)
 {
     //удаление
     QSqlQuery my_query;
-    my_query.prepare("DELETE  FROM free_user_time ");
+    my_query.prepare("DELETE  FROM distibuted_time ");
     if( !my_query.exec() ) {
             qDebug() << db.lastError().text() << "FAIL IN DELETING";
             return false;
         }
     //добавление
 
-    for(int i = 0; i < my_freedom.size(); i++){
+    for(int i = 0; i < distr_time.size(); i++){
 
-        my_query.prepare("INSERT INTO free_user_time (Date, begin_hour, begin_minute, end_hour, end_minute)"
-                                      "VALUES (:Date, :begin_hour, :begin_minute, :end_hour, :end_minute);");
-        my_query.bindValue(":Date", my_freedom[i].getDate());
-        my_query.bindValue(":begin_hour", my_freedom[i].getBeg_hour());
-        my_query.bindValue(":begin_minute", my_freedom[i].getBeg_minute());
-        my_query.bindValue(":end_hour", my_freedom[i].getEnd_hour());
-        my_query.bindValue(":end_minute", my_freedom[i].getEnd_minute());
+        my_query.prepare("INSERT INTO distibuted_time (date, begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name)"
+                                      "VALUES (:date, :begin_task_hour, :begin_task_minute, :end_task_hour, :end_task_minute, :task_name);");
+        my_query.bindValue(":date", distr_time[i].getDate());
+        my_query.bindValue(":begin_task_hour", distr_time[i].getBeg_hour());
+        my_query.bindValue(":begin_task_minute", distr_time[i].getBeg_minute());
+        my_query.bindValue(":end_task_hour", distr_time[i].getEnd_hour());
+        my_query.bindValue(":end_task_minute", distr_time[i].getEnd_minute());
+        my_query.bindValue(":task_name", distr_time[i].getTask_name());
         if( !my_query.exec() ) {
                 qDebug() << db.lastError().text() << "FAIL IN INSERTING";
                 return false;
