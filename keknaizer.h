@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QTime>
 #include "time.h"
-#include "problems.h"
 #include "task.h"
 #include "database.h"
 
@@ -75,7 +74,6 @@ private:
     Ui::keknaizer *ui;
     //Time time;
     vector<task> to_do_list;
-    problems *pr;
     DataBase kdb;
 
     QSystemTrayIcon  * trayIcon;
