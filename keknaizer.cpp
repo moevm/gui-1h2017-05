@@ -61,6 +61,9 @@ keknaizer::~keknaizer()
 void keknaizer::free_time()
 {
     ui->time_widget->free_time();
+//    ui->time_widget->lines();
+    // Добавить проверку?
+
 }
 
 void keknaizer::on_pushButton_2_clicked()
@@ -133,6 +136,7 @@ void keknaizer::on_bd_task(QDate qd) //проверить
 
     // Обновляем дату для линии времени
     ui->time_widget_2->setChosenDate(ui->calendarWidget_2->selectedDate());
+    ui->time_widget_2->setmyVec(kdb.get_free_user_time(ui->time_widget_2->getChosenDate()));
     ui->time_widget_2->repaint();
 }
 
@@ -253,6 +257,7 @@ void keknaizer::cancel_time()
 
 void keknaizer::add_freedom()
 {
+
     QVector<QVector<int>> work_freedom = ui->time_widget->getmyVec();
     ui->time_widget_2->setBusy_time(ui->time_widget->getBusy_time());
 

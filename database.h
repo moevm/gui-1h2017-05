@@ -36,7 +36,7 @@ public:
     //для Сержа
     QVector<freedom> all_free_times();
 //    bool delete_and_insert_in_free_time(QVector<freedom> my_freedom);
-    bool DataBase::delete_and_insert_in_dis_time(QVector<freedom> distr_time);
+    bool delete_and_insert_in_dis_time(QVector<freedom> distr_time);
 private:
     QSqlDatabase db;
 

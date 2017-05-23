@@ -25,18 +25,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         keknaizer.cpp \
-    time.cpp \
     task.cpp \
     database.cpp \
     popup.cpp \
-    freedom.cpp
+    freedom.cpp \
+    kektime.cpp
 
 HEADERS  += keknaizer.h \
-    time.h \
     task.h \
     database.h \
     popup.h \
-    freedom.h
+    freedom.h \
+    kektime.h
 
 FORMS    += keknaizer.ui
 

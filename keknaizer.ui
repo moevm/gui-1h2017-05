@@ -425,7 +425,7 @@ QTreeView::branch:closed:has-children {
       </property>
      </column>
     </widget>
-    <widget class="Time" name="time_widget_2" native="true">
+    <widget class="Kektime" name="time_widget_2" native="true">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -577,7 +577,7 @@ font: 14px &quot;Trebuchet MS&quot;, &quot;Lucida Sans&quot;;
     <widget class="QPushButton" name="pushButton_8">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>270</x>
        <y>430</y>
        <width>111</width>
        <height>31</height>
@@ -603,37 +603,6 @@ QPushButton#pushButton_8:hover {
      </property>
      <property name="text">
       <string>Добавить задачу</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_9">
-     <property name="geometry">
-      <rect>
-       <x>450</x>
-       <y>430</y>
-       <width>101</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#pushButton_9{
-   padding: 1px 2px; 
-    font: normal 13px Roboto; 
-    border: none;
-    color: #fff; 
-    background-color: #0e9dc7;
-    text-align: center;
-    border-bottom-right-radius:4px;
-    border-top-left-radius:4px;
-    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
-    }
-     
-QPushButton#pushButton_9:hover {
-    color: #fff; 
-    background-color: rgb(15, 179, 227);
-    }</string>
-     </property>
-     <property name="text">
-      <string>На главную</string>
      </property>
     </widget>
     <widget class="QPlainTextEdit" name="plainTextEdit_3">
@@ -838,7 +807,7 @@ QCalendarWidget QAbstractItemView:disabled {  color: rgb(64, 64, 64);}
     </widget>
    </widget>
    <widget class="QWidget" name="page_3">
-    <widget class="Time" name="time_widget" native="true">
+    <widget class="Kektime" name="time_widget" native="true">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -1493,9 +1462,9 @@ QPushButton#pushButton_10:hover {
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Time</class>
+   <class>Kektime</class>
    <extends>QWidget</extends>
-   <header>time.h</header>
+   <header>kektime.h</header>
    <container>1</container>
    <slots>
     <signal>showChosenTask()</signal>
@@ -1511,8 +1480,8 @@ QPushButton#pushButton_10:hover {
    <slot>on_problems_add()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>310</x>
-     <y>420</y>
+     <x>470</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
      <x>115</x>
