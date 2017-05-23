@@ -20,6 +20,7 @@ class PopUp : public QWidget
 
 public:
     explicit PopUp(QWidget *parent = 0);
+    void setXY(int x, int y);
 
 protected:
     void paintEvent(QPaintEvent *event);    // Фон будет отрисовываться через метод перерисовки
@@ -42,6 +43,7 @@ private:
     QPropertyAnimation animation;   // Свойство анимации для всплывающего сообщения
     float popupOpacity;     // Свойства полупрозрачности виджета
     QTimer *timer;          // Таймер, по которому виджет будет скрыт
+    int X, Y;
 };
 
 #endif // POPUP_H

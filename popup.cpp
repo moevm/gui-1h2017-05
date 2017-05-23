@@ -6,6 +6,7 @@
 
 PopUp::PopUp(QWidget *parent) : QWidget(parent)
 {
+    X = Y = 0;
     setWindowFlags(Qt::FramelessWindowHint |        // Отключаем оформление окна
                    Qt::Tool |                       // Отменяем показ в качестве отдельного окна
                    Qt::WindowStaysOnTopHint);       // Устанавливаем поверх всех окон
@@ -75,14 +76,20 @@ void PopUp::show()
     animation.setStartValue(0.0);   // Стартовое значение будет 0 (полностью прозрачный виджет)
     animation.setEndValue(1.0);     // Конечное - полностью непрозрачный виджет
 
-    setGeometry(QApplication::desktop()->availableGeometry().width() - 26 - width() + QApplication::desktop() -> availableGeometry().x(),
+    if (!X*Y) {
+        setGeometry(QApplication::desktop()->availableGeometry().width() - 26 - width() + QApplication::desktop() -> availableGeometry().x(),
                 QApplication::desktop()->availableGeometry().height() - height() + QApplication::desktop() -> availableGeometry().y(),
                 width(),
                 height());
+    } else {
+        setGeometry(X - width() - 5, Y - height(),
+                    width(), height());
+    }
     QWidget::show();                // Отображаем виджет, который полностью прозрачен
 
     animation.start();              // И запускаем анимацию
-    timer->start(3000);             // А также стартуем таймер, который запустит скрытие уведомления через 3 секунды
+    if (!X*Y) timer->start(3000);             // А также стартуем таймер, который запустит скрытие уведомления через 3 секунды
+    else timer->start(1500);
 }
 
 void PopUp::hideAnimation()
@@ -112,4 +119,9 @@ void PopUp::setPopupOpacity(float opacity)
 float PopUp::getPopupOpacity() const
 {
     return popupOpacity;
+}
+
+void PopUp::setXY(int x, int y)
+{
+    X = x; Y = y;
 }

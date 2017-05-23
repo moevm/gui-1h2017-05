@@ -172,7 +172,7 @@ bool Time::free_time()
 //    qDebug() << busy_time;
 //    qDebug() << free_vec.size();
 
-    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ДО проверки начального" << free_vec;
+//    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ДО проверки начального" << free_vec;
 
     if (((busy_time[0][0] != 0)) || ((busy_time[0][0] == 0)&& (busy_time[0][1]!=0)) ){ // подумать как быть с изменением
             if(borders[0] == false){
@@ -193,7 +193,7 @@ bool Time::free_time()
     }
 
 
-    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки начального" << free_vec;
+//    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки начального" << free_vec;
 
     //ВОЗМОЖНО
     if((busy_time[0][0] == 0)&& (busy_time[0][1]==0)){
@@ -204,7 +204,7 @@ bool Time::free_time()
 
     }
 
-    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки НА УДАЛЕНИЕ НАЧАЛЬНОГО" << free_vec;
+//    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки НА УДАЛЕНИЕ НАЧАЛЬНОГО" << free_vec;
 
 
     if((busy_time.last()[2] != 23) || (busy_time.last()[2] == 23)&& (busy_time.last()[3]!=59)){
@@ -225,7 +225,7 @@ bool Time::free_time()
         borders[1] = true;
     }
 
-        qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки КОНЕЧНОГО" << free_vec;
+//        qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки КОНЕЧНОГО" << free_vec;
 
     //ВОЗМОЖНО 2 !
     if((busy_time.last()[2] == 23)&& (busy_time.last()[3]==59)){
@@ -235,7 +235,7 @@ bool Time::free_time()
         }
     }
 
-           qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки НА УДАЛЕНИЕ КОНЕЧНОГО" << free_vec;
+//           qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки НА УДАЛЕНИЕ КОНЕЧНОГО" << free_vec;
 
     int k = 0;
     int j;
@@ -252,23 +252,23 @@ bool Time::free_time()
 
     if(borders[0] && borders[1]){
         free_vec.remove(1,free_vec.size()-2); //удалить все кроме левой и правой границы
-        qDebug() << "Первое условие!";
+//        qDebug() << "Первое условие!";
     }
     else if(borders[0]){
         free_vec.remove(1,free_vec.size()-1);//удалить все, кроме левой, так как нет правой
-         qDebug() << "Второе условие!";
+//         qDebug() << "Второе условие!";
     }
     else if(borders[1]){
         free_vec.remove(0,free_vec.size()-1);//удалить все, кроме правой, так как нет левой ?? ТУТ ХЗ
-         qDebug() << "Третье условие!";
+//         qDebug() << "Третье условие!";
     }
     else{
         free_vec.clear(); // УДАЛИТЬ ВСЕ, так как нет границ, ты свободен, малыш
-         qDebug() << "Четвертое условие!";
+//         qDebug() << "Четвертое условие!";
     }
 
 
-    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки границ и очистки" << free_vec;
+//    qDebug() << "Вывод  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ ПОСЛЕ проверки границ и очистки" << free_vec;
 
 
     //borders[1] == true ? j = busy_time.size()-1 : j = busy_time.size()-2; //учет границы
@@ -302,7 +302,7 @@ bool Time::free_time()
     }
 
 
-    qDebug() << "ОКОНЧАТЕЛЬНЫЙ вывод после вставки всех элементов  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ" << free_vec;
+//    qDebug() << "ОКОНЧАТЕЛЬНЫЙ вывод после вставки всех элементов  ВЕКТОРА СВОБОДНОГО ВРЕМЕНИ" << free_vec;
 
     //можно сделать метод, который будет делать окончательные преобразования перед записью в БД - удалять элементы, у которых единичные отрезки
     // либо можно их сразу не записывать, проверяя условие - ПОПРОБУЮ пока это
@@ -314,6 +314,11 @@ bool Time::free_time()
 void Time::setTimeBorders(int index, int a)
 {
     timeBorders[index] = a;
+}
+
+void Time::setmyVec(const QVector<QVector<int> > &new_time)
+{
+    free_vec = new_time;
 }
 
 void Time::set_borders_false()
@@ -332,6 +337,11 @@ QVector<QVector<int> > Time::getBusy_time() const
     return busy_time;
 }
 
+void Time::setBusy_time(const QVector<QVector<int> > &new_time)
+{
+    busy_time = new_time;
+}
+
 void Time::setBusy_time_clear()
 {
     busy_time.clear();
@@ -341,7 +351,7 @@ void Time::setClickable(bool ind) {
     isClickable = ind;
 }
 
-QVector<freedom> Time::getDistrubuted_time() const
+QVector<freedom> Time::getDistributed_time() const
 {
     return distrubuted_time;
 }
@@ -370,14 +380,15 @@ void Time::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     if (isClickable) painter.setBrush(QColor(240, 240, 240));
     else painter.setBrush(QColor(106, 177, 199));
+
     // Рисуем 2 поля для ввода:
     painter.drawRect(lMarg, upMarg,12*lMarg, 2*upMarg);
     painter.drawRect(lMarg, 5*upMarg,12*lMarg, 2*upMarg);
     int x(lMarg), y(upMarg);
 
-    if (isClickable) {
+    if (isClickable) {      //
         // Рисуем промежутки занятости
-        for (int i=0; i<busy_time.size(); i++) {
+        for (int i=0; i < busy_time.size(); i++) {
             painter.setBrush(QColor(106, 177, 199));  // (52, 216, 0)
             int fromX = busy_time[i][0]*lMarg+lMarg+busy_time[i][1]*lMarg/60;
             int toX = busy_time[i][2]*lMarg+lMarg+busy_time[i][3]*lMarg/60;
@@ -390,12 +401,29 @@ void Time::paintEvent(QPaintEvent *event)
             else painter.drawRect(fromX, 5*upMarg, toX-fromX, 2*upMarg);
             X1 = X2 = 0;
         }
-    } else {
+
+     } else {
+
+        // Рисуем промежутки свободного времени
+        for (int i=0; i < free_vec.size(); i++) {
+            painter.setBrush(QColor(240, 240, 240));  // (52, 216, 0)
+            int fromX = free_vec[i][0]*lMarg+lMarg+free_vec[i][1]*lMarg/60;
+            int toX = free_vec[i][2]*lMarg+lMarg+free_vec[i][3]*lMarg/60;
+            if (free_vec[i][0]>=12) {
+                toX-=12*lMarg;
+                fromX-=12*lMarg;
+            }
+
+            if (free_vec[i][0]<12) painter.drawRect(fromX, upMarg, toX-fromX, 2*upMarg);
+            else painter.drawRect(fromX, 5*upMarg, toX-fromX, 2*upMarg);
+            X1 = X2 = 0;
+        }
 
         // Рисуем промежутки распределенного времени
-        for (int i=0; i<distrubuted_time.size(); i++) {
+        for (int i(0), j(0); i < distrubuted_time.size(); i++) {
+            if (i>0 && distrubuted_time[i].getTask_name() != distrubuted_time[i-1].getTask_name()) j++;
             if (getChosenDate() == distrubuted_time[i].getDate()) {
-                painter.setBrush(QColor(106, 250, 100));  // (52, 216, 0)
+                painter.setBrush(QColor((100+159*j)%255, (106+57*j)%255, (250+113*j)%255));  // Динамическое изменение цветов
                 int fromX = distrubuted_time[i].getBeg_hour()*lMarg+lMarg+distrubuted_time[i].getBeg_minute()*lMarg/60;
                 int toX = distrubuted_time[i].getEnd_hour()*lMarg+lMarg+distrubuted_time[i].getEnd_minute()*lMarg/60;
                 if (distrubuted_time[i].getBeg_hour()>=12) {
@@ -427,10 +455,47 @@ void Time::paintEvent(QPaintEvent *event)
 
 void Time::mousePressEvent(QMouseEvent *event)
 {
-    if(isClickable && event->pos().x() > lMarg && event->pos().x() <= width()-lMarg) {
-        if (event->pos().y() >= upMarg && event->pos().y() <= 3*upMarg) X1 = event->pos().x();
-        else if (event->pos().y() >= 5*upMarg && event->pos().y() <= 7*upMarg) X1 = event->pos().x()+12*lMarg;
-    }
+        if(event->pos().x() > lMarg && event->pos().x() <= width()-lMarg) {
+            if (event->pos().y() >= upMarg && event->pos().y() <= 3*upMarg) X1 = event->pos().x();
+            else if (event->pos().y() >= 5*upMarg && event->pos().y() <= 7*upMarg) X1 = event->pos().x()+12*lMarg;
+            // Если требуется идентификация выбранного отрезка
+            if (!isClickable) {
+                qDebug() << "Мы все таки кликнули!";
+                int hour = (X1-lMarg)/lMarg;
+                int minute = ((X1-lMarg)%lMarg * 60)/lMarg;
+//                emit showChosenTask(event->pos().x(), event->pos().y(), hour, minute);
+
+
+
+                QVector<freedom> distr_time = getDistributed_time();
+                int i = 0;
+                for (i; i<distr_time.size(); i++) {
+                    if (getChosenDate() == distr_time[i].getDate() &&
+                        QTime(distr_time[i].getBeg_hour(),distr_time[i].getBeg_minute()).secsTo(QTime(hour, minute)) >=0 &&
+                        QTime(distr_time[i].getEnd_hour(),distr_time[i].getEnd_minute()).secsTo(QTime(hour, minute))<=0) break;
+                }
+                if (i != distr_time.size()) {
+                    PopUp *newPop = new PopUp();
+                    newPop->setPopupText(distr_time[i].getTask_name().append(" - ").append(distr_time[i].getDate().toString("dd.MM.yy")));
+                    newPop->setXY(QCursor::pos().x(), QCursor::pos().y());
+                    newPop->show();
+                    return;
+                }
+
+                for(i = 0; i < getmyVec().size(); i++) {
+                    if (QTime(getmyVec()[i][0],getmyVec()[i][1]).secsTo(QTime(hour, minute)) >=0 &&
+                        QTime(getmyVec()[i][2],getmyVec()[i][3]).secsTo(QTime(hour, minute))<=0) break;
+                }
+
+                PopUp *newPop = new PopUp();
+                newPop->setXY(QCursor::pos().x(), QCursor::pos().y());
+
+                if (i != getmyVec().size()) newPop->setPopupText("Свободное время");
+                else newPop->setPopupText("Занятое время");
+                newPop->show();
+                return;
+            }
+        }
 }
 
 

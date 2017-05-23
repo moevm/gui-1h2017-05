@@ -37,7 +37,7 @@ border-radius:8px;
 }</string>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QLabel" name="label_11">
@@ -1497,6 +1497,9 @@ QPushButton#pushButton_10:hover {
    <extends>QWidget</extends>
    <header>time.h</header>
    <container>1</container>
+   <slots>
+    <signal>showChosenTask()</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -1675,5 +1678,6 @@ QPushButton#pushButton_10:hover {
   <slot>add_freedom()</slot>
   <slot>try_change_color()</slot>
   <slot>update_dates()</slot>
+  <slot>showUserChosenTask()</slot>
  </slots>
 </ui>

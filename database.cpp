@@ -12,9 +12,10 @@ DataBase::DataBase()
         qDebug() << "Открылась!";
     }
         QVector<task> a = get_all_tasks_by_date_and_diff();
-       for(int i = 0; i < a.size(); i++){
-           qDebug() << a[i].getName() << " " << a[i].getDeadline()<< " " << a[i].getDifficult() << " " << a[i].getDescription();
-       }
+//       for(int i = 0; i < a.size(); i++){
+//           qDebug() << a[i].getName() << " " << a[i].getDeadline()<< " " << a[i].getDifficult() << " " << a[i].getDescription();
+//       }
+
 }
 
 DataBase::~DataBase(){
@@ -61,7 +62,7 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
         QString description = my_query.value(3).toString();
 
         //QString current
-        qDebug() << name_of_task+","+deadline+','+difficult +","+description;
+//        qDebug() << name_of_task+","+deadline+','+difficult +","+description;
         int diff = difficult.toInt();
         switch(diff){
         case 0:
@@ -96,7 +97,7 @@ QVector<QVector<QString>> DataBase::cur_tasks(QDate currDate)
         for_output[i].push_back(deadline);
         for_output[i].push_back(difficult);
         for_output[i].push_back(description);
-        qDebug() << for_output[i][0]+","+for_output[i][1]+','+for_output[i][2] +","+for_output[i][3]+'\n';
+//        qDebug() << for_output[i][0]+","+for_output[i][1]+','+for_output[i][2] +","+for_output[i][3]+'\n';
 
     }
 
@@ -173,12 +174,7 @@ QVector<QVector<int>> DataBase::get_free_user_time(QDate date)
 //для таблица распределенного времени
 //bool DataBase::add_dis_time(QDate one_date, QVector<QVector<int> > time, QString one_task_name)
 bool DataBase::add_dis_time(QVector<freedom> distr_time)
-{/*
-    QVector<int> work_times(4);
-    for(int i = 0; i < time.size(); i++){
-        for(int z = 0;z < 4; z++){
-            work_times[z]= time[i][z]; // записываем в рабочий вектор свободное время
-        }*/
+{
     for (int i = 0; i < distr_time.size(); i++) {
         QSqlQuery my_query;
         my_query.prepare("INSERT INTO distibuted_time (date, begin_task_hour, begin_task_minute, end_task_hour, end_task_minute, task_name )"
@@ -220,7 +216,7 @@ QVector<freedom> DataBase::get_all_dis_time() {
 
     QVector<freedom>  dis_time;
     QSqlQuery my_query;
-    my_query.prepare("SELECT * FROM distibuted_time  ORDER by date ");
+    my_query.prepare("SELECT * FROM distibuted_time  ");    //ORDER by date
     my_query.exec();
     while(my_query.next()){
         dis_time.push_back(freedom());
@@ -271,7 +267,7 @@ bool DataBase::delete_same_dates(QDate begin, QDate end, QVector<QDate> times)
 
     for(int i = 0; i < count_dates+1; i++){
         work_date = begin.addDays(i);
-        qDebug() << work_date;
+//        qDebug() << work_date;
         if (times.contains(work_date)){
             my_query.prepare("DELETE  FROM free_user_time WHERE Date = :new_date ");
             my_query.bindValue(":new_date", work_date);
