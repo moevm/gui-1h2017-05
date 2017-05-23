@@ -27,18 +27,14 @@ SOURCES += main.cpp\
         keknaizer.cpp \
     time.cpp \
     task.cpp \
-    problems.cpp \
     database.cpp \
-    timeline.cpp \
     popup.cpp \
     freedom.cpp
 
 HEADERS  += keknaizer.h \
     time.h \
     task.h \
-    problems.h \
     database.h \
-    timeline.h \
     popup.h \
     freedom.h
 
